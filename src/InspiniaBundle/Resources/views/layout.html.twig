@@ -1,0 +1,32 @@
+{% extends "::inspinia.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Inspinia
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    
+    {% stylesheets
+        '@InspiniaBundle/Resources/public/style.css'
+    %}
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{%block wrapper %}
+    {{ parent() }}
+
+    <div id="wrapper">
+        {% include 'InspiniaBundle::partials/nav-bar.html.twig' with {} %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% include 'InspiniaBundle::partials/small-chat.html.twig' with {} %}
+        {% include 'InspiniaBundle::partials/small-chat-box.html.twig' with {} %}
+
+        {% include 'InspiniaBundle::partials/right-sidebar.html.twig' with {} %}
+        {% include 'InspiniaBundle::partials/skin-config.html.twig' with {} %}
+    </div>
+{% endblock %}

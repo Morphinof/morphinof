@@ -1,0 +1,27 @@
+inspinia_homepage:
+    path:     /inspinia
+    defaults: { _controller: InspiniaBundle:Default:index }
+
+inspinia_dashboard2:
+    path:     /inspinia/dashboard2
+    defaults: { _controller: InspiniaBundle:Default:dashboard2 }
+
+inspinia_dashboard3:
+    path:     /inspinia/dashboard3
+    defaults: { _controller: InspiniaBundle:Default:dashboard3 }
+
+inspinia_dashboard4:
+    path:     /inspinia/dashboard4
+    defaults: { _controller: InspiniaBundle:Default:dashboard4 }
+
+inspinia_dashboard4_1:
+    path:     /inspinia/dashboard4_1
+    defaults: { _controller: InspiniaBundle:Default:dashboard4_1 }
+
+inspinia_dashboard5:
+    path:     /inspinia/dashboard5
+    defaults: { _controller: InspiniaBundle:Default:dashboard5 }
+
+inspinia_layouts:
+    path:     /inspinia/layouts
+    defaults: { _controller: InspiniaBundle:Default:layouts }

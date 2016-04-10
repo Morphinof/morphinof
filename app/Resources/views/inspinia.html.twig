@@ -1,0 +1,99 @@
+{% import "form.twig" as macro %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>
+    {% block title %}Morphinof{% endblock %}
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+
+    {% block stylesheets %}
+        {% stylesheets
+            '@CoreBundle/Resources/public/css/bootstrap.css'
+            '@CoreBundle/Resources/public/font-awesome/css/font-awesome.css'
+
+            '@CoreBundle/Resources/public/css/plugins/toastr/toastr.min.css'
+
+            '@CoreBundle/Resources/public/js/plugins/gritter/jquery.gritter.css'
+
+            '@CoreBundle/Resources/public/css/animate.css'
+            '@CoreBundle/Resources/public/css/style.css'
+
+            '../app/Resources/public/css/global.css'
+        %}
+            <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block modals %}
+    <div id="modals-container"></div>
+    {% endblock %}
+
+    {% block body %}
+        {% block wrapper %}
+        {% endblock %}
+    {% endblock %}
+</body>
+
+{% block javascripts %}
+    {% javascripts
+        '@CoreBundle/Resources/public/js/jquery-2.1.1.js'
+        '@CoreBundle/Resources/public/js/bootstrap.min.js'
+        '@CoreBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
+        '@CoreBundle/Resources/public/js/plugins/slimscroll/jquery.slimscroll.min.js'
+
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.tooltip.min.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.spline.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.resize.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.pie.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.time.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.symbol.js'
+         '@CoreBundle/Resources/public/js/plugins/flot/curvedLines.js'
+
+         '@CoreBundle/Resources/public/js/plugins/peity/jquery.peity.min.js'
+         '@CoreBundle/Resources/public/js/demo/peity-demo.js'
+
+         '@CoreBundle/Resources/public/js/inspinia.js'
+         '@CoreBundle/Resources/public/js/plugins/pace/pace.min.js'
+
+         '@CoreBundle/Resources/public/js/plugins/jquery-ui/jquery-ui.min.js'
+
+         '@CoreBundle/Resources/public/js/plugins/gritter/jquery.gritter.min.js'
+
+         '@CoreBundle/Resources/public/js/plugins/sparkline/jquery.sparkline.min.js'
+         '@CoreBundle/Resources/public/js/demo/sparkline-demo.js'
+
+         '@CoreBundle/Resources/public/js/plugins/chartJs/Chart.min.js'
+
+         '@CoreBundle/Resources/public/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js'
+         '@CoreBundle/Resources/public/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'
+
+         '@CoreBundle/Resources/public/js/plugins/easypiechart/jquery.easypiechart.js'
+
+         '@CoreBundle/Resources/public/js/plugins/toastr/toastr.min.js'
+
+         '@CoreBundle/Resources/public/js/skin-config.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $(document).ready
+        (
+            function()
+            {
+
+            }
+        );
+    </script>
+{% endblock %}
+</html>

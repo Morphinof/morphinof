@@ -1,0 +1,255 @@
+{% extends "InspiniaBundle::layout.html.twig" %}
+
+{% set title = 'Layouts' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    %}
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+
+<div id="page-wrapper" class="gray-bg">
+
+    {% include 'InspiniaBundle::partials/nav-bar-static-top.html.twig' with { background: 'white-bg' } %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Layouts</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Layouts</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+                        <h2><span class="text-navy">INSPINIA - Responsive Admin Theme</span>
+                        is provided with two main layouts <br/>three skins and separate configure options.</h2>
+                        <p>
+                            All config options you can trun on/off from the theme box configuration (green icon on the left side of page).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+
+                        <h4 class="m-b-xxs">Top navigation, centered content layout</h4>
+                        <small>(optional layout)</small>
+                        <p>Avalible configure options</p>
+                        <span class="simple_tag">Scroll navbar</span>
+                        <span class="simple_tag">Top fixed navbar</span>
+                        <span class="simple_tag">Boxed layout</span>
+                        <span class="simple_tag">Scroll footer</span>
+                        <span class="simple_tag">Fixed footer</span>
+                        <div class="m-t-md">
+                            <p>Check the Dashboard v.4 with top navigation layout</p>
+                            <div class="p-lg ">
+                            <a href="dashboard_4.html">
+                                <img alt="image" class="img-responsive img-shadow" src="{{ asset('/img/dashbard4_2.jpg') }}" />
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+
+                        <h4 class="m-b-xxs">Basci left side nabigation layout </h4><small>(main layout)</small>
+                        <p>Avalible configure options</p>
+                        <span class="simple_tag">Collapse menu</span>
+                        <span class="simple_tag">Fixed sidebar</span>
+                        <span class="simple_tag">Scroll navbar</span>
+                        <span class="simple_tag">Top fixed navbar</span>
+                        <span class="simple_tag">Boxed layout</span>
+                        <span class="simple_tag">Scroll footer</span>
+                        <span class="simple_tag">Fixed footer</span>
+                        <div class="m-t-md">
+                            <p>Check the Dashboard v.4 with basic layout</p>
+                            <div class="p-lg">
+                                <a href="dashboard_4_1.html">
+                                    <img alt="image" class="img-responsive img-shadow" src="{{ asset('/img/dashbard4_1.jpg') }}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+
+                        <h4 class="m-b-xxs">Full height - Outlook view <span class="label label-primary">NEW</span></h4>
+                        <small>(optional layout)</small>
+                        <p>Avalible configure options</p>
+                        <span class="simple_tag">Scroll navbar</span>
+                        <span class="simple_tag">Boxed layout</span>
+                        <span class="simple_tag">Scroll footer</span>
+                        <span class="simple_tag">Fixed footer</span>
+                        <div class="m-t-md">
+                            <p>Check the Outlook view in in full height page</p>
+                            <div class="p-lg ">
+                                <a href="full_height.html">
+                                    <img alt="image" class="img-responsive img-shadow" src="{{ asset('/img/full_height.jpg') }}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+
+                        <h4 class="m-b-xxs">Off canvas menu <span class="label label-primary">NEW</span></h4>
+                        <small>(optional layout)</small>
+                        <p>Avalible configure options</p>
+                        <span class="simple_tag">Collapse menu</span>
+                        <span class="simple_tag">Fixed sidebar</span>
+                        <span class="simple_tag">Top fixed navbar</span>
+                        <span class="simple_tag">Boxed layout</span>
+                        <span class="simple_tag">Scroll footer</span>
+                        <span class="simple_tag">Fixed footer</span>
+                        <div class="m-t-md">
+                            <p>Check the off canvas menu on example article page</p>
+                            <div class="p-lg">
+                                <a href="off_canvas_menu.html">
+                                    <img alt="image" class="img-responsive img-shadow" src="{{ asset('/img/off_canvas.jpg') }}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'InspiniaBundle::partials/footer.html.twig' with {} %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $(document).ready(function() {
+
+            var sparklineCharts = function(){
+                $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 52], {
+                    type: 'line',
+                    width: '100%',
+                    height: '50',
+                    lineColor: '#1ab394',
+                    fillColor: "transparent"
+                });
+
+                $("#sparkline2").sparkline([32, 11, 25, 37, 41, 32, 34, 42], {
+                    type: 'line',
+                    width: '100%',
+                    height: '50',
+                    lineColor: '#1ab394',
+                    fillColor: "transparent"
+                });
+
+                $("#sparkline3").sparkline([34, 22, 24, 41, 10, 18, 16,8], {
+                    type: 'line',
+                    width: '100%',
+                    height: '50',
+                    lineColor: '#1C84C6',
+                    fillColor: "transparent"
+                });
+            };
+
+            var sparkResize;
+
+            $(window).resize(function(e) {
+                clearTimeout(sparkResize);
+                sparkResize = setTimeout(sparklineCharts, 500);
+            });
+
+            sparklineCharts();
+
+
+
+
+            var data1 = [
+                [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,20],[11,10],[12,13],[13,4],[14,7],[15,8],[16,12]
+            ];
+            var data2 = [
+                [0,0],[1,2],[2,7],[3,4],[4,11],[5,4],[6,2],[7,5],[8,11],[9,5],[10,4],[11,1],[12,5],[13,2],[14,5],[15,2],[16,0]
+            ];
+            $("#flot-dashboard5-chart").length && $.plot($("#flot-dashboard5-chart"), [
+                        data1,  data2
+                    ],
+                    {
+                        series: {
+                            lines: {
+                                show: false,
+                                fill: true
+                            },
+                            splines: {
+                                show: true,
+                                tension: 0.4,
+                                lineWidth: 1,
+                                fill: 0.4
+                            },
+                            points: {
+                                radius: 0,
+                                show: true
+                            },
+                            shadowSize: 2
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true,
+
+                            borderWidth: 2,
+                            color: 'transparent'
+                        },
+                        colors: ["#1ab394", "#1C84C6"],
+                        xaxis:{
+                        },
+                        yaxis: {
+                        },
+                        tooltip: false
+                    }
+            );
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,236 @@
+{% macro message(id, title, message, type) %}
+    {% if id is null %}{% set id = random() %}{% endif %}
+    {% if type is null %}{% set type = 'success' %}{% endif %}
+    <div id="{{ id }}" class="alert alert-{{ type }} fade in m-b-15">
+        {% if title is not null %}<strong>{{ title }}</strong>{% endif %}
+        {% if message is not null %}{{ message | raw }}{% endif %}
+        <span class="close" data-dismiss="alert">×</span>
+    </div>
+{% endmacro %}
+
+{% macro progressBar(id, class, percent, label, stripped) %}
+    {% if id is not null %}
+        {% if class is null %}{% set class = 'inverse' %}{% endif %}
+        {% if percent is null %}{% set percent = 0 %}{% endif %}
+        {% if stripped is null %}{% set stripped = false %}{% endif %}
+        <div id="{{ id }}" class="progress {% if stripped %}progress-striped{% endif %} active">
+            <div class="progress-bar progress-bar-{{ class }}" style="width: {{ percent }}%">{{ label }}</div>
+        </div>
+    {% else %}
+        Id de la barre de progression manquant !
+    {% endif %}
+{% endmacro %}
+
+{% macro knob(id, percent, width, height, thickness, fgColor, inputColor, readOnly) %}
+    {% if id is null %}{% set id = random() %}{% endif %}
+    {% if percent is null %}{% set percent = 0 %}{% endif %}
+    {% if readOnly is null %}{% set readOnly = true %}{% endif %}
+
+    <input id="{{ id }}" type="text" value="{{ percent }}" class="dial" />
+
+    <script>
+    Anaxago.knob.push
+    (
+        {
+            id: '{{ id }}',
+            width: {{ width }},
+            height: {{ height }},
+            thickness: {{ thickness }},
+            fgColor: '{{ fgColor }}',
+            inputColor: '{{ inputColor }}',
+            readOnly: {{ readOnly }}
+        }
+    );
+    </script>
+{% endmacro %}
+
+{# Steps status : complete, active and disable #}
+{% macro process_steps(steps) %}
+    {% set percent = (100 / (steps | length)) | round(1, 'floor') %}
+    <div class="row bs-wizard">
+        {% for step in steps %}
+            <div class="bs-wizard-step {{ step.status }} pull-left" style="width:{{ percent }}%;">
+                <div class="text-center bs-wizard-stepnum">Etape {{ loop.index }}</div>
+                <div class="progress"><div class="progress-bar"></div></div>
+                <a href="#" class="bs-wizard-dot{% if step.noGo is defined and step.noGo %}-failed{% endif %}"></a>
+                <div class="bs-wizard-info text-center"><small {% if step.noGo is defined and step.noGo %}class="t-d-l-t"{% endif %}>{{ step.title }}</small></div>
+                {% if step.message is not null %}
+                    {% set messageColor = 'green' %}
+                    {% if step.messageColor is not null %}
+                        {% set messageColor = step.messageColor %}
+                    {% endif %}
+                <div class="t-a-c f-w-b {{ messageColor }}">{{ step.message }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro button(id, type, class, value, on) %}
+<button {% if id is not null %}id="{{ id }}"{% endif %} type="button" class="btn btn-{{ type }} {{ class }} m-r-5 m-b-5">{{ value }}</button>
+
+{% if id is not null and on is not null and on.event is defined and on.function %}
+<script>
+    $('#{{ id }}')
+    .on
+    (
+        '{{ on.event }}',
+        function(e)
+        {
+            {{ on.function | raw }}(e);
+        }
+    );
+</script>
+{% endif %}
+{% endmacro %}
+
+{% macro note(id, title, note, type, class) %}
+{% if type is null %}{% set type = 'info' %}{% endif %}
+<div {% if id is not null %}id="{{ id }}"{% endif %} class="note note-{{ type }} {% if class is not null %}{{ class }}{% endif %}">
+    <h4>{{ title }}</h4>
+    <p>{{ note }}</p>
+</div>
+{% endmacro %}
+
+{% macro timeline(elements) %}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="timeline">
+        {% for element in elements %}
+            {% set glyph = element.glyph %}
+            {% if glyph is null %}{% set glyph = '' %}{% endif %}
+            {% set color = 'info' %}
+            {% if element.color is defined %}{% set color = element.color %}{% endif %}
+            {% set date = element.date %}
+            {% if date is null %}{% set date = 'Date inconnue' %}{% endif %}
+            {% set description = null %}
+            {% if element.description is defined %}{% set description = element.description %}{% endif %}
+            <li {% if loop.index is divisibleby(2) %}class="timeline-inverted"{% endif %}>
+                <div class="timeline-badge {{ color }}"><i class="fa fa-{{ glyph }}"></i></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4 class="timeline-title">{{ element.title }}</h4>
+                        <p><small class="text-muted"><i class="fa fa-clock-o m-l-1"></i> {{ date | format('d/m/Y') }}</small></p>
+                    </div>
+                    {% if description is not null %}
+                    <div class="timeline-body">
+                        <p>
+                            {{ description }}
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro stars(mark) %}
+    {% set mark = mark | split(',') %}
+    {% set left = mark[0] %}
+    {% set right = 0 %}
+
+    {% if mark[1] is defined %}{% set right = (mark[1] * 2) %}{% endif %}
+
+    {% set count = 0 %}
+
+    {% if left == 0 %}
+        {% for i in 0..3 %}
+            <i class="fa fa-star-o fa-2x primary"></i>
+        {% endfor %}
+    {% else %}
+        {% for i in 1..left %}
+        <i class="fa fa-star fa-2x primary"></i>
+        {% endfor %}
+    {% endif %}
+
+    {% if right == 0 %}
+        <i class="fa fa-star-o fa-2x primary"></i>
+    {% else %}
+        <i class="fa fa-star fa-2x primary"></i>
+    {% endif %}
+
+    {% for i in (left + 1)..4 %}
+        <i class="fa fa-star-o fa-2x primary"></i>
+    {% endfor %}
+{% endmacro %}
+
+{% macro carousel(id, images, parameters) %}
+<div id="{{ id }}" class="owl-carousel">
+    {% if images | length > 0 %}
+        {% for image in images %}
+        <div>
+            <img src="" alt="" />
+            {{ image }}
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+<script>Anaxago.carousels.push({ id: '{{ id }}', parameters: {{ parameters | json_encode | raw }} });</script>
+{% endmacro %}
+
+{% macro dropdown(id, class, css, label, elements, selectedValue, on, attributes) %}
+<div id="{{ id }}" class="btn-group m-r-5 m-b-5 {% if css is not null %}{{ css }}{% endif %}">
+    <a href="javascript:;" id="{{ id }}-label" class="btn btn-{{ class }}">{{ label }}</a>
+    <a href="javascript:;" data-toggle="dropdown" class="btn btn-{{ class }} dropdown-toggle" aria-expanded="false">
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu pull-right">
+        {% for element in elements %}
+            {% if element.type is defined %}
+                {% if element.type == 'default' or element.type is null %}
+                    <li
+                        {% if element.value is defined and element.value is not null and element.value == selectedValue %}
+                        class="active"
+                        {% endif %}
+                    >
+                        <a
+                            href="{{ element.href }}"
+                            {% if element.value is defined and element.value is not null %}
+                            value="{{ element.value }}"
+                            {% endif %}
+                            label="{{ element.label }}"
+                            {% if attributes is not null and attributes | length > 0 %}
+                                {% for attribute, value in attributes %}
+                                    {{ attribute }}="{{ value }}"
+                                {% endfor %}
+                            {% endif %}
+                        >
+                            {{ element.label }}
+                        </a>
+                    </li>
+                {% elseif element.type == 'header' %}
+                    <li class="dropdown-header">{{ element.label }}</li>
+                {% elseif element.type == 'divider' %}
+                    <li class="divider"></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% if on is not null and on.event is defined and on.function is defined %}
+<script>
+    $('#{{ id }} > ul > li > a')
+    .on
+    (
+        '{{ on.event }}',
+        function (e)
+        {
+            var dropdown = $('#{{ id }}'),
+                element = $(e.target),
+                label = element.attr('label'),
+                value = element.attr('value'),
+                button = $('#{{ id }}-label');
+
+            button.html(label);
+            dropdown.find('li.active').removeClass('active');
+            element.closest('li').addClass('active');
+
+            {{ on.function | raw }}(e);
+        }
+    );
+</script>
+{% endif %}
+{% endmacro %}

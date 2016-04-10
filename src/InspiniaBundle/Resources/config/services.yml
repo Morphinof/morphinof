@@ -1,0 +1,4 @@
+services:
+#    inspinia.example:
+#        class: InspiniaBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
