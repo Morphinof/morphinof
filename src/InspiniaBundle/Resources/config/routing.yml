@@ -141,3 +141,55 @@ inspinia_projects:
 inspinia_project_detail:
     path:     /inspinia/project/detail
     defaults: { _controller: InspiniaBundle:Default:projectDetail }
+
+inspinia_teams_board:
+    path:     /inspinia/teams/board
+    defaults: { _controller: InspiniaBundle:Default:teamsBoard }
+
+inspinia_social_feed:
+    path:     /inspinia/social/feed
+    defaults: { _controller: InspiniaBundle:Default:socialFeed }
+
+inspinia_clients:
+    path:     /inspinia/clients
+    defaults: { _controller: InspiniaBundle:Default:clients }
+
+inspinia_full_height:
+    path:     /inspinia/full-height
+    defaults: { _controller: InspiniaBundle:Default:fullHeight }
+
+inspinia_vote_list:
+    path:     /inspinia/vote-list
+    defaults: { _controller: InspiniaBundle:Default:voteList }
+
+inspinia_file_manager:
+    path:     /inspinia/file-manager
+    defaults: { _controller: InspiniaBundle:Default:fileManager }
+
+inspinia_calendar:
+    path:     /inspinia/calendar
+    defaults: { _controller: InspiniaBundle:Default:calendar }
+
+inspinia_issue_tracker:
+    path:     /inspinia/issue-tracker
+    defaults: { _controller: InspiniaBundle:Default:issueTracker }
+
+inspinia_blog:
+    path:     /inspinia/blog
+    defaults: { _controller: InspiniaBundle:Default:blog }
+
+inspinia_article:
+    path:     /inspinia/article
+    defaults: { _controller: InspiniaBundle:Default:article }
+
+inspinia_faq:
+    path:     /inspinia/faq
+    defaults: { _controller: InspiniaBundle:Default:faq }
+
+inspinia_timeline:
+    path:     /inspinia/timeline
+    defaults: { _controller: InspiniaBundle:Default:timeline }
+
+inspinia_pin_board:
+    path:     /inspinia/pin-board
+    defaults: { _controller: InspiniaBundle:Default:pinBoard }

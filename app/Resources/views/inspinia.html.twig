@@ -56,6 +56,11 @@
 
             '@CoreBundle/Resources/public/css/plugins/bootstrap-markdown/bootstrap-markdown.min.css'
 
+            '@CoreBundle/Resources/public/css/plugins/codemirror/codemirror.css'
+            '@CoreBundle/Resources/public/css/plugins/codemirror/ambiance.css'
+
+            '@CoreBundle/Resources/public/css/plugins/fullcalendar/fullcalendar.css'
+
             '@CoreBundle/Resources/public/css/animate.css'
 
             '@CoreBundle/Resources/public/css/style.css'
@@ -67,6 +72,7 @@
             <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
         {% endstylesheets %}
     {% endblock %}
+    <link href="/bundles/core/css/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print'>
 </head>
 
 <body>
@@ -151,6 +157,9 @@
 
         '@CoreBundle/Resources/public/js/plugins/bootstrap-markdown/bootstrap-markdown.js'
         '@CoreBundle/Resources/public/js/plugins/bootstrap-markdown/markdown.js'
+
+        '@CoreBundle/Resources/public/js/plugins/fullcalendar/moment.min.js'
+        '@CoreBundle/Resources/public/js/plugins/fullcalendar/fullcalendar.min.js'
 
         '@CoreBundle/Resources/public/js/plugins/toastr/toastr.min.js'
 

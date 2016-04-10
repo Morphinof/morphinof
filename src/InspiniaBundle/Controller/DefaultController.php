@@ -184,4 +184,69 @@ class DefaultController extends Controller
     {
         return $this->render('InspiniaBundle:Default:project-detail.html.twig');
     }
+
+    public function teamsBoardAction()
+    {
+        return $this->render('InspiniaBundle:Default:teams-board.html.twig');
+    }
+
+    public function socialFeedAction()
+    {
+        return $this->render('InspiniaBundle:Default:social-feed.html.twig');
+    }
+
+    public function clientsAction()
+    {
+        return $this->render('InspiniaBundle:Default:clients.html.twig');
+    }
+
+    public function fullHeightAction()
+    {
+        return $this->render('InspiniaBundle:Default:full-height.html.twig');
+    }
+
+    public function voteListAction()
+    {
+        return $this->render('InspiniaBundle:Default:vote-list.html.twig');
+    }
+
+    public function fileManagerAction()
+    {
+        return $this->render('InspiniaBundle:Default:file-manager.html.twig');
+    }
+
+    public function calendarAction()
+    {
+        return $this->render('InspiniaBundle:Default:calendar.html.twig');
+    }
+
+    public function issueTrackerAction()
+    {
+        return $this->render('InspiniaBundle:Default:issue-tracker.html.twig');
+    }
+
+    public function blogAction()
+    {
+        return $this->render('InspiniaBundle:Default:blog.html.twig');
+    }
+
+    public function articleAction()
+    {
+        return $this->render('InspiniaBundle:Default:article.html.twig');
+    }
+
+    public function faqAction()
+    {
+        return $this->render('InspiniaBundle:Default:faq.html.twig');
+    }
+
+    public function timelineAction()
+    {
+        return $this->render('InspiniaBundle:Default:timeline.html.twig');
+    }
+
+    public function pinBoardAction()
+    {
+        return $this->render('InspiniaBundle:Default:pin-board.html.twig');
+    }
 }
