@@ -1,14 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Alerts e.g. approaching your limit</title>
-    <link href="styles.css" media="all" rel="stylesheet" type="text/css" />
-</head>
+{% extends "InspiniaBundle::layout.html.twig" %}
 
-<body>
+{% set title = 'Alerts e.g. approaching your limit' %}
 
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+        '@InspiniaBundle/Resources/public/emails-styles.css'
+    %}
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
 <table class="body-wrap">
     <tr>
         <td></td>
@@ -58,6 +69,16 @@
         <td></td>
     </tr>
 </table>
+{% endblock %}
 
-</body>
-</html>
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock %}

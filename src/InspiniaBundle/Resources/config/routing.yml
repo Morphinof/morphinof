@@ -25,3 +25,63 @@ inspinia_dashboard5:
 inspinia_layouts:
     path:     /inspinia/layouts
     defaults: { _controller: InspiniaBundle:Default:layouts }
+
+inspinia_graph_flot:
+    path:     /inspinia/graph-flot
+    defaults: { _controller: InspiniaBundle:Default:graphFlot }
+
+inspinia_graph_morris:
+    path:     /inspinia/graph-morris
+    defaults: { _controller: InspiniaBundle:Default:graphMorris }
+
+inspinia_graph_rickshaw:
+    path:     /inspinia/graph-rickshaw
+    defaults: { _controller: InspiniaBundle:Default:graphRickshaw }
+
+inspinia_graph_chartjs:
+    path:     /inspinia/graph-chartjs
+    defaults: { _controller: InspiniaBundle:Default:graphChartJs }
+
+inspinia_graph_chartist:
+    path:     /inspinia/graph-chartist
+    defaults: { _controller: InspiniaBundle:Default:graphChartist }
+
+inspinia_graph_c3:
+    path:     /inspinia/graph-c3
+    defaults: { _controller: InspiniaBundle:Default:graphC3 }
+
+inspinia_graph_peity:
+    path:     /inspinia/graph-peity
+    defaults: { _controller: InspiniaBundle:Default:graphPeity }
+
+inspinia_graph_sparkline:
+    path:     /inspinia/graph-sparkline
+    defaults: { _controller: InspiniaBundle:Default:graphSparkline }
+
+inspinia_mailbox:
+    path:     /inspinia/mailbox
+    defaults: { _controller: InspiniaBundle:Default:mailbox }
+
+inspinia_mail_detail:
+    path:     /inspinia/mail-detail
+    defaults: { _controller: InspiniaBundle:Default:mailDetail }
+
+inspinia_mail_compose:
+    path:     /inspinia/mail-compose
+    defaults: { _controller: InspiniaBundle:Default:mailCompose }
+
+inspinia_email_templates:
+    path:     /inspinia/email-templates
+    defaults: { _controller: InspiniaBundle:Default:emailTemplates }
+
+inspinia_email_action:
+    path:     /inspinia/email/action
+    defaults: { _controller: InspiniaBundle:Default:emailAction }
+
+inspinia_email_alert:
+    path:     /inspinia/email/alert
+    defaults: { _controller: InspiniaBundle:Default:emailAlert }
+
+inspinia_email_billing:
+    path:     /inspinia/email/billing
+    defaults: { _controller: InspiniaBundle:Default:emailBilling }

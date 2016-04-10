@@ -15,6 +15,10 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
 {% block content %}
 <div id="page-wrapper" class="gray-bg sidebar-content">
 

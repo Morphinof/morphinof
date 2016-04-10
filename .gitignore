@@ -1,6 +1,8 @@
 /var/
 /vendor/
 /web/bundles/
+/web/js/
+/web/css/
 design
 inspinia
 .idea/

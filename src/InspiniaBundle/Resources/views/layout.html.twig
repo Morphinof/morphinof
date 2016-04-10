@@ -8,7 +8,6 @@
     {{ parent() }}
     
     {% stylesheets
-        '@InspiniaBundle/Resources/public/style.css'
     %}
     <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -18,7 +17,9 @@
     {{ parent() }}
 
     <div id="wrapper">
-        {% include 'InspiniaBundle::partials/nav-bar.html.twig' with {} %}
+        {% block navbar %}
+            {% include 'InspiniaBundle::partials/nav-bar.html.twig' with {} %}
+        {% endblock %}
 
         {% block content %}
         {% endblock %}

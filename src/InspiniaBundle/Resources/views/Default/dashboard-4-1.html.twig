@@ -15,6 +15,10 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
 {% block content %}
 <div id="page-wrapper" class="gray-bg">
 
@@ -67,8 +71,6 @@
                                 <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i> <small>Slow pace</small></div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -85,7 +87,6 @@
                             <div class="flot-chart-content" id="flot-chart1"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -94,11 +95,11 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <div>
-                                    <span class="pull-right text-right">
-                                    <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                                        <br/>
-                                        All sales: 162,862
-                                    </span>
+                            <span class="pull-right text-right">
+                            <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                                <br/>
+                                All sales: 162,862
+                            </span>
                             <h3 class="font-bold no-margins">
                                 Half-year revenue margin
                             </h3>
@@ -106,7 +107,6 @@
                         </div>
 
                         <div class="m-t-sm">
-
                             <div class="row">
                                 <div class="col-md-8">
                                     <div>
@@ -132,7 +132,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="m-t-md">
@@ -144,7 +143,6 @@
                                 <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
                             </small>
                         </div>
-
                     </div>
                 </div>
             </div>
