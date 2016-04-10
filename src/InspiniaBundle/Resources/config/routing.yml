@@ -85,3 +85,59 @@ inspinia_email_alert:
 inspinia_email_billing:
     path:     /inspinia/email/billing
     defaults: { _controller: InspiniaBundle:Default:emailBilling }
+
+inspinia_metrics:
+    path:     /inspinia/metrics
+    defaults: { _controller: InspiniaBundle:Default:metrics }
+
+inspinia_widgets:
+    path:     /inspinia/widgets
+    defaults: { _controller: InspiniaBundle:Default:widgets }
+
+inspinia_form_basic:
+    path:     /inspinia/form/basic
+    defaults: { _controller: InspiniaBundle:Default:formBasic }
+
+inspinia_form_advanced:
+    path:     /inspinia/form/advanced
+    defaults: { _controller: InspiniaBundle:Default:formAdvanced }
+
+inspinia_form_wizard:
+    path:     /inspinia/form/wizard
+    defaults: { _controller: InspiniaBundle:Default:formWizard }
+
+inspinia_form_file_upload:
+    path:     /inspinia/form/file-upload
+    defaults: { _controller: InspiniaBundle:Default:formFileUpload }
+
+inspinia_form_editors:
+    path:     /inspinia/form/editors
+    defaults: { _controller: InspiniaBundle:Default:formEditors }
+
+inspinia_form_markdown:
+    path:     /inspinia/form/markdown
+    defaults: { _controller: InspiniaBundle:Default:formMarkdown }
+
+inspinia_contacts:
+    path:     /inspinia/contacts
+    defaults: { _controller: InspiniaBundle:Default:contacts }
+
+inspinia_profile:
+    path:     /inspinia/profile
+    defaults: { _controller: InspiniaBundle:Default:profile }
+
+inspinia_profile_2:
+    path:     /inspinia/profile-2
+    defaults: { _controller: InspiniaBundle:Default:profile2 }
+
+inspinia_contacts_2:
+    path:     /inspinia/contacts-2
+    defaults: { _controller: InspiniaBundle:Default:contacts2 }
+
+inspinia_projects:
+    path:     /inspinia/projects
+    defaults: { _controller: InspiniaBundle:Default:projects }
+
+inspinia_project_detail:
+    path:     /inspinia/project/detail
+    defaults: { _controller: InspiniaBundle:Default:projectDetail }

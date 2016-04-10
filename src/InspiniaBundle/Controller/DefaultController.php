@@ -115,4 +115,73 @@ class DefaultController extends Controller
     {
         return $this->render('InspiniaBundle:Default:email-templates/billing.html.twig');
     }
+
+    public function metricsAction()
+    {
+        return $this->render('InspiniaBundle:Default:metrics.html.twig');
+    }
+
+    public function widgetsAction()
+    {
+        return $this->render('InspiniaBundle:Default:widgets.html.twig');
+    }
+
+    public function formBasicAction()
+    {
+        return $this->render('InspiniaBundle:Default:form-basic.html.twig');
+    }
+
+    public function formAdvancedAction()
+    {
+        return $this->render('InspiniaBundle:Default:form-advanced.html.twig');
+    }
+    public function formWizardAction()
+    {
+        return $this->render('InspiniaBundle:Default:form-wizard.html.twig');
+    }
+
+    public function formFileUploadAction()
+    {
+        return $this->render('InspiniaBundle:Default:form-file-upload.html.twig');
+    }
+
+    public function formEditorsAction()
+    {
+        return $this->render('InspiniaBundle:Default:form-editors.html.twig');
+    }
+
+    public function formMarkdownAction()
+    {
+        return $this->render('InspiniaBundle:Default:form-markdown.html.twig');
+    }
+
+    public function contactsAction()
+    {
+        return $this->render('InspiniaBundle:Default:contacts.html.twig');
+    }
+
+    public function profileAction()
+    {
+        return $this->render('InspiniaBundle:Default:profile.html.twig');
+    }
+
+    public function profile2Action()
+    {
+        return $this->render('InspiniaBundle:Default:profile-2.html.twig');
+    }
+
+    public function contacts2Action()
+    {
+        return $this->render('InspiniaBundle:Default:contacts-2.html.twig');
+    }
+
+    public function projectsAction()
+    {
+        return $this->render('InspiniaBundle:Default:projects.html.twig');
+    }
+
+    public function projectDetailAction()
+    {
+        return $this->render('InspiniaBundle:Default:project-detail.html.twig');
+    }
 }

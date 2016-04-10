@@ -37,8 +37,8 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
                              </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="{{ path('inspinia_profile') }}">Profile</a></li>
+                            <li><a href="{{ path('inspinia_contacts') }}">Contacts</a></li>
                             <li><a href="{{ path('inspinia_mailbox') }}">Mailbox</a></li>
                             <li class="divider"></li>
                             <li><a href="login.html">Logout</a></li>
@@ -84,31 +84,31 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span>  </a>
+                    <a href="{{ path('inspinia_metrics') }}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span>  </a>
                 </li>
                 <li>
-                    <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
+                    <a href="{{ path('inspinia_widgets') }}"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Forms</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="form_basic.html">Basic form</a></li>
-                        <li><a href="form_advanced.html">Advanced Plugins</a></li>
-                        <li><a href="form_wizard.html">Wizard</a></li>
-                        <li><a href="form_file_upload.html">File Upload</a></li>
-                        <li><a href="form_editors.html">Text Editor</a></li>
-                        <li><a href="form_markdown.html">Markdown</a></li>
+                        <li><a href="{{ path('inspinia_form_basic') }}">Basic form</a></li>
+                        <li><a href="{{ path('inspinia_form_advanced') }}">Advanced Plugins</a></li>
+                        <li><a href="{{ path('inspinia_form_wizard') }}">Wizard</a></li>
+                        <li><a href="{{ path('inspinia_form_file_upload') }}">File Upload</a></li>
+                        <li><a href="{{ path('inspinia_form_editors') }}">Text Editor</a></li>
+                        <li><a href="{{ path('inspinia_form_markdown') }}">Markdown</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">App Views</span>  <span class="pull-right label label-primary">SPECIAL</span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="contacts.html">Contacts</a></li>
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="profile_2.html">Profile v.2</a></li>
-                        <li><a href="contacts_2.html">Contacts v.2</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="project_detail.html">Project detail</a></li>
+                        <li><a href="{{ path('inspinia_contacts') }}">Contacts</a></li>
+                        <li><a href="{{ path('inspinia_profile') }}">Profile</a></li>
+                        <li><a href="{{ path('inspinia_profile_2') }}">Profile v.2</a></li>
+                        <li><a href="{{ path('inspinia_contacts_2') }}">Contacts v.2</a></li>
+                        <li><a href="{{ path('inspinia_projects') }}">Projects</a></li>
+                        <li><a href="{{ path('inspinia_project_detail') }}">Project detail</a></li>
                         <li><a href="teams_board.html">Teams board</a></li>
                         <li><a href="social_feed.html">Social feed</a></li>
                         <li><a href="clients.html">Clients</a></li>
@@ -275,7 +275,7 @@
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
                             <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
+                                <a href="{{ path('inspinia_profile') }}" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/a7.jpg">
                                 </a>
                                 <div class="media-body">
@@ -288,7 +288,7 @@
                         <li class="divider"></li>
                         <li>
                             <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
+                                <a href="{{ path('inspinia_profile') }}" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/a4.jpg">
                                 </a>
                                 <div class="media-body ">
@@ -301,7 +301,7 @@
                         <li class="divider"></li>
                         <li>
                             <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
+                                <a href="{{ path('inspinia_profile') }}" class="pull-left">
                                     <img alt="image" class="img-circle" src="img/profile.jpg">
                                 </a>
                                 <div class="media-body ">
@@ -336,7 +336,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="profile.html">
+                            <a href="{{ path('inspinia_profile') }}">
                                 <div>
                                     <i class="fa fa-twitter fa-fw"></i> 3 New Followers
                                     <span class="pull-right text-muted small">12 minutes ago</span>

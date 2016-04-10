@@ -1,0 +1,364 @@
+{% extends "InspiniaBundle::layout.html.twig" %}
+
+{% set title = 'Contacts 2' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+
+        {% stylesheets
+        %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div id="page-wrapper" class="gray-bg">
+    {% include 'InspiniaBundle::partials/nav-bar-static-top.html.twig' with { background: null } %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9">
+            <h2>Contacts 2</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('inspinia_homepage') }}">Home</a>
+                </li>
+                <li>
+                    App Views
+                </li>
+                <li class="active">
+                    <strong>Contacts 2</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a2.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>John Smith</strong></h3>
+
+                        <div class="font-bold">Graphics designer</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a1.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Alex Johnatan</strong></h3>
+
+                        <div class="font-bold">CEO</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a3.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Monica Smith</strong></h3>
+
+                        <div class="font-bold">Marketing manager</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a4.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Michael Zimber</strong></h3>
+
+                        <div class="font-bold">Sales manager</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a5.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Sandra Smith</strong></h3>
+
+                        <div class="font-bold">Graphics designer</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a6.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Janet Carton</strong></h3>
+
+                        <div class="font-bold">CFO</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a1.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Alex Johnatan</strong></h3>
+
+                        <div class="font-bold">CEO</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a7.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>John Smith</strong></h3>
+
+                        <div class="font-bold">Graphics designer</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a2.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>John Smith</strong></h3>
+
+                        <div class="font-bold">Graphics designer</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a1.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Alex Johnatan</strong></h3>
+
+                        <div class="font-bold">CEO</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a3.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Monica Smith</strong></h3>
+
+                        <div class="font-bold">Marketing manager</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="contact-box center-version">
+
+                    <a href="{{ path('inspinia_profile') }}">
+
+                        <img alt="image" class="img-circle" src="{{ asset('/img/a4.jpg') }}" />
+
+                        <h3 class="m-b-xs"><strong>Michael Zimber</strong></h3>
+
+                        <div class="font-bold">Sales manager</div>
+                        <address class="m-t-md">
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address>
+                    </a>
+                    <div class="contact-box-footer">
+                        <div class="m-t-xs btn-group">
+                            <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                            <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'InspiniaBundle::partials/footer.html.twig' with {} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock %}
