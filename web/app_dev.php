@@ -1,6 +1,8 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\Debug\Debug;
 
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
@@ -22,7 +24,20 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
  * @var Composer\Autoload\ClassLoader $loader
  */
 $loader = require __DIR__.'/../app/autoload.php';
-Debug::enable();
+
+include_once __DIR__.'/../var/bootstrap.php.cache';
+// Enable APC for autoloading to improve performance.
+// You should change the ApcClassLoader first argument to a unique prefix
+// in order to prevent cache key conflicts with other applications
+// also using APC.
+$apcLoader = new Symfony\Component\ClassLoader\ApcClassLoader(sha1(__FILE__), $loader);
+$loader->unregister();
+$apcLoader->register(true);
+
+ErrorHandler::register();
+ExceptionHandler::register();
+
+#Debug::enable();
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();

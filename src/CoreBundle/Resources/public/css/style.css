@@ -160,7 +160,7 @@ h5 {
   font-size: 12px;
 }
 .nav-header {
-  padding: 33px 25px;
+  padding: 13px 25px; /* old value : 33px 25px */
   background: url("/img/patterns/header-profile.png") no-repeat;
 }
 .pace-done .nav-header {
