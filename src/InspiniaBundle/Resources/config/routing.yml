@@ -193,3 +193,19 @@ inspinia_timeline:
 inspinia_pin_board:
     path:     /inspinia/pin-board
     defaults: { _controller: InspiniaBundle:Default:pinBoard }
+
+inspinia_search_results:
+    path:     /inspinia/search-results
+    defaults: { _controller: InspiniaBundle:Default:searchResults }
+
+inspinia_lock_screen:
+    path:     /inspinia/lock-screen
+    defaults: { _controller: InspiniaBundle:Default:lockScreen }
+
+inspinia_invoice:
+    path:     /inspinia/invoice
+    defaults: { _controller: InspiniaBundle:Default:invoice }
+
+inspinia_login:
+    path:     /inspinia/login
+    defaults: { _controller: InspiniaBundle:Default:login }

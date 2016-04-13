@@ -75,7 +75,7 @@
     <link href="/bundles/core/css/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print'>
 </head>
 
-<body>
+<body {% if bodyBackground is defined and bodyBackground is not null %}class="{{ bodyBackground }}"{% endif %}>
     {% block modals %}
     <div id="modals-container"></div>
     {% endblock %}

@@ -35,7 +35,7 @@
                             <li><a href="{{ path('inspinia_contacts') }}">Contacts</a></li>
                             <li><a href="{{ path('inspinia_mailbox') }}">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="{{ path('inspinia_login') }}">Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -121,10 +121,10 @@
                 <li>
                     <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="search_results.html">Search results</a></li>
-                        <li><a href="lockscreen.html">Lockscreen</a></li>
-                        <li><a href="invoice.html">Invoice</a></li>
-                        <li><a href="login.html">Login</a></li>
+                        <li><a href="{{ path('inspinia_search_results') }}">Search results</a></li>
+                        <li><a href="{{ path('inspinia_lock_screen') }}">Lockscreen</a></li>
+                        <li><a href="{{ path('inspinia_invoice') }}">Invoice</a></li>
+                        <li><a href="{{ path('inspinia_login') }}">Login</a></li>
                         <li><a href="login_two_columns.html">Login v.2</a></li>
                         <li><a href="forgot_password.html">Forget password</a></li>
                         <li><a href="register.html">Register</a></li>
@@ -252,7 +252,7 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                <form role="search" class="navbar-form-custom" action="search_results.html">
+                <form role="search" class="navbar-form-custom" action="{{ path('inspinia_search_results') }}">
                     <div class="form-group">
                         <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
                     </div>
@@ -360,7 +360,7 @@
 
 
                 <li>
-                    <a href="login.html">
+                    <a href="{{ path('inspinia_login') }}">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>

@@ -249,4 +249,24 @@ class DefaultController extends Controller
     {
         return $this->render('InspiniaBundle:Default:pin-board.html.twig');
     }
+
+    public function searchResultsAction()
+    {
+        return $this->render('InspiniaBundle:Default:search-results.html.twig');
+    }
+
+    public function lockScreenAction()
+    {
+        return $this->render('InspiniaBundle:Default:lock-screen.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
+
+    public function invoiceAction()
+    {
+        return $this->render('InspiniaBundle:Default:invoice.html.twig');
+    }
+
+    public function loginAction()
+    {
+        return $this->render('InspiniaBundle:Default:login.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
 }
