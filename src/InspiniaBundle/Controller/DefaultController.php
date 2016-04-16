@@ -392,7 +392,7 @@ class DefaultController extends Controller
 
     public function loadingButtonsAction()
     {
-        return $this->render('InspiniaBundle:Default:loading-buttons.html.twig');
+        return $this->render('InspiniaBundle:Default:loading-buttons.twig');
     }
 
     public function chatViewAction()
@@ -408,5 +408,55 @@ class DefaultController extends Controller
     public function tourAction()
     {
         return $this->render('InspiniaBundle:Default:tour.html.twig');
+    }
+
+    public function typographyAction()
+    {
+        return $this->render('InspiniaBundle:Default:typography.html.twig');
+    }
+
+    public function iconsAction()
+    {
+        return $this->render('InspiniaBundle:Default:icons.html.twig');
+    }
+
+    public function draggablePanelsAction()
+    {
+        return $this->render('InspiniaBundle:Default:draggable-panels.html.twig');
+    }
+
+    public function resizeablePanelsAction()
+    {
+        return $this->render('InspiniaBundle:Default:resizeable-panels.html.twig');
+    }
+
+    public function buttonsAction()
+    {
+        return $this->render('InspiniaBundle:Default:buttons.html.twig');
+    }
+
+    public function videoAction()
+    {
+        return $this->render('InspiniaBundle:Default:video.html.twig');
+    }
+
+    public function tabsPanelsAction()
+    {
+        return $this->render('InspiniaBundle:Default:tabs-panels.html.twig');
+    }
+
+    public function tabsAction()
+    {
+        return $this->render('InspiniaBundle:Default:tabs.html.twig');
+    }
+
+    public function notificationsAction()
+    {
+        return $this->render('InspiniaBundle:Default:notifications.html.twig');
+    }
+
+    public function badgesLabelsAction()
+    {
+        return $this->render('InspiniaBundle:Default:badges-labels.html.twig');
     }
 }

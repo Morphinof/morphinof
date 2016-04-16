@@ -321,3 +321,43 @@ inspinia_masonry:
 inspinia_tour:
     path:     /inspinia/tour
     defaults: { _controller: InspiniaBundle:Default:tour }
+
+inspinia_typography:
+    path:     /inspinia/typography
+    defaults: { _controller: InspiniaBundle:Default:typography }
+
+inspinia_icons:
+    path:     /inspinia/icons
+    defaults: { _controller: InspiniaBundle:Default:icons }
+
+inspinia_draggable_panels:
+    path:     /inspinia/draggable-panels
+    defaults: { _controller: InspiniaBundle:Default:draggablePanels }
+
+inspinia_resizeable_panels:
+    path:     /inspinia/resizeable-panels
+    defaults: { _controller: InspiniaBundle:Default:resizeablePanels }
+
+inspinia_buttons:
+    path:     /inspinia/buttons
+    defaults: { _controller: InspiniaBundle:Default:buttons }
+
+inspinia_video:
+    path:     /inspinia/video
+    defaults: { _controller: InspiniaBundle:Default:video }
+
+inspinia_tabs_panels:
+    path:     /inspinia/tabs-panels
+    defaults: { _controller: InspiniaBundle:Default:tabsPanels }
+
+inspinia_tabs:
+    path:     /inspinia/tabs
+    defaults: { _controller: InspiniaBundle:Default:tabs }
+
+inspinia_notifications:
+    path:     /inspinia/notifications
+    defaults: { _controller: InspiniaBundle:Default:notifications }
+
+inspinia_badges_labels:
+    path:     /inspinia/badges-labels
+    defaults: { _controller: InspiniaBundle:Default:badgesLabels }
