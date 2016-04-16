@@ -1,0 +1,70 @@
+{% extends "InspiniaBundle::layout.html.twig" %}
+
+{% set title = 'Empty Page' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+
+        {% stylesheets
+        %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div id="page-wrapper" class="gray-bg">
+    {% include 'InspiniaBundle::partials/nav-bar-static-top.html.twig' with { background: null } %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>This is main title</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('inspinia_homepage') }}">This is</a>
+                </li>
+                <li class="active">
+                    <strong>Breadcrumb</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-sm-8">
+            <div class="title-action">
+                <a href="" class="btn btn-primary">This is action area</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content">
+        <div class="middle-box text-center animated fadeInRightBig">
+            <h3 class="font-bold">This is page content</h3>
+            <div class="error-desc">
+                You can create here any grid layout you want. And any variation layout you imagine:) Check out
+                main dashboard and other site. It use many different layout.
+                <br/><a href="{{ path('inspinia_homepage') }}" class="btn btn-primary m-t">Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    {% include 'InspiniaBundle::partials/footer.html.twig' with {} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    '@CoreBundle/Resources/public/js/demo/peity-demo.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock %}

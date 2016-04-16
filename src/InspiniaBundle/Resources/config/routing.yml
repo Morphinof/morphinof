@@ -209,3 +209,115 @@ inspinia_invoice:
 inspinia_login:
     path:     /inspinia/login
     defaults: { _controller: InspiniaBundle:Default:login }
+
+inspinia_login_v2:
+    path:     /inspinia/login-v2
+    defaults: { _controller: InspiniaBundle:Default:loginV2 }
+
+inspinia_forgot_password:
+    path:     /inspinia/forgot-password
+    defaults: { _controller: InspiniaBundle:Default:forgotPassword }
+
+inspinia_register:
+    path:     /inspinia/register
+    defaults: { _controller: InspiniaBundle:Default:register }
+
+inspinia_404:
+    path:     /inspinia/404
+    defaults: { _controller: InspiniaBundle:Default:error404 }
+
+inspinia_500:
+    path:     /inspinia/500
+    defaults: { _controller: InspiniaBundle:Default:error500 }
+
+inspinia_empty_page:
+    path:     /inspinia/empty-page
+    defaults: { _controller: InspiniaBundle:Default:emptyPage }
+
+inspinia_toastr_notifications:
+    path:     /inspinia/toastr-notifications
+    defaults: { _controller: InspiniaBundle:Default:toastrNotifications }
+
+inspinia_nestable_list:
+    path:     /inspinia/nestable-list
+    defaults: { _controller: InspiniaBundle:Default:nestableList }
+
+inspinia_agile_board:
+    path:     /inspinia/agile-board
+    defaults: { _controller: InspiniaBundle:Default:agileBoard }
+
+inspinia_timeline_2:
+    path:     /inspinia/timeline-2
+    defaults: { _controller: InspiniaBundle:Default:timeline2 }
+
+inspinia_diff:
+    path:     /inspinia/diff
+    defaults: { _controller: InspiniaBundle:Default:diff }
+
+inspinia_i18support:
+    path:     /inspinia/i18support
+    defaults: { _controller: InspiniaBundle:Default:i18support }
+
+inspinia_sweet_alert:
+    path:     /inspinia/sweet-alert
+    defaults: { _controller: InspiniaBundle:Default:sweetAlert }
+
+inspinia_idle_timer:
+    path:     /inspinia/idle-timer
+    defaults: { _controller: InspiniaBundle:Default:idleTimer }
+
+inspinia_truncate:
+    path:     /inspinia/truncate
+    defaults: { _controller: InspiniaBundle:Default:truncate }
+
+inspinia_spinners:
+    path:     /inspinia/spinners
+    defaults: { _controller: InspiniaBundle:Default:spinners }
+
+inspinia_tinycon:
+    path:     /inspinia/tinycon
+    defaults: { _controller: InspiniaBundle:Default:tinycon }
+
+inspinia_google_maps:
+    path:     /inspinia/google-maps
+    defaults: { _controller: InspiniaBundle:Default:googleMaps }
+
+inspinia_code_editor:
+    path:     /inspinia/code-editor
+    defaults: { _controller: InspiniaBundle:Default:codeEditor }
+
+inspinia_modal_window:
+    path:     /inspinia/modal-window
+    defaults: { _controller: InspiniaBundle:Default:modalWindow }
+
+inspinia_clipboard:
+    path:     /inspinia/clipboard
+    defaults: { _controller: InspiniaBundle:Default:clipboard }
+
+inspinia_forum_main:
+    path:     /inspinia/forum-main
+    defaults: { _controller: InspiniaBundle:Default:forumMain }
+
+inspinia_validation:
+    path:     /inspinia/validation
+    defaults: { _controller: InspiniaBundle:Default:validation }
+
+inspinia_tree_view:
+    path:     /inspinia/tree-view
+    defaults: { _controller: InspiniaBundle:Default:treeView }
+
+inspinia_loading_buttons:
+    path:     /inspinia/loading-buttons
+    defaults: { _controller: InspiniaBundle:Default:loadingButtons }
+
+inspinia_chat_view:
+    path:     /inspinia/chat-view
+    defaults: { _controller: InspiniaBundle:Default:chatView }
+
+inspinia_masonry:
+    path:     /inspinia/masonry
+    defaults: { _controller: InspiniaBundle:Default:masonry }
+
+inspinia_tour:
+    path:     /inspinia/tour
+    defaults: { _controller: InspiniaBundle:Default:tour }

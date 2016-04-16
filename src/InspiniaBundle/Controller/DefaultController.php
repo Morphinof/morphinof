@@ -269,4 +269,144 @@ class DefaultController extends Controller
     {
         return $this->render('InspiniaBundle:Default:login.html.twig', array('bodyBackground' => 'gray-bg'));
     }
+
+    public function loginV2Action()
+    {
+        return $this->render('InspiniaBundle:Default:login-v2.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
+
+    public function forgotPasswordAction()
+    {
+        return $this->render('InspiniaBundle:Default:forgot-password.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
+
+    public function registerAction()
+    {
+        return $this->render('InspiniaBundle:Default:register.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
+
+    public function error404Action()
+    {
+        return $this->render('InspiniaBundle:Default:404.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
+
+    public function error500Action()
+    {
+        return $this->render('InspiniaBundle:Default:500.html.twig', array('bodyBackground' => 'gray-bg'));
+    }
+
+    public function emptyPageAction()
+    {
+        return $this->render('InspiniaBundle:Default:empty-page.html.twig');
+    }
+
+    public function toastrNotificationsAction()
+    {
+        return $this->render('InspiniaBundle:Default:toastr-notifications.html.twig');
+    }
+
+    public function nestableListAction()
+    {
+        return $this->render('InspiniaBundle:Default:nestable-list.html.twig');
+    }
+
+    public function agileBoardAction()
+    {
+        return $this->render('InspiniaBundle:Default:agile-board.html.twig');
+    }
+
+    public function timeline2Action()
+    {
+        return $this->render('InspiniaBundle:Default:timeline-2.html.twig');
+    }
+
+    public function diffAction()
+    {
+        return $this->render('InspiniaBundle:Default:diff.html.twig');
+    }
+
+    public function i18supportAction()
+    {
+        return $this->render('InspiniaBundle:Default:i18support.html.twig');
+    }
+
+    public function sweetAlertAction()
+    {
+        return $this->render('InspiniaBundle:Default:sweet-alert.html.twig');
+    }
+
+    public function idleTimerAction()
+    {
+        return $this->render('InspiniaBundle:Default:idle-timer.html.twig');
+    }
+
+    public function truncateAction()
+    {
+        return $this->render('InspiniaBundle:Default:truncate.html.twig');
+    }
+
+    public function spinnersAction()
+    {
+        return $this->render('InspiniaBundle:Default:spinners.html.twig');
+    }
+
+    public function tinyconAction()
+    {
+        return $this->render('InspiniaBundle:Default:tinycon.html.twig');
+    }
+
+    public function googleMapsAction()
+    {
+        return $this->render('InspiniaBundle:Default:google-maps.html.twig');
+    }
+
+    public function codeEditorAction()
+    {
+        return $this->render('InspiniaBundle:Default:code-editor.html.twig');
+    }
+
+    public function modalWindowAction()
+    {
+        return $this->render('InspiniaBundle:Default:modal-window.html.twig');
+    }
+
+    public function clipboardAction()
+    {
+        return $this->render('InspiniaBundle:Default:clipboard.html.twig');
+    }
+
+    public function forumMainAction()
+    {
+        return $this->render('InspiniaBundle:Default:forum-main.html.twig');
+    }
+
+    public function validationAction()
+    {
+        return $this->render('InspiniaBundle:Default:validation.html.twig');
+    }
+
+    public function treeViewAction()
+    {
+        return $this->render('InspiniaBundle:Default:tree-view.html.twig');
+    }
+
+    public function loadingButtonsAction()
+    {
+        return $this->render('InspiniaBundle:Default:loading-buttons.html.twig');
+    }
+
+    public function chatViewAction()
+    {
+        return $this->render('InspiniaBundle:Default:chat-view.html.twig');
+    }
+
+    public function masonryAction()
+    {
+        return $this->render('InspiniaBundle:Default:masonry.html.twig');
+    }
+
+    public function tourAction()
+    {
+        return $this->render('InspiniaBundle:Default:tour.html.twig');
+    }
 }
