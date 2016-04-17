@@ -3,9 +3,16 @@
 namespace InspiniaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+use CoreBundle\Controller\AbstractController;
+
+class DefaultController extends AbstractController
 {
+    public function preExecute(Request $request)
+    {
+    }
+
     public function indexAction()
     {
         return $this->render('InspiniaBundle:Default:index.html.twig');

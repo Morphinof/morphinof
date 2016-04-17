@@ -4,7 +4,9 @@ namespace InspiniaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class LandingController extends Controller
+use CoreBundle\Controller\AbstractController;
+
+class LandingController extends AbstractController
 {
     public function indexAction()
     {
