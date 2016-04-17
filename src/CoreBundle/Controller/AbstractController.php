@@ -8,7 +8,13 @@ use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 class AbstractController extends Controller
 {
+    /**
+     * Pre execute
+     *
+     * @param Request $request
+     */
     public function preExecute(Request $request)
     {
+        
     }
 }

@@ -1,5 +1,5 @@
 services:
-  controller.pre_execute_listener:
+  core_bundle.controller.pre_execute_listener:
     class: CoreBundle\Listener\ControllerListener
     tags:
       -  { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
