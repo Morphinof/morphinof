@@ -1,0 +1,29 @@
+{% extends "::landing.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Inspinia
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    %}
+    <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{%block wrapper %}
+    {{ parent() }}
+
+    <div id="wrapper">
+        {% block navbar %}
+            {% include 'InspiniaBundle:Landing:partials/navbar-wrapper.html.twig' with {} %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% include 'InspiniaBundle::partials/skin-config.html.twig' with {} %}
+    </div>
+{% endblock %}

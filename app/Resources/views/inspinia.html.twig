@@ -20,6 +20,8 @@
             '@CoreBundle/Resources/public/css/bootstrap.css'
             '@CoreBundle/Resources/public/font-awesome/css/font-awesome.css'
             '@CoreBundle/Resources/public/css/plugins/jQueryUI/jquery-ui.css'
+            '@CoreBundle/Resources/public/css/plugins/jqGrid/ui.jqgrid.css'
+            '@CoreBundle/Resources/public/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css'
 
             '@CoreBundle/Resources/public/css/plugins/toastr/toastr.min.css'
 
@@ -78,6 +80,17 @@
 
             '@CoreBundle/Resources/public/css/plugins/bootstrapTour/bootstrap-tour.min.css'
 
+            '@CoreBundle/Resources/public/css/plugins/dataTables/datatables.min.css'
+
+            '@CoreBundle/Resources/public/css/plugins/footable/footable.core.css'
+
+            '@CoreBundle/Resources/public/css/plugins/datapicker/datepicker3.css'
+
+            '@CoreBundle/Resources/public/css/plugins/slick/slick.css'
+            '@CoreBundle/Resources/public/css/plugins/slick/slick-theme.css'
+
+            '@CoreBundle/Resources/public/css/plugins/blueimp/css/blueimp-gallery.min.css'
+
             '@CoreBundle/Resources/public/css/animate.css'
 
             '@CoreBundle/Resources/public/css/style.css'
@@ -92,7 +105,11 @@
     <link href="/bundles/core/css/plugins/fullcalendar/fullcalendar.print.css" rel='stylesheet' media='print'>
 </head>
 
-<body {% if bodyBackground is defined and bodyBackground is not null %}class="{{ bodyBackground }}"{% endif %}>
+<body
+    {% if bodyBackground is defined and bodyBackground is not null %}class="{{ bodyBackground }}"{% endif %}
+    {% if mdSkin is defined and mdSkin is not null %}class="md-skin fixed-sidebar fixed-nav"{% endif %}
+    {% if canvasMenu is defined and canvasMenu is not null %}class="canvas-menu"{% endif %}
+>
     {% block modals %}
     <div id="modals-container"></div>
     {% endblock %}
@@ -110,6 +127,9 @@
         '@CoreBundle/Resources/public/js/plugins/metisMenu/jquery.metisMenu.js'
         '@CoreBundle/Resources/public/js/plugins/slimscroll/jquery.slimscroll.min.js'
 
+        '@CoreBundle/Resources/public/js/inspinia.js'
+        '@CoreBundle/Resources/public/js/plugins/pace/pace.min.js'
+
         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.js'
         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.tooltip.min.js'
         '@CoreBundle/Resources/public/js/plugins/flot/jquery.flot.spline.js'
@@ -120,9 +140,6 @@
         '@CoreBundle/Resources/public/js/plugins/flot/curvedLines.js'
 
         '@CoreBundle/Resources/public/js/plugins/peity/jquery.peity.min.js'
-
-        '@CoreBundle/Resources/public/js/inspinia.js'
-        '@CoreBundle/Resources/public/js/plugins/pace/pace.min.js'
 
         '@CoreBundle/Resources/public/js/plugins/jquery-ui/jquery-ui.min.js'
 
@@ -214,6 +231,18 @@
         '@CoreBundle/Resources/public/js/plugins/bootstrapTour/bootstrap-tour.min.js'
 
         '@CoreBundle/Resources/public/js/plugins/video/responsible-video.js'
+
+        '@CoreBundle/Resources/public/js/plugins/dataTables/datatables.min.js'
+        '@CoreBundle/Resources/public/js/plugins/jeditable/jquery.jeditable.js'
+
+        '@CoreBundle/Resources/public/js/plugins/footable/footable.all.min.js'
+
+        '@CoreBundle/Resources/public/js/plugins/jqGrid/i18n/grid.locale-en.js'
+        '@CoreBundle/Resources/public/js/plugins/jqGrid/jquery.jqGrid.min.js'
+
+        '@CoreBundle/Resources/public/js/plugins/slick/slick.min.js'
+
+        '@CoreBundle/Resources/public/js/plugins/blueimp/jquery.blueimp-gallery.min.js'
 
         '@CoreBundle/Resources/public/js/skin-config.js'
     %}

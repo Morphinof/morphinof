@@ -11,6 +11,11 @@ class DefaultController extends Controller
         return $this->render('InspiniaBundle:Default:index.html.twig');
     }
 
+    public function mdSkinAction()
+    {
+        return $this->render('InspiniaBundle:Default:md-skin.html.twig', array('mdSkin' => true));
+    }
+
     public function dashboard2Action()
     {
         return $this->render('InspiniaBundle:Default:dashboard-2.html.twig');
@@ -265,6 +270,11 @@ class DefaultController extends Controller
         return $this->render('InspiniaBundle:Default:invoice.html.twig');
     }
 
+    public function invoicePrintAction()
+    {
+        return $this->render('InspiniaBundle:Default:invoice-print.html.twig', array('bodyBackground' => 'white-bg'));
+    }
+
     public function loginAction()
     {
         return $this->render('InspiniaBundle:Default:login.html.twig', array('bodyBackground' => 'gray-bg'));
@@ -380,6 +390,11 @@ class DefaultController extends Controller
         return $this->render('InspiniaBundle:Default:forum-main.html.twig');
     }
 
+    public function forumPostAction()
+    {
+        return $this->render('InspiniaBundle:Default:forum-post.html.twig');
+    }
+
     public function validationAction()
     {
         return $this->render('InspiniaBundle:Default:validation.html.twig');
@@ -458,5 +473,95 @@ class DefaultController extends Controller
     public function badgesLabelsAction()
     {
         return $this->render('InspiniaBundle:Default:badges-labels.html.twig');
+    }
+
+    public function gridOptionsAction()
+    {
+        return $this->render('InspiniaBundle:Default:grid-options.html.twig');
+    }
+
+    public function tableBasicAction()
+    {
+        return $this->render('InspiniaBundle:Default:table-basic.html.twig');
+    }
+
+    public function tableDataTablesAction()
+    {
+        return $this->render('InspiniaBundle:Default:table-data-tables.html.twig');
+    }
+
+    public function tableFooTableAction()
+    {
+        return $this->render('InspiniaBundle:Default:table-foo-table.html.twig');
+    }
+
+    public function tableJqGridAction()
+    {
+        return $this->render('InspiniaBundle:Default:table-jq-grid.html.twig');
+    }
+
+    public function eCommerceProductsGridAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-products-grid.html.twig');
+    }
+
+    public function eCommerceProductsListAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-product-list.html.twig');
+    }
+
+    public function eCommerceProductAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-product.html.twig');
+    }
+
+    public function eCommerceProductDetailAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-product-detail.html.twig');
+    }
+
+    public function eCommerceCartAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-cart.html.twig');
+    }
+
+    public function eCommerceOrdersAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-orders.html.twig');
+    }
+
+    public function eCommercePaymentsAction()
+    {
+        return $this->render('InspiniaBundle:Default:e-commerce-payments.html.twig');
+    }
+
+    public function basicGalleryAction()
+    {
+        return $this->render('InspiniaBundle:Default:basic-gallery.html.twig');
+    }
+
+    public function slickCarouselAction()
+    {
+        return $this->render('InspiniaBundle:Default:slick-carousel.html.twig');
+    }
+
+    public function carouselAction()
+    {
+        return $this->render('InspiniaBundle:Default:carousel.html.twig');
+    }
+
+    public function cssAnimationAction()
+    {
+        return $this->render('InspiniaBundle:Default:css-animation.html.twig');
+    }
+
+    public function packageAction()
+    {
+        return $this->render('InspiniaBundle:Default:package.html.twig');
+    }
+
+    public function offCanvasMenuAction()
+    {
+        return $this->render('InspiniaBundle:Default:off-canvas-menu.html.twig', array('canvasMenu' => true));
     }
 }

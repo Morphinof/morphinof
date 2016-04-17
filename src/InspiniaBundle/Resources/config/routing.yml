@@ -2,6 +2,10 @@ inspinia_homepage:
     path:     /inspinia
     defaults: { _controller: InspiniaBundle:Default:index }
 
+inspinia_md_skin:
+    path:     /inspinia/md-skin
+    defaults: { _controller: InspiniaBundle:Default:mdSkin }
+
 inspinia_dashboard2:
     path:     /inspinia/dashboard2
     defaults: { _controller: InspiniaBundle:Default:dashboard2 }
@@ -206,6 +210,10 @@ inspinia_invoice:
     path:     /inspinia/invoice
     defaults: { _controller: InspiniaBundle:Default:invoice }
 
+inspinia_invoice_print:
+    path:     /inspinia/invoice-print
+    defaults: { _controller: InspiniaBundle:Default:invoicePrint }
+
 inspinia_login:
     path:     /inspinia/login
     defaults: { _controller: InspiniaBundle:Default:login }
@@ -298,6 +306,10 @@ inspinia_forum_main:
     path:     /inspinia/forum-main
     defaults: { _controller: InspiniaBundle:Default:forumMain }
 
+inspinia_forum_post:
+    path:     /inspinia/forum-post
+    defaults: { _controller: InspiniaBundle:Default:forumPost }
+
 inspinia_validation:
     path:     /inspinia/validation
     defaults: { _controller: InspiniaBundle:Default:validation }
@@ -361,3 +373,79 @@ inspinia_notifications:
 inspinia_badges_labels:
     path:     /inspinia/badges-labels
     defaults: { _controller: InspiniaBundle:Default:badgesLabels }
+
+inspinia_grid_options:
+    path:     /inspinia/grid-options
+    defaults: { _controller: InspiniaBundle:Default:gridOptions }
+
+inspinia_table_basic:
+    path:     /inspinia/table-basic
+    defaults: { _controller: InspiniaBundle:Default:tableBasic }
+
+inspinia_table_data_tables:
+    path:     /inspinia/table-data-tables
+    defaults: { _controller: InspiniaBundle:Default:tableDataTables }
+
+inspinia_table_foo_table:
+    path:     /inspinia/table-foo-table
+    defaults: { _controller: InspiniaBundle:Default:tableFooTable }
+
+inspinia_table_jq_grid:
+    path:     /inspinia/table-jq-grid
+    defaults: { _controller: InspiniaBundle:Default:tableJqGrid }
+
+inspinia_e_commerce_products_grid:
+    path:     /inspinia/table-e-commerce-products-grid
+    defaults: { _controller: InspiniaBundle:Default:eCommerceProductsGrid }
+
+inspinia_e_commerce_products_list:
+    path:     /inspinia/table-e-commerce-products-list
+    defaults: { _controller: InspiniaBundle:Default:eCommerceProductsList }
+
+inspinia_e_commerce_product:
+    path:     /inspinia/table-e-commerce-product
+    defaults: { _controller: InspiniaBundle:Default:eCommerceProduct }
+
+inspinia_e_commerce_product_detail:
+    path:     /inspinia/table-e-commerce-product-detail
+    defaults: { _controller: InspiniaBundle:Default:eCommerceProductDetail }
+
+inspinia_e_commerce_cart:
+    path:     /inspinia/table-e-commerce-cart
+    defaults: { _controller: InspiniaBundle:Default:eCommerceCart }
+
+inspinia_e_commerce_orders:
+    path:     /inspinia/table-e-commerce-orders
+    defaults: { _controller: InspiniaBundle:Default:eCommerceOrders }
+
+inspinia_e_commerce_payments:
+    path:     /inspinia/table-e-commerce-payments
+    defaults: { _controller: InspiniaBundle:Default:eCommercePayments }
+
+inspinia_basic_gallery:
+    path:     /inspinia/basic-gallery
+    defaults: { _controller: InspiniaBundle:Default:basicGallery }
+
+inspinia_slick_carousel:
+    path:     /inspinia/slick-carousel
+    defaults: { _controller: InspiniaBundle:Default:slickCarousel }
+
+inspinia_carousel:
+    path:     /inspinia/carousel
+    defaults: { _controller: InspiniaBundle:Default:carousel }
+
+inspinia_css_animation:
+    path:     /inspinia/css-animation
+    defaults: { _controller: InspiniaBundle:Default:cssAnimation }
+
+inspinia_package:
+    path:     /inspinia/package
+    defaults: { _controller: InspiniaBundle:Default:package }
+
+inspinia_off_canvas_menu:
+    path:     /inspinia/off-canvas-menu
+    defaults: { _controller: InspiniaBundle:Default:offCanvasMenu }
+
+inspinia_landing:
+    path:     /inspinia/landing
+    defaults: { _controller: InspiniaBundle:Landing:index }

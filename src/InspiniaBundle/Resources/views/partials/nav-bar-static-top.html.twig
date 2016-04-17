@@ -1,5 +1,5 @@
 <div class="row border-bottom">
-    <nav class="navbar navbar-static-top {{ background }}" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-{{ position | default('static') }}-top {{ background }}" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
             <form role="search" class="navbar-form-custom" action="{{ path('inspinia_search_results') }}">
@@ -89,7 +89,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="grid_options.html">
+                        <a href="{{ path('inspinia_grid_options') }}">
                             <div>
                                 <i class="fa fa-upload fa-fw"></i> Server Rebooted
                                 <span class="pull-right text-muted small">4 minutes ago</span>
