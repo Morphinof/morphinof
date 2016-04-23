@@ -4,7 +4,7 @@
 parameters:
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
+    database_name:     morphinof
     database_user:     root
     database_password: ~
     # You should uncomment this if you want use pdo_sqlite
@@ -16,4 +16,4 @@ parameters:
     mailer_password:   ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            6aaf0cf6a19cf6f9df8133a16a5fa2692f3b9450
