@@ -4,17 +4,26 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span>
-                        <img alt="image" class="img-circle" src="{{ asset('img/profile_small.jpg') }}" />
+                        {% if app.user.avatar is not null %}
+                            <img alt="image" class="img-circle" src="{% path app.user.avatar, 'small' %}" />
+                        {% else %}
+                            <img alt="image" class="img-circle" src="{{ asset('img/profile_small.jpg') }}" />
+                        {% endif %}
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <strong class="font-bold">{{ app.user.username }}</strong>
                             </span>
-                            <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                            {% if app.user.profile.profession is not null %}
+                            <span class="text-muted text-xs block">{{ app.user.profile.profession }} <b class="caret"></b></span>
+                            {% endif %}
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+                        <li><a href="{{ path('sonata_admin_dashboard') }}">Admin</a></li>
+                        {% endif %}
                         <li><a href="{{ path('inspinia_profile') }}">Profile</a></li>
                         <li><a href="{{ path('inspinia_contacts') }}">Contacts</a></li>
                         <li><a href="{{ path('inspinia_mailbox') }}">Mailbox</a></li>

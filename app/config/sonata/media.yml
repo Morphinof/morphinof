@@ -4,6 +4,16 @@ sonata_media:
         gallery: Application\Sonata\MediaBundle\Entity\Gallery
         gallery_has_media: Application\Sonata\MediaBundle\Entity\GalleryHasMedia
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
+    providers:
+        file:
+            service: sonata.media.provider.file
+            allowed_extensions: ['pdf', 'jpg', 'png', 'jpeg']
+            allowed_mime_types: ['application/pdf', 'application/x-pdf', 'image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png']
+        image:
+            service: sonata.media.provider.image
+            resizer: sonata.media.resizer.custom
+            allowed_extensions: ['pdf', 'jpg', 'png', 'jpeg']
+            allowed_mime_types: ['application/pdf', 'application/x-pdf','image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png']
     default_context: default # you need to set a context
     contexts:
         default:  # the default context is mandatory

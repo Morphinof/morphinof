@@ -1,0 +1,6 @@
+services:
+    admin.user:
+        class: AdminBundle\Admin\UserAdmin
+        arguments: [~, UserBundle\Entity\User, ~, '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Gestion des utilisateurs }

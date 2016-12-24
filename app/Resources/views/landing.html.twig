@@ -31,9 +31,8 @@
 </head>
 
 <body id="page-top" class="landing-page">
-    {% block modals %}
-    <div id="modals-container"></div>
-    {% endblock %}
+
+    <div id="modals-container">{% block modals %}{% endblock %}</div>
 
     {% block body %}
         {% block wrapper %}

@@ -1,0 +1,6 @@
+imports:
+    - { resource: "admin.yml" }
+services:
+    sonata.media.resizer.custom:
+        class: AdminBundle\Resizer\CustomResizer
+        arguments: [ "@sonata.media.adapter.image.gd", 'outbound', "@sonata.media.metadata.proxy" ]

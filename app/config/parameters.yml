@@ -5,8 +5,12 @@ parameters:
     database_name: morphinof
     database_user: root
     database_password: null
+
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
+
     secret: 6aaf0cf6a19cf6f9df8133a16a5fa2692f3b9450
+
+    homepage_route: inspinia_homepage

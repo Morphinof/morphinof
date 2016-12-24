@@ -20,6 +20,8 @@ class AppKernel extends Kernel
 
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+            new FOS\UserBundle\FOSUserBundle(),
+
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
             new Sonata\CoreBundle\SonataCoreBundle(),
@@ -37,9 +39,9 @@ class AppKernel extends Kernel
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new CoreBundle\CoreBundle(),
-            new InspiniaBundle\InspiniaBundle(),
             new UserBundle\UserBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+            new AdminBundle\AdminBundle(),
+            new InspiniaBundle\InspiniaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
