@@ -6,3 +6,5 @@
 design
 inspinia
 .idea/
+/app/bootstrap.php.cache
+/bin/
