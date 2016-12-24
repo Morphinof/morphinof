@@ -2,6 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "doctrine/doctrine.yml" }
+    - { resource: "doctrine/migrations.yml" }
+    - { resource: "sonata/sonata.yml" }
+    - { resource: "sonata/media.yml" }
     - { resource: "@CoreBundle/Resources/config/services.yml" }
     - { resource: "@InspiniaBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
@@ -14,7 +18,7 @@ parameters:
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
-    translator: ~
+    translator: { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
