@@ -1,8 +1,8 @@
 sonata_media:
     class:
-        media: Application\MediaBundle\Entity\Media
-        gallery: Application\MediaBundle\Entity\Gallery
-        gallery_has_media: Application\MediaBundle\Entity\GalleryHasMedia
+        media: Application\Sonata\MediaBundle\Entity\Media
+        gallery: Application\Sonata\MediaBundle\Entity\Gallery
+        gallery_has_media: Application\Sonata\MediaBundle\Entity\GalleryHasMedia
     db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
     default_context: default # you need to set a context
     contexts:
@@ -17,7 +17,23 @@ sonata_media:
             formats:
                 small: { width: 100, height: 100, quality: 100 }
                 big:   { width: 500, height: 500, quality: 100 }
+        user:
+            providers:
+                - sonata.media.provider.image
+                - sonata.media.provider.file
 
+            formats:
+                small: { width: 60, height: 60, quality: 100 }
+                medium: { width: 80, height: 80, quality: 100 }
+                big:   { width: 500, height: 500, quality: 100 }
+        avatar:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 60, height: 60, quality: 100 }
+                medium: { width: 80, height: 80, quality: 100 }
+                big:   { width: 500, height: 500, quality: 100 }
     cdn:
         server:
             path: /uploads/media # http://media.sonata-project.org/

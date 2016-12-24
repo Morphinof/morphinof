@@ -8,3 +8,4 @@ inspinia
 .idea/
 /app/bootstrap.php.cache
 /bin/
+/web/uploads/

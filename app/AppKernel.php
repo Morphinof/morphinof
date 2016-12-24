@@ -35,6 +35,7 @@ class AppKernel extends Kernel
 
             new AppBundle\AppBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new CoreBundle\CoreBundle(),
             new InspiniaBundle\InspiniaBundle(),
             new UserBundle\UserBundle(),

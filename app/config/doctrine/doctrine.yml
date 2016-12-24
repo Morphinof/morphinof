@@ -3,7 +3,10 @@ doctrine:
         entity_managers:
             default:
                 mappings:
+                    SonataClassificationBundle: ~
+                    ApplicationSonataClassificationBundle: ~
                     SonataMediaBundle: ~
+                    ApplicationSonataMediaBundle: ~
 
     dbal:
         types:

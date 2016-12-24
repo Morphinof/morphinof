@@ -10,6 +10,12 @@ admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix: /admin
 
+# https://stackoverflow.com/questions/33426789/unable-to-generate-a-url-for-the-named-route-admin-sonata-classification-categor/33842367#33842367
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /

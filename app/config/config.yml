@@ -5,6 +5,7 @@ imports:
     - { resource: "doctrine/doctrine.yml" }
     - { resource: "doctrine/migrations.yml" }
     - { resource: "sonata/sonata.yml" }
+    - { resource: "sonata/sonata_classification.yml" }
     - { resource: "sonata/media.yml" }
     - { resource: "@CoreBundle/Resources/config/services.yml" }
     - { resource: "@InspiniaBundle/Resources/config/services.yml" }
