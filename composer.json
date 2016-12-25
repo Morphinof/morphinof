@@ -32,7 +32,8 @@
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "sonata-project/admin-bundle": "^3.10",
         "sonata-project/doctrine-orm-admin-bundle": "^3.1",
-        "sonata-project/media-bundle": "^3.3"
+        "sonata-project/media-bundle": "^3.3",
+        "egeloen/ckeditor-bundle": "^4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

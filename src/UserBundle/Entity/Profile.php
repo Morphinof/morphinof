@@ -161,4 +161,28 @@ class Profile
     {
         return $this->birthDate;
     }
+
+    /**
+     * Set about
+     *
+     * @param string $about
+     *
+     * @return Profile
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
 }

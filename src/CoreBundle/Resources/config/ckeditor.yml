@@ -1,0 +1,83 @@
+ivory_ck_editor:
+    enable: true
+    autoload: true
+    default_config: default
+    plugins:
+        button:
+            path:     "/bundles/core/ckeditor/plugins/button/"
+            filename: "plugin.js"
+        clipboard:
+            path:     "/bundles/core/ckeditor/plugins/clipboard/"
+            filename: "plugin.js"
+        dialog:
+            path:     "/bundles/core/ckeditor/plugins/dialog/"
+            filename: "plugin.js"
+        dialogui:
+            path:     "/bundles/core/ckeditor/plugins/dialogui/"
+            filename: "plugin.js"
+        filetools:
+            path:     "/bundles/core/ckeditor/plugins/filetools/"
+            filename: "plugin.js"
+        lineutils:
+            path:     "/bundles/core/ckeditor/plugins/lineutils/"
+            filename: "plugin.js"
+        notification:
+            path:     "/bundles/core/ckeditor/plugins/notification/"
+            filename: "plugin.js"
+        notificationaggregator:
+            path:     "/bundles/core/ckeditor/plugins/notificationaggregator/"
+            filename: "plugin.js"
+        toolbar:
+            path:     "/bundles/core/ckeditor/plugins/toolbar/"
+            filename: "plugin.js"
+        widget:
+            path:     "/bundles/core/ckeditor/plugins/widget/"
+            filename: "plugin.js"
+        uploadwidget:
+            path:     "/bundles/core/ckeditor/plugins/uploadwidget/"
+            filename: "plugin.js"
+        uploadimage:
+            path:     "/bundles/core/ckeditor/plugins/uploadimage/"
+            filename: "plugin.js"
+        image2:
+            path:     "/bundles/core/ckeditor/plugins/image2/"
+            filename: "plugin.js"
+    toolbars:
+        configs:
+            document: [ '@block1', '@block2', '@block3', '@block4', '@block5', '@block10', '@block11', '/', '@block6', '@block7', '@block8', '@block9', '/', '@block10', '@block11', '@block12' ]
+        items:
+            block1: ['Source', '-', 'NewPage', 'Preview', 'Print', '-', 'Templates']
+            block2: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+            block3: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
+            block4: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'SelectField', 'Button', 'ImageButton', 'HiddenField']
+            block5: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+            block6: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',]
+            block7: ['Link', 'Unlink', 'Anchor']
+            block8: ['Image', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'PageBreak', 'Iframe']
+            block9: ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
+            block10: ['Maximize', 'ShowBlocks']
+            block11: ['Variables']
+            block12: ['Image']
+    configs:
+        default:
+            skin: "office2013,/bundles/core/ckeditor/themes/office2013/"
+            extraPlugins: "button,clipboard,dialog,dialogui,filetools,lineutils,notification,notificationaggregator,toolbar,widget,uploadwidget,uploadimage,image2"
+            format_tags: 'p;h2;h3;h4;div'
+            dialog_noConfirmCancel: true
+            allowedContent: true
+            extraAllowedContent: '*{*}'
+            # default toolbar plus Format button
+            toolbar: document
+            filebrowserBrowseRoute: admin_sonata_media_media_browser
+            filebrowserImageBrowseRoute: admin_sonata_media_media_browser
+            # Display images by default when clicking the image dialog browse button
+            filebrowserImageBrowseRouteParameters:
+                provider: sonata.media.provider.image
+            filebrowserUploadRoute: admin_sonata_media_media_upload
+            filebrowserUploadRouteParameters:
+                provider: sonata.media.provider.file
+            # Upload file as image when sending a file from the image dialog
+            filebrowserImageUploadRoute: admin_sonata_media_media_upload
+            filebrowserImageUploadRouteParameters:
+                provider: sonata.media.provider.image
+                context: default # Optional, to upload in a custom context

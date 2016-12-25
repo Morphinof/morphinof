@@ -2,6 +2,7 @@
 
 namespace UserBundle\Form;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -65,6 +66,21 @@ class ProfileType extends AbstractType
                 'format' => 'd/MM/y', # RFC-3339 date
                 'input' => 'datetime',
                 'required' => false,
+            )
+        )
+        ->add
+        (
+            'about',
+            CKEditorType::class,
+            array
+            (
+                'label' => 'A-propos',
+                'config_name' => 'default',
+                'attr' => array
+                (
+                    'rows' => 10,
+                    'cols' => 76,
+                )
             )
         );
     }

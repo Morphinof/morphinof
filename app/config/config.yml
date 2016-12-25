@@ -8,6 +8,7 @@ imports:
     - { resource: "sonata/sonata_classification.yml" }
     - { resource: "sonata/media.yml" }
     - { resource: "@CoreBundle/Resources/config/services.yml" }
+    - { resource: "@CoreBundle/Resources/config/ckeditor.yml" }
     - { resource: "@InspiniaBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
