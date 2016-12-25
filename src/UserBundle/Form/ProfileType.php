@@ -2,6 +2,8 @@
 
 namespace UserBundle\Form;
 
+use CoreBundle\Enum\ContextEnum;
+use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -91,6 +93,32 @@ class ProfileType extends AbstractType
             array
             (
                 'class' => 'ApplicationSonataClassificationBundle:Tag',
+                'query_builder' => function (EntityRepository $repository)
+                {
+                    return $repository->createQueryBuilder('t')
+                    ->where('t.context = :context')
+                    ->setParameter('context', ContextEnum::HOBBIES);
+                },
+                'empty_data' => 'Sélectionner les hobbies',
+                'multiple' => true,
+                'attr' => array(),
+                'required' => false,
+            )
+        )
+        ->add
+        (
+            'skills',
+            EntityType::class,
+            array
+            (
+                'class' => 'ApplicationSonataClassificationBundle:Tag',
+                'query_builder' => function (EntityRepository $repository)
+                {
+                    return $repository->createQueryBuilder('t')
+                    ->where('t.context = :context')
+                    ->setParameter('context', ContextEnum::SKILLS);
+                },
+                'empty_data' => 'Sélectionner les hobbies',
                 'multiple' => true,
                 'attr' => array(),
                 'required' => false,

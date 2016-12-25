@@ -65,11 +65,24 @@ class Profile
      * @ORM\JoinTable
      * (
      *      name="profile_hobbies",
-     *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", unique=false)}
      * )
      */
     protected $hobbies;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag")
+     * @ORM\JoinTable
+     * (
+     *      name="profile_skills",
+     *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", unique=false)}
+     * )
+     */
+    protected $skills;
 
     /**
      * Constructor
@@ -77,6 +90,7 @@ class Profile
     public function __construct()
     {
         $this->hobbies = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
 
     /**
@@ -254,5 +268,52 @@ class Profile
     public function getHobbies()
     {
         return $this->hobbies;
+    }
+
+    /**
+     * Add skill
+     *
+     * @param Tag $skill
+     *
+     * @return Profile
+     */
+    public function addSkill(Tag $skill)
+    {
+        $this->hobbies[] = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Remove skill
+     *
+     * @param Tag $skill
+     */
+    public function removeSkill(Tag $skill)
+    {
+        $this->hobbies->removeElement($skill);
+    }
+
+    /**
+     * Set skills
+     *
+     * @param ArrayCollection $skills
+     * @return Profile
+     */
+    public function setSkills(ArrayCollection $skills)
+    {
+        $this->skills = $skills;
+
+        return $this;
+    }
+
+    /**
+     * Get skills
+     *
+     * @return ArrayCollection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
     }
 }

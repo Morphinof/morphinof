@@ -17,3 +17,5 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            6aaf0cf6a19cf6f9df8133a16a5fa2692f3b9450
+
+    homepage_route: resume_homepage

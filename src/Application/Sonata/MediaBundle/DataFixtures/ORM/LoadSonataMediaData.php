@@ -11,8 +11,13 @@ namespace Satoripop\AdminDataBundle\DataFixtures\ORM;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\ClassificationBundle\Entity\Context;
 use Application\Sonata\ClassificationBundle\Entity\Tag;
+
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+
+use CoreBundle\Enum\ContextEnum;
+use CoreBundle\Enum\HobbyEnum;
+use CoreBundle\Enum\SkillEnum;
 
 /**
  * Class LoadSonataMediaData
@@ -33,16 +38,10 @@ class LoadSonataMediaData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $hobbies = null;
+        $hobbies = $skills = null;
         $this->manager = $manager;
 
-        $contexts = array
-        (
-            'default',
-            'user',
-            'avatar',
-            'hobbies',
-        );
+        $contexts = ContextEnum::__toArray();
 
         foreach ($contexts as $context)
         {
@@ -52,7 +51,7 @@ class LoadSonataMediaData implements FixtureInterface
 
         $tagsList = array
         (
-            'hobbies' => array('Jeux Vidéos'),
+            'hobbies' => HobbyEnum::__toArray(),
         );
 
         foreach ($tagsList as $context => $tags)
@@ -60,6 +59,19 @@ class LoadSonataMediaData implements FixtureInterface
             foreach ($tags as $tag)
             {
                 $$tag = $this->createTag($tag, $hobbies);
+            }
+        }
+
+        $skillsList = array
+        (
+            'hobbies' => SkillEnum::__toArray(),
+        );
+
+        foreach ($skillsList as $context => $tags)
+        {
+            foreach ($tags as $tag)
+            {
+                $$tag = $this->createTag($tag, $skills);
             }
         }
 
@@ -108,7 +120,6 @@ class LoadSonataMediaData implements FixtureInterface
 
         return $category;
     }
-
 
     private function createTag($name, Context $context)
     {
