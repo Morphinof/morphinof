@@ -24,23 +24,16 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=255)
+     * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=255)
+     * @ORM\Column(name="lastName", type="string", length=255, nullable=true)
      */
     private $lastName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=true)
-     */
-    private $email;
 
     /**
      * @var string
@@ -55,6 +48,20 @@ class Profile
      * @ORM\Column(name="profession", type="string", length=255, nullable=true)
      */
     protected $profession;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birth_date", type="date", nullable=true)
+     */
+    protected $birthDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="about", type="text", nullable=true)
+     */
+    protected $about;
 
     /**
      * Set firstName
@@ -115,30 +122,6 @@ class Profile
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Profile
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
      * Set telephone
      *
      * @param string $telephone
@@ -184,5 +167,29 @@ class Profile
     public function getProfession()
     {
         return $this->profession;
+    }
+
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime $birthDate
+     *
+     * @return Profile
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
     }
 }

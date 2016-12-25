@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 
 use CoreBundle\Enum\RolesEnum;
+use UserBundle\Form\ContactType;
 use UserBundle\Form\ProfileType;
 
 /**
@@ -92,6 +93,16 @@ class UserAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Profil',
+            )
+        )
+        ->add
+        (
+            'contact',
+            ContactType::class,
+            array
+            (
+                'label' => 'Contact',
+                'required' => false,
             )
         )
         ->add

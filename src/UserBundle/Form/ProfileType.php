@@ -3,6 +3,7 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -82,7 +83,18 @@ class ProfileType extends AbstractType
                 'required' => false
             )
         )
-        ;
+        ->add
+        (
+            'birthDate',
+            BirthdayType::class,
+            array
+            (
+                'label' => 'Date de naissance',
+                'format' => 'd/MM/y', # RFC-3339 date
+                'input' => 'datetime',
+                'required' => false,
+            )
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

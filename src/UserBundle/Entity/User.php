@@ -12,7 +12,8 @@ use UserBundle\Entity\Profile;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -41,12 +42,21 @@ class User extends BaseUser
      */
     protected $profile;
 
+    /**
+     * @var Contact
+     *
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Contact", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
+     */
+    protected $contact;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->avatar = null;
         $this->profile = new Profile();
+        $this->contact = new Contact();
     }
 
     /**
@@ -95,5 +105,29 @@ class User extends BaseUser
     public function getProfile()
     {
         return $this->profile;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param Contact $contact
+     *
+     * @return User
+     */
+    public function setContact(Contact $contact = null)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return Contact
+     */
+    public function getContact()
+    {
+        return $this->contact;
     }
 }

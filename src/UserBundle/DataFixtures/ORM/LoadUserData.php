@@ -14,15 +14,21 @@ class LoadUserData implements FixtureInterface
         $admin = new User();
         $admin->setUsername('morphinof');
         $admin->setEmail('antoine.griffon@gmail.com');
+        $admin->getProfile()->setFirstName('Antoine');
+        $admin->getProfile()->setLastName('Griffon');
+        $admin->getProfile()->setBirthDate(new \DateTime('1984-06-14'));
         $admin->setPlainPassword('tbqohdux0');
         $admin->addRole('ROLE_SUPER_ADMIN');
         $admin->setEnabled(true);
         $manager->persist($admin);
 
         $user = new User();
-        $user->setUsername('user');
-        $user->setEmail('griffon.dev@gmail.com');
-        $user->setPlainPassword('user');
+        $user->setUsername('johndoe');
+        $user->setEmail('john.doe@gmail.com');
+        $user->getProfile()->setFirstName('John');
+        $user->getProfile()->setLastName('Doe');
+        $user->getProfile()->setBirthDate(new \DateTime('NOW'));
+        $user->setPlainPassword('1234');
         $user->addRole('ROLE_USER');
         $admin->setEnabled(true);
         $manager->persist($user);

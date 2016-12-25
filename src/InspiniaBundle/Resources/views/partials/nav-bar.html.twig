@@ -4,7 +4,7 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span>
-                        {% if app.user.avatar is not null %}
+                        {% if app.user is not null and app.user.avatar is not null %}
                             <img alt="image" class="img-circle" src="{% path app.user.avatar, 'small' %}" />
                         {% else %}
                             <img alt="image" class="img-circle" src="{{ asset('img/profile_small.jpg') }}" />
@@ -13,15 +13,19 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold">{{ app.user.username }}</strong>
+                                <strong class="font-bold">
+                                    {% if app.user is not null and app.user.avatar is not null %}
+                                        {{ app.user.username }}
+                                    {% endif %}
+                                </strong>
                             </span>
-                            {% if app.user.profile.profession is not null %}
+                            {% if app.user is not null and app.user.profile is not null %}
                             <span class="text-muted text-xs block">{{ app.user.profile.profession }} <b class="caret"></b></span>
                             {% endif %}
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+                        {% if app.user is not null and app.user.hasRole('ROLE_SUPER_ADMIN') %}
                         <li><a href="{{ path('sonata_admin_dashboard') }}">Admin</a></li>
                         {% endif %}
                         <li><a href="{{ path('inspinia_profile') }}">Profile</a></li>

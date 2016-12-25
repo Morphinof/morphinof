@@ -1,0 +1,58 @@
+{% import "form.twig" as macro %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>
+    {% block title %}Morphinof{% endblock %}
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+
+    {% block stylesheets %}
+        {# '@CoreBundle/Resources/public/css/plugins/ionRangeSlider/normalize.css' #}
+
+        {% stylesheets
+            '@CoreBundle/Resources/public/css/bootstrap.css'
+            '@CoreBundle/Resources/public/font-awesome/css/font-awesome.css'
+
+            '@ResumeBundle/Resources/public/css/main.css'
+
+            '../app/Resources/public/css/global.css'
+        %}
+            <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}{% endblock %}
+</body>
+
+{% block javascripts %}
+    {% javascripts
+        '@CoreBundle/Resources/public/js/jquery-2.1.1.js'
+        '@CoreBundle/Resources/public/js/bootstrap.min.js'
+
+        '@ResumeBundle/Resources/public/js/html5shiv.js'
+        '@ResumeBundle/Resources/public/js/respond.min.js'
+        '@ResumeBundle/Resources/public/js/scripts.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $(document).ready
+        (
+            function()
+            {
+
+            }
+        );
+    </script>
+{% endblock %}
+</html>

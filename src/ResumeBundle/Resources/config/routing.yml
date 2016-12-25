@@ -1,0 +1,5 @@
+resume_homepage:
+    path:     /resume/{username}
+    defaults:
+        _controller: ResumeBundle:Index:index
+        username: 'morphinof'

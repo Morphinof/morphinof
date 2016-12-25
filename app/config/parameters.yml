@@ -13,4 +13,4 @@ parameters:
 
     secret: 6aaf0cf6a19cf6f9df8133a16a5fa2692f3b9450
 
-    homepage_route: inspinia_homepage
+    homepage_route: resume_homepage #inspinia_homepage

@@ -69,7 +69,7 @@ class SecurityController extends AbstractController
                 : null;
         }
 
-        if (!is_null($this->get('security.token_storage')->getToken()->getUser())){
+        if ($this->get('security.token_storage')->getToken()->getUser() != 'anon.'){
             $route = $this->getParameter('homepage_route');
 
             return $this->redirectToRoute($route);

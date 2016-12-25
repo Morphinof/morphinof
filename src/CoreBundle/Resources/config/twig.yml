@@ -1,0 +1,6 @@
+services:
+  core_bundle.twig.tools_extension:
+    class: CoreBundle\Twig\ToolsExtension
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+      - { name: twig.extension }

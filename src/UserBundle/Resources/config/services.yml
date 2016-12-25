@@ -1,5 +1,10 @@
 services:
-    user.form.profile:
-          class: UserBundle\Form\ProfileType
-          tags:
-              - { name: form.type, alias: user_bundle_profile_type }
+  user.form.profile:
+    class: UserBundle\Form\ProfileType
+    tags:
+      - { name: form.type, alias: user_bundle_profile_type }
+
+    user.form.contact:
+      class: UserBundle\Form\ContactType
+      tags:
+        - { name: form.type, alias: user_bundle_contact_type }
