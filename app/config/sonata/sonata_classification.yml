@@ -1,0 +1,18 @@
+sonata_classification:
+    admin:
+        tag:
+            class:        Sonata\ClassificationBundle\Admin\TagAdmin
+            controller:   SonataAdminBundle:CRUD
+            translation:  SonataClassificationBundle
+        category:
+            class:        AdminBundle\Admin\FixedCategoryAdmin # Sonata\ClassificationBundle\Admin\CategoryAdmin
+            controller:   SonataClassificationBundle:CategoryAdmin
+            translation:  SonataClassificationBundle
+        collection:
+            class:        AdminBundle\Admin\FixedCategoryAdmin #Sonata\ClassificationBundle\Admin\CollectionAdmin
+            controller:   SonataAdminBundle:CRUD
+            translation:  SonataClassificationBundle
+        context:
+            class:        Sonata\ClassificationBundle\Admin\ContextAdmin
+            controller:   SonataAdminBundle:CRUD
+            translation:  SonataClassificationBundle
