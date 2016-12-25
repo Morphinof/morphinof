@@ -1,0 +1,45 @@
+<!-- CONTACT -->
+<div class="box clearfix">
+    <h2>Contact</h2>
+    {% if user.contact.telephone is not null %}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fa fa-phone fa-fw"></span></div>
+        <div class="title only pull-right">
+            {{ user.contact.telephone }}
+        </div>
+    </div>
+    {% endif %}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fa fa-envelope fa-fw"></span></div>
+        <div class="title only pull-right">
+            {{ user.contact.email | default(user.email | default('john.doe@gmail.com')) }}
+        </div>
+    </div>
+    {% if user.contact.twitter is not null %}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fa fa-twitter fa-fw"></span></div>
+        <div class="title pull-right">Twitter</div>
+        <div class="description pull-right">
+            {{ user.contact.twitter }}
+        </div>
+    </div>
+    {% endif %}
+    {% if user.contact.facebook is not null %}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fa fa-facebook fa-fw"></span></div>
+        <div class="title pull-right">Facebook</div>
+        <div class="description pull-right">
+            {{ user.contact.facebook }}
+        </div>
+    </div>
+    {% endif %}
+    {% if user.contact.skype is not null %}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fa fa-skype fa-fw"></span></div>
+        <div class="title pull-right">Skype</div>
+        <div class="description pull-right">
+            {{ user.contact.skype }}
+        </div>
+    </div>
+    {% endif %}
+</div>

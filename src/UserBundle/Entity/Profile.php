@@ -2,6 +2,8 @@
 
 namespace UserBundle\Entity;
 
+use Application\Sonata\ClassificationBundle\Entity\Tag;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,27 @@ class Profile
      * @ORM\Column(name="about", type="text", nullable=true)
      */
     protected $about;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag")
+     * @ORM\JoinTable
+     * (
+     *      name="profile_hobbies",
+     *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", unique=false)}
+     * )
+     */
+    protected $hobbies;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hobbies = new ArrayCollection();
+    }
 
     /**
      * Set firstName
@@ -184,5 +207,52 @@ class Profile
     public function getAbout()
     {
         return $this->about;
+    }
+
+    /**
+     * Add hobby
+     *
+     * @param Tag $hobby
+     *
+     * @return Profile
+     */
+    public function addHobby(Tag $hobby)
+    {
+        $this->hobbies[] = $hobby;
+
+        return $this;
+    }
+
+    /**
+     * Remove hobby
+     *
+     * @param Tag $hobby
+     */
+    public function removeHobby(Tag $hobby)
+    {
+        $this->hobbies->removeElement($hobby);
+    }
+
+    /**
+     * Set hobbies
+     *
+     * @param ArrayCollection $hobbies
+     * @return Profile
+     */
+    public function setHobbies(ArrayCollection $hobbies)
+    {
+        $this->hobbies = $hobbies;
+
+        return $this;
+    }
+
+    /**
+     * Get hobbies
+     *
+     * @return ArrayCollection
+     */
+    public function getHobbies()
+    {
+        return $this->hobbies;
     }
 }

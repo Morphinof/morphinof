@@ -10,6 +10,7 @@ namespace Satoripop\AdminDataBundle\DataFixtures\ORM;
 
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\ClassificationBundle\Entity\Context;
+use Application\Sonata\ClassificationBundle\Entity\Tag;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -32,21 +33,34 @@ class LoadSonataMediaData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        $hobbies = null;
         $this->manager = $manager;
 
-        #
-        # Contexts
-        #
         $contexts = array
         (
             'default',
             'user',
             'avatar',
+            'hobbies',
         );
 
-        foreach ($contexts as $label) {
-            $context = $this->createContext($label);
-            $this->createCategory($label, $context);
+        foreach ($contexts as $context)
+        {
+            $$context = $this->createContext($context);
+            $this->createCategory($context, $$context);
+        }
+
+        $tagsList = array
+        (
+            'hobbies' => array('Jeux Vidéos'),
+        );
+
+        foreach ($tagsList as $context => $tags)
+        {
+            foreach ($tags as $tag)
+            {
+                $$tag = $this->createTag($tag, $hobbies);
+            }
         }
 
         $manager->flush();
@@ -93,6 +107,18 @@ class LoadSonataMediaData implements FixtureInterface
         $this->manager->persist($category);
 
         return $category;
+    }
+
+
+    private function createTag($name, Context $context)
+    {
+        $tag = new Tag();
+        $tag->setEnabled(true);
+        $tag->setName($name);
+        $tag->setContext($context);
+        $this->manager->persist($tag);
+
+        return $tag;
     }
 
     public function getOrder()

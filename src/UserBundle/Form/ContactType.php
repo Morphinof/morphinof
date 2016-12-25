@@ -28,7 +28,7 @@ class ContactType extends AbstractType
         )
         ->add
         (
-            'phone',
+            'telephone',
             TextType::class,
             array
             (
