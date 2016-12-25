@@ -1,4 +1,10 @@
 services:
-#    resume.example:
-#        class: ResumeBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    resume_bundle.form.education:
+        class: ResumeBundle\Form\EducationType
+        tags:
+            - { name: form.type, alias: resume_bundle_education_type }
+
+    resume_bundle.form.experience:
+        class: ResumeBundle\Form\ExperienceType
+        tags:
+            - { name: form.type, alias: resume_bundle_experience_type }

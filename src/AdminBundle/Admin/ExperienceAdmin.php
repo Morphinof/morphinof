@@ -2,9 +2,7 @@
 
 namespace AdminBundle\Admin;
 
-use Doctrine\DBAL\Types\ArrayType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Doctrine\ORM\EntityManager;
 
@@ -12,18 +10,15 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\MediaBundle\Form\Type\MediaType;
 
-use CoreBundle\Enum\RolesEnum;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use UserBundle\Form\ContactType;
-use UserBundle\Form\ProfileType;
 
 /**
- * Class EducationAdmin
+ * Class ExperienceAdmin
  * @package AdminBundle\Admin
  */
-class EducationAdmin extends AbstractAdmin
+class ExperienceAdmin extends AbstractAdmin
 {
     /** @var EntityManager $em */
     private $em;
@@ -36,7 +31,7 @@ class EducationAdmin extends AbstractAdmin
         (
             '_page' => 1,
             '_sort_order' => 'DESC',
-            '_sort_by' => 'year'
+            '_sort_by' => 'from'
         );
 
         $this->em = $entityManager;
@@ -50,12 +45,10 @@ class EducationAdmin extends AbstractAdmin
         $formMapper
         ->with
         (
-            'Education',
+            'Expériences',
             array
             (
                 'class'       => 'col-md-12',
-                #'box_class'   => 'box box-solid box-danger',
-                #'description' => 'Profil',
             )
         )
         ->add
@@ -69,7 +62,19 @@ class EducationAdmin extends AbstractAdmin
                 (
                     'placeholder' => 'Titre',
                 ),
-                'required' => true,
+            )
+        )
+        ->add
+        (
+            'company',
+            TextType::class,
+            array
+            (
+                'label' => 'Compagnie',
+                'attr' => array
+                (
+                    'placeholder' => 'Compagnie',
+                ),
             )
         )
         ->add
@@ -88,15 +93,24 @@ class EducationAdmin extends AbstractAdmin
         )
         ->add
         (
-            'year',
-            ChoiceType::class,
+            'startedOn',
+            DateType::class,
             array
             (
-                'choices' => array_reverse(range(1900, date('Y'))),
-                'choice_label' => function ($value, $key, $index)
-                {
-                    return $value;
-                },
+                'label' => 'De',
+                'format' => 'd/MM/y', # RFC-3339 date
+                'input' => 'datetime',
+            )
+        )
+        ->add
+        (
+            'endedOn',
+            DateType::class,
+            array
+            (
+                'label' => 'A',
+                'format' => 'd/MM/y', # RFC-3339 date
+                'input' => 'datetime',
             )
         )
         ->add
@@ -135,11 +149,20 @@ class EducationAdmin extends AbstractAdmin
         )
         ->add
         (
-            'year',
+            'startedOn',
             null,
             array
             (
-                'label' => 'Année'
+                'label' => 'De'
+            )
+        )
+        ->add
+        (
+            'endedOn',
+            null,
+            array
+            (
+                'label' => 'A'
             )
         );
     }
@@ -161,11 +184,20 @@ class EducationAdmin extends AbstractAdmin
         )
         ->add
         (
-            'year',
+            'startedOn',
             null,
             array
             (
-                'label' => 'Année'
+                'label' => 'De'
+            )
+        )
+        ->add
+        (
+            'endedOn',
+            null,
+            array
+            (
+                'label' => 'A'
             )
         )
         ->add

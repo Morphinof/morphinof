@@ -140,7 +140,7 @@ class UserAdmin extends AbstractAdmin
             ContactType::class,
             array
             (
-                'label' => 'Contact',
+                'label' => false,
                 'required' => false,
             )
         )

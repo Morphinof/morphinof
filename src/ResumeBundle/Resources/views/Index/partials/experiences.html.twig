@@ -1,0 +1,22 @@
+{% if user is defined %}
+    <!-- EXPERIENCES -->
+    <div class="box">
+        <h2>Experiences</h2>
+        {% if user.experiences | length > 0 %}
+            {% for experience in user.experiences %}
+            <div class="job clearfix">
+                <div class="col-xs-3">
+                    <div class="where">{{ experience.company }}</div>
+                    <div class="year">{{ experience.startedOn | date('Y') }} - {{ experience.endedOn | date('Y') }}</div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="profession">{{ experience.title }}</div>
+                    <div class="description">
+                        {{ experience.resume | raw }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}

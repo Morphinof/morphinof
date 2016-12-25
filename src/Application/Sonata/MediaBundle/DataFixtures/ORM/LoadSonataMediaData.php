@@ -12,7 +12,8 @@ use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\ClassificationBundle\Entity\Context;
 use Application\Sonata\ClassificationBundle\Entity\Tag;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use CoreBundle\Enum\ContextEnum;
@@ -24,7 +25,7 @@ use CoreBundle\Enum\SkillEnum;
  *
  * @package Satoripop\AdminDataBundle\DataFixtures\ORM
  */
-class LoadSonataMediaData implements FixtureInterface
+class LoadSonataMediaData extends AbstractFixture implements OrderedFixtureInterface
 {
     /** @var ObjectManager $manager */
     private $manager;
@@ -54,11 +55,13 @@ class LoadSonataMediaData implements FixtureInterface
             'hobbies' => HobbyEnum::__toArray(),
         );
 
+        $globalTagId = 1;
         foreach ($tagsList as $context => $tags)
         {
             foreach ($tags as $tag)
             {
-                $$tag = $this->createTag($tag, $hobbies);
+                $$tag = $this->createTag($globalTagId, $tag, $hobbies);
+                $globalTagId++;
             }
         }
 
@@ -71,7 +74,8 @@ class LoadSonataMediaData implements FixtureInterface
         {
             foreach ($tags as $tag)
             {
-                $$tag = $this->createTag($tag, $skills);
+                $$tag = $this->createTag($globalTagId, $tag, $skills);
+                $globalTagId++;
             }
         }
 
@@ -121,13 +125,15 @@ class LoadSonataMediaData implements FixtureInterface
         return $category;
     }
 
-    private function createTag($name, Context $context)
+    private function createTag($id, $name, Context $context)
     {
         $tag = new Tag();
         $tag->setEnabled(true);
         $tag->setName($name);
         $tag->setContext($context);
+
         $this->manager->persist($tag);
+        $this->addReference('tag-'.$id, $tag);
 
         return $tag;
     }

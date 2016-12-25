@@ -110,11 +110,12 @@ class ProfileType extends AbstractType
             EntityType::class,
             array
             (
-                'class' => 'ApplicationSonataClassificationBundle:Tag',
+                'class' => 'ResumeBundle\Entity\Skill',
                 'query_builder' => function (EntityRepository $repository)
                 {
-                    return $repository->createQueryBuilder('t')
-                    ->where('t.context = :context')
+                    return $repository->createQueryBuilder('s')
+                    ->leftJoin('s.tag', 'tag')
+                    ->where('tag.context = :context')
                     ->setParameter('context', ContextEnum::SKILLS);
                 },
                 'multiple' => true,

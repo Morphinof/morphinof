@@ -1,0 +1,13 @@
+{% if user is defined %}
+<!-- HOBBIES -->
+<div class="box">
+    <h2>Hobbies</h2>
+    {% if user.profile.hobbies | length > 0 %}
+        {% for hobbie in user.profile.hobbies %}
+            <div class="hobby">{{ hobbie.name }}</div>
+        {% endfor %}
+    {% else %}
+        Pas de hobbies
+    {% endif %}
+</div>
+{% endif %}

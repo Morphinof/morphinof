@@ -7,6 +7,12 @@ services:
 
     admin.education:
         class: AdminBundle\Admin\EducationAdmin
-        arguments: [~, ResumeBundle\Entity\Education, ~, '@doctrine.orm.entity_manager']
+        arguments: [~, ResumeBundle\Entity\Education, AdminBundle:EducationAdmin, '@doctrine.orm.entity_manager']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: CV, label: Education }
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Diplômes }
+
+    admin.experience:
+        class: AdminBundle\Admin\ExperienceAdmin
+        arguments: [~, ResumeBundle\Entity\Experience, AdminBundle:ExperienceAdmin, '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Expériences }

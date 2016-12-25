@@ -10,6 +10,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Application\Sonata\MediaBundle\Entity\Media;
 
 use ResumeBundle\Entity\Education;
+use ResumeBundle\Entity\Experience;
 use UserBundle\Entity\Profile;
 
 /**
@@ -65,6 +66,19 @@ class User extends BaseUser
      */
     protected $educations;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Experience")
+     * @ORM\JoinTable
+     * (
+     *      name="users_experiences",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="experience_id", referencedColumnName="id")}
+     *  )
+     */
+    protected $experiences;
+
     public function __construct()
     {
         parent::__construct();
@@ -72,6 +86,8 @@ class User extends BaseUser
         $this->avatar = null;
         $this->profile = new Profile();
         $this->contact = new Contact();
+        $this->educations = new ArrayCollection();
+        $this->experiences = new ArrayCollection();
     }
 
     /**
@@ -155,7 +171,10 @@ class User extends BaseUser
      */
     public function addEducation(Education $education)
     {
-        $this->educations[] = $education;
+        if (!$this->educations->contains($education))
+        {
+            $this->educations[] = $education;
+        }
 
         return $this;
     }
@@ -173,10 +192,47 @@ class User extends BaseUser
     /**
      * Get educations
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getEducations()
     {
         return $this->educations;
+    }
+
+    /**
+     * Add experience
+     *
+     * @param Experience $experience
+     *
+     * @return User
+     */
+    public function addExperience(Experience $experience)
+    {
+        if (!$this->experiences->contains($experience))
+        {
+            $this->experiences[] = $experience;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove experience
+     *
+     * @param Experience $experience
+     */
+    public function removeExperience(Experience $experience)
+    {
+        $this->experiences->removeElement($experience);
+    }
+
+    /**
+     * Get experiences
+     *
+     * @return ArrayCollection
+     */
+    public function getExperiences()
+    {
+        return $this->experiences;
     }
 }

@@ -74,7 +74,7 @@ class Profile
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag")
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Skill")
      * @ORM\JoinTable
      * (
      *      name="profile_skills",

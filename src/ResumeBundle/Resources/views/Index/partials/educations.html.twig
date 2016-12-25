@@ -1,0 +1,19 @@
+{% if user is defined %}
+<!-- EDUCATION -->
+<div class="box">
+    <h2>Diplômes</h2>
+    {% if user.educations | length > 0 %}
+    <ul id="education" class="clearfix">
+        {% for education in user.educations %}
+        <li>
+            <div class="year pull-left">{{ education.year }}</div>
+            <div class="description pull-right">
+                <h3>{{ education.title }}</h3>
+                <p>{{ education.resume | raw }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endif %}

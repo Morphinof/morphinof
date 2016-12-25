@@ -4,18 +4,20 @@ namespace ResumeBundle\Entity;
 
 use CoreBundle\Traits\CreatedUpdatedTrait;
 use CoreBundle\Traits\DescribableTrait;
+use CoreBundle\Traits\StartedEndedTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Education
+ * Experience
  *
- * @ORM\Table(name="education")
- * @ORM\Entity(repositoryClass="ResumeBundle\Repository\EducationRepository")
+ * @ORM\Table(name="experience")
+ * @ORM\Entity(repositoryClass="ResumeBundle\Repository\ExperienceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Education
+class Experience
 {
     use CreatedUpdatedTrait;
+    use StartedEndedTrait;
     use DescribableTrait;
 
     /**
@@ -25,14 +27,14 @@ class Education
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="year", type="integer")
+     * @ORM\Column(name="company", type="string", length=255)
      */
-    private $year;
+    protected $company;
 
     /**
      * Get id
@@ -45,27 +47,26 @@ class Education
     }
 
     /**
-     * Set year
+     * Set company
      *
-     * @param integer $year
+     * @param string $company
      *
-     * @return Education
+     * @return Experience
      */
-    public function setYear($year)
+    public function setCompany($company)
     {
-        $this->year = $year;
+        $this->company = $company;
 
         return $this;
     }
 
     /**
-     * Get year
+     * Get company
      *
-     * @return integer
+     * @return string
      */
-    public function getYear()
+    public function getCompany()
     {
-        return $this->year;
+        return $this->company;
     }
 }
-

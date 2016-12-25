@@ -1,0 +1,19 @@
+{% if user is defined %}
+<!-- SKILLS -->
+<div class="box">
+    <h2>Compétances</h2>
+    <div class="skills">
+        {% if user.profile.skills | length > 0 %}
+            {% for skill in user.profile.skills %}
+            <div class="item-skills" data-percent="{{ skill.level }}">{{ skill.tag.name }}</div>
+            {% endfor %}
+            <div class="skills-legend clearfix">
+                <div class="legend-left legend">Débutant</div>
+                <div class="legend-left legend"><span>Avancé</span></div>
+                <div class="legend-right legend"><span>Expert</span></div>
+                <div class="legend-right legend">Maître</div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

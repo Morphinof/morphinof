@@ -29,7 +29,7 @@ trait DescribableTrait
      * Set title
      *
      * @param $title
-     * @return DescribableTrait
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -52,7 +52,7 @@ trait DescribableTrait
      * Set description
      *
      * @param $description
-     * @return DescribableTrait
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -75,7 +75,7 @@ trait DescribableTrait
      * Set resume
      *
      * @param $resume
-     * @return DescribableTrait
+     * @return $this
      */
     public function setResume($resume)
     {
