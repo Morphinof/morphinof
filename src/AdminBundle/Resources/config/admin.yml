@@ -4,3 +4,9 @@ services:
         arguments: [~, UserBundle\Entity\User, ~, '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Gestion des utilisateurs }
+
+    admin.education:
+        class: AdminBundle\Admin\EducationAdmin
+        arguments: [~, ResumeBundle\Entity\Education, ~, '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Education }

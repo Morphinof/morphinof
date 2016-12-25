@@ -3,6 +3,7 @@
 namespace AdminBundle\Admin;
 
 use Doctrine\DBAL\Types\ArrayType;
+use ResumeBundle\Form\EducationType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Doctrine\ORM\EntityManager;
@@ -18,7 +19,7 @@ use UserBundle\Form\ContactType;
 use UserBundle\Form\ProfileType;
 
 /**
- * Class CategoryAdmin
+ * Class UserAdmin
  * @package AdminBundle\Admin
  */
 class UserAdmin extends AbstractAdmin

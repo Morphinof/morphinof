@@ -2,12 +2,14 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use FOS\UserBundle\Model\User as BaseUser;
 
 use Application\Sonata\MediaBundle\Entity\Media;
 
+use ResumeBundle\Entity\Education;
 use UserBundle\Entity\Profile;
 
 /**
@@ -49,6 +51,19 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
      */
     protected $contact;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Education")
+     * @ORM\JoinTable
+     * (
+     *      name="users_educations",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="education_id", referencedColumnName="id")}
+     *  )
+     */
+    protected $educations;
 
     public function __construct()
     {
@@ -129,5 +144,39 @@ class User extends BaseUser
     public function getContact()
     {
         return $this->contact;
+    }
+
+    /**
+     * Add education
+     *
+     * @param Education $education
+     *
+     * @return User
+     */
+    public function addEducation(Education $education)
+    {
+        $this->educations[] = $education;
+
+        return $this;
+    }
+
+    /**
+     * Remove education
+     *
+     * @param Education $education
+     */
+    public function removeEducation(Education $education)
+    {
+        $this->educations->removeElement($education);
+    }
+
+    /**
+     * Get educations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEducations()
+    {
+        return $this->educations;
     }
 }

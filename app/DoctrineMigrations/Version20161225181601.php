@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20161225161256 extends AbstractMigration
+class Version20161225181601 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,9 +18,7 @@ class Version20161225161256 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX UNIQ_4C62E638444F97DD ON contact');
-        $this->addSql('ALTER TABLE contact CHANGE phone telephone VARCHAR(255) DEFAULT NULL');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_4C62E638450FF010 ON contact (telephone)');
+        $this->addSql('ALTER TABLE education CHANGE year year INT NOT NULL');
     }
 
     /**
@@ -31,8 +29,6 @@ class Version20161225161256 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX UNIQ_4C62E638450FF010 ON contact');
-        $this->addSql('ALTER TABLE contact CHANGE telephone phone VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_4C62E638444F97DD ON contact (phone)');
+        $this->addSql('ALTER TABLE education CHANGE year year DATETIME NOT NULL');
     }
 }

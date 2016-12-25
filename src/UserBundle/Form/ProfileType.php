@@ -99,7 +99,6 @@ class ProfileType extends AbstractType
                     ->where('t.context = :context')
                     ->setParameter('context', ContextEnum::HOBBIES);
                 },
-                'empty_data' => 'Sélectionner les hobbies',
                 'multiple' => true,
                 'attr' => array(),
                 'required' => false,
@@ -118,7 +117,6 @@ class ProfileType extends AbstractType
                     ->where('t.context = :context')
                     ->setParameter('context', ContextEnum::SKILLS);
                 },
-                'empty_data' => 'Sélectionner les hobbies',
                 'multiple' => true,
                 'attr' => array(),
                 'required' => false,
