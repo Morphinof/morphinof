@@ -43,34 +43,6 @@ class ProfileType extends AbstractType
         )
         ->add
         (
-            'email',
-            TextType::class,
-            array
-            (
-                'label' => 'E-mail',
-                'attr' => array
-                (
-                    'placeholder' => 'E-mail',
-                ),
-                'required' => false
-            )
-        )
-        ->add
-        (
-            'telephone',
-            TextType::class,
-            array
-            (
-                'label' => 'Téléphone',
-                'attr' => array
-                (
-                    'placeholder' => 'Téléphone',
-                ),
-                'required' => false
-            )
-        )
-        ->add
-        (
             'profession',
             TextType::class,
             array

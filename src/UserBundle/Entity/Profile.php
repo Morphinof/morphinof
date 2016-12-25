@@ -38,13 +38,6 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=50, nullable=true)
-     */
-    private $telephone;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="profession", type="string", length=255, nullable=true)
      */
     protected $profession;
@@ -119,30 +112,6 @@ class Profile
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set telephone
-     *
-     * @param string $telephone
-     *
-     * @return Profile
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    /**
-     * Get telephone
-     *
-     * @return string
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
     }
 
     /**

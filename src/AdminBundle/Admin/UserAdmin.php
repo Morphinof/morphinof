@@ -73,6 +73,16 @@ class UserAdmin extends AbstractAdmin
         $rolesChoices = self::flattenRoles($roles);
 
         $formMapper
+        ->with
+        (
+            'Utilisateur',
+            array
+            (
+                'class'       => 'col-md-4',
+                #'box_class'   => 'box box-solid box-danger',
+                #'description' => 'Profil',
+            )
+        )
         ->add
         (
             'avatar',
@@ -88,11 +98,39 @@ class UserAdmin extends AbstractAdmin
         ->add('enabled')
         ->add
         (
+            'roles',
+            ChoiceType::class,
+            array
+            (
+                'choices' => $rolesChoices,
+                'multiple' => true
+            )
+        )
+        ->end()
+        ->with
+        (
+            'Profil',
+            array
+            (
+                'class' => 'col-md-4',
+            )
+        )
+        ->add
+        (
             'profile',
             ProfileType::class,
             array
             (
-                'label' => 'Profil',
+                'label' => false,
+            )
+        )
+        ->end()
+        ->with
+        (
+            'Contact',
+            array
+            (
+                'class' => 'col-md-4',
             )
         )
         ->add
@@ -105,16 +143,7 @@ class UserAdmin extends AbstractAdmin
                 'required' => false,
             )
         )
-        ->add
-        (
-            'roles',
-            ChoiceType::class,
-            array
-            (
-                'choices' => $rolesChoices,
-                'multiple' => true
-            )
-        );
+        ->end();
     }
 
     /**

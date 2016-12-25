@@ -14,16 +14,72 @@ class ContactType extends AbstractType
         $builder
         ->add
         (
-            'firstName',
+            'email',
             TextType::class,
             array
             (
-                'label' => 'Prénom',
+                'label' => 'E-mail',
                 'attr' => array
                 (
-                    'placeholder' => 'Prénom',
+                    'placeholder' => 'E-mail',
                 ),
-                'required' => true
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'phone',
+            TextType::class,
+            array
+            (
+                'label' => 'Téléphone',
+                'attr' => array
+                (
+                    'placeholder' => 'Téléphone',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'facebook',
+            TextType::class,
+            array
+            (
+                'label' => 'Facebook',
+                'attr' => array
+                (
+                    'placeholder' => 'Facebook',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'twitter',
+            TextType::class,
+            array
+            (
+                'label' => 'Twitter',
+                'attr' => array
+                (
+                    'placeholder' => 'Twitter',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'skype',
+            TextType::class,
+            array
+            (
+                'label' => 'Skype',
+                'attr' => array
+                (
+                    'placeholder' => 'Skype',
+                ),
+                'required' => false
             )
         );
     }
