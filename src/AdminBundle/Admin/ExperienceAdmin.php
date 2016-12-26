@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Admin;
 
+use CoreBundle\Enum\ContextEnum;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 use Doctrine\ORM\EntityManager;
@@ -11,6 +12,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Sonata\MediaBundle\Form\Type\MediaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -53,6 +56,17 @@ class ExperienceAdmin extends AbstractAdmin
         )
         ->add
         (
+            'owner',
+            EntityType::class,
+            array
+            (
+                'label' => 'Propriétraire',
+                'class' => 'UserBundle:User',
+                'disabled' => true,
+            )
+        )
+        ->add
+        (
             'title',
             TextType::class,
             array
@@ -75,6 +89,16 @@ class ExperienceAdmin extends AbstractAdmin
                 (
                     'placeholder' => 'Compagnie',
                 ),
+            )
+        )
+        ->add
+        (
+            'logo',
+            MediaType::class,
+            array
+            (
+                'context' => ContextEnum::LOGOS,
+                'provider' => 'sonata.media.provider.image',
             )
         )
         ->add
@@ -184,6 +208,12 @@ class ExperienceAdmin extends AbstractAdmin
         )
         ->add
         (
+            'owner',
+            EntityType::class,
+            array()
+        )
+        ->add
+        (
             'startedOn',
             null,
             array
@@ -197,7 +227,8 @@ class ExperienceAdmin extends AbstractAdmin
             null,
             array
             (
-                'label' => 'A'
+                'label' => 'A',
+                'required' => false,
             )
         )
         ->add

@@ -14,7 +14,7 @@ trait StartedEndedTrait
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="ended_on", type="datetime")
+     * @ORM\Column(name="ended_on", type="datetime", nullable=true)
      */
     protected $endedOn;
 

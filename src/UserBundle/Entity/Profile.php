@@ -24,6 +24,14 @@ class Profile
     private $id;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="profile")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    protected $owner;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
@@ -74,23 +82,41 @@ class Profile
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Skill")
-     * @ORM\JoinTable
-     * (
-     *      name="profile_skills",
-     *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", unique=false)}
-     * )
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Skill", mappedBy="profile")
      */
     protected $skills;
 
     /**
-     * Constructor
+     * Profile constructor
      */
     public function __construct()
     {
         $this->hobbies = new ArrayCollection();
         $this->skills = new ArrayCollection();
+    }
+
+    /**
+     * Set owner
+     *
+     * @param User $owner
+     *
+     * @return Profile
+     */
+    public function setOwner($owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 
     /**
@@ -139,6 +165,17 @@ class Profile
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        if (!is_null($this->owner) && !is_null($this->owner->getProfile()))
+            return $this->owner->getProfile()->getFirstName().' '.$this->owner->getProfile()->getLastName();
+
+        return null;
     }
 
     /**
@@ -315,5 +352,15 @@ class Profile
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $fullName = $this->getFullName();
+
+        return 'Profil de '.$this->owner->getUsername().($fullName ? ' ('.$fullName.')' : '');
     }
 }

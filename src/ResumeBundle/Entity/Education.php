@@ -5,6 +5,7 @@ namespace ResumeBundle\Entity;
 use CoreBundle\Traits\CreatedUpdatedTrait;
 use CoreBundle\Traits\DescribableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * Education
@@ -28,6 +29,14 @@ class Education
     private $id;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="educations")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $owner;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="year", type="integer")
@@ -42,6 +51,30 @@ class Education
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param User $owner
+     *
+     * @return Education
+     */
+    public function setOwner($owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 
     /**
@@ -68,4 +101,3 @@ class Education
         return $this->year;
     }
 }
-

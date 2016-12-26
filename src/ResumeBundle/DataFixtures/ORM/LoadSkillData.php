@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use ResumeBundle\Entity\Education;
 use ResumeBundle\Entity\Skill;
 use UserBundle\Entity\User;
 
@@ -63,7 +62,7 @@ class LoadSkillData extends AbstractFixture implements OrderedFixtureInterface
 
         foreach ($skills as $data)
         {
-            $skill = $this->createSkill($data['skill'], $data['level']);
+            $skill = $this->createSkill($admin,$data['skill'], $data['level']);
             $manager->persist($skill);
 
             $admin->getProfile()->getSkills()->add($skill);
@@ -73,9 +72,10 @@ class LoadSkillData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
-    private function createSkill($tag, $level)
+    private function createSkill(User $owner, $tag, $level)
     {
         $skill = new Skill();
+        $skill->setProfile($owner->getProfile());
         $skill->setTag($tag);
         $skill->setLevel($level);
 
@@ -86,6 +86,6 @@ class LoadSkillData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 4;
+        return 3;
     }
 }

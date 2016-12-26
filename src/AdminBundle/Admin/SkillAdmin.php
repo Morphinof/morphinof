@@ -2,10 +2,9 @@
 
 namespace AdminBundle\Admin;
 
-use Doctrine\DBAL\Types\ArrayType;
+use CoreBundle\Enum\ContextEnum;
+use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Doctrine\ORM\EntityManager;
 
@@ -13,18 +12,15 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\MediaBundle\Form\Type\MediaType;
 
-use CoreBundle\Enum\RolesEnum;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use UserBundle\Form\ContactType;
-use UserBundle\Form\ProfileType;
 
 /**
- * Class EducationAdmin
+ * Class SkillAdmin
  * @package AdminBundle\Admin
  */
-class EducationAdmin extends AbstractAdmin
+class SkillAdmin extends AbstractAdmin
 {
     /** @var EntityManager $em */
     private $em;
@@ -37,7 +33,7 @@ class EducationAdmin extends AbstractAdmin
         (
             '_page' => 1,
             '_sort_order' => 'DESC',
-            '_sort_by' => 'year'
+            '_sort_by' => 'from'
         );
 
         $this->em = $entityManager;
@@ -51,79 +47,50 @@ class EducationAdmin extends AbstractAdmin
         $formMapper
         ->with
         (
-            'Education',
+            'Compétances',
             array
             (
                 'class'       => 'col-md-12',
-                #'box_class'   => 'box box-solid box-danger',
-                #'description' => 'Profil',
             )
         )
         ->add
         (
-            'owner',
+            'profile',
             EntityType::class,
             array
             (
-                'label' => 'Propriétraire',
-                'class' => 'UserBundle:User',
+                'label' => 'Profil',
+                'class' => 'UserBundle:Profile',
                 'disabled' => true,
             )
         )
         ->add
         (
-            'title',
-            TextType::class,
+            'tag',
+            EntityType::class,
             array
             (
-                'label' => 'Titre',
-                'attr' => array
-                (
-                    'placeholder' => 'Titre',
-                ),
-                'required' => true,
-            )
-        )
-        ->add
-        (
-            'description',
-            TextType::class,
-            array
-            (
-                'label' => 'Description',
-                'attr' => array
-                (
-                    'placeholder' => 'Description',
-                ),
-                'required' => false,
-            )
-        )
-        ->add
-        (
-            'year',
-            ChoiceType::class,
-            array
-            (
-                'choices' => array_reverse(range(1900, date('Y'))),
-                'choice_label' => function ($value, $key, $index)
+                'class' => 'ApplicationSonataClassificationBundle:Tag',
+                'query_builder' => function (EntityRepository $repository)
                 {
-                    return $value;
+                    return $repository->createQueryBuilder('t')
+                    ->where('t.context = :context')
+                    ->setParameter('context', ContextEnum::SKILLS);
                 },
+                'attr' => array(),
             )
         )
         ->add
         (
-            'resume',
-            CKEditorType::class,
+            'level',
+            TextType::class,
             array
             (
-                'label' => 'Résumé',
-                'config_name' => 'default',
+                'label' => 'Niveau',
                 'attr' => array
                 (
-                    'rows' => 10,
-                    'cols' => 76,
-                )
+                    'placeholder' => 'Niveau',
+                ),
             )
         )
         ->end();
@@ -138,20 +105,20 @@ class EducationAdmin extends AbstractAdmin
         ->add('id')
         ->add
         (
-            'title',
+            'tag',
             null,
             array
             (
-                'label' => 'Titre'
+                'label' => 'Tag'
             )
         )
         ->add
         (
-            'year',
+            'level',
             null,
             array
             (
-                'label' => 'Année'
+                'label' => 'Niveau'
             )
         );
     }
@@ -162,22 +129,31 @@ class EducationAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+        ->add('id')
         ->add
         (
-            'title',
+            'tag',
             null,
             array
             (
-                'label' => 'Titre'
+                'label' => 'Tag',
+                'query_builder' => function(EntityRepository $repository)
+                {
+                    return $repository
+                    ->createQueryBuilder('s')
+                    ->leftjoin('s.tag', 'tag')
+                    ->where('tag.context = :context')
+                    ->setParameter('context', ContextEnum::SKILLS);
+                }
             )
         )
         ->add
         (
-            'year',
+            'level',
             null,
             array
             (
-                'label' => 'Année'
+                'label' => 'Niveau'
             )
         )
         ->add

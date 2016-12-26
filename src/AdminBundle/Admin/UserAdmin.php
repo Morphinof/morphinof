@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Admin;
 
+use CoreBundle\Enum\ContextEnum;
 use Doctrine\DBAL\Types\ArrayType;
 use ResumeBundle\Form\EducationType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -90,7 +91,7 @@ class UserAdmin extends AbstractAdmin
             MediaType::class,
             array
             (
-                'context' => 'avatar',
+                'context' => ContextEnum::AVATAR,
                 'provider' => 'sonata.media.provider.image',
             )
         )

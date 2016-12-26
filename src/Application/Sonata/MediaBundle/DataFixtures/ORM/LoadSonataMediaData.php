@@ -12,6 +12,7 @@ use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\ClassificationBundle\Entity\Context;
 use Application\Sonata\ClassificationBundle\Entity\Tag;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -140,6 +141,6 @@ class LoadSonataMediaData extends AbstractFixture implements OrderedFixtureInter
 
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
 }

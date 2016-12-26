@@ -56,26 +56,14 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Education")
-     * @ORM\JoinTable
-     * (
-     *      name="users_educations",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="education_id", referencedColumnName="id")}
-     *  )
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Education", mappedBy="owner")
      */
     protected $educations;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Experience")
-     * @ORM\JoinTable
-     * (
-     *      name="users_experiences",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="experience_id", referencedColumnName="id")}
-     *  )
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Experience", mappedBy="owner")
      */
     protected $experiences;
 

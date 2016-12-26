@@ -72,7 +72,8 @@ class ExperienceType extends AbstractType
             DateType::class,
             array
             (
-                'label' => 'A'
+                'label' => 'A',
+                'required' => false,
             )
         )
         ->add

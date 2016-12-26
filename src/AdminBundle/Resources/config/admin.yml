@@ -16,3 +16,9 @@ services:
         arguments: [~, ResumeBundle\Entity\Experience, AdminBundle:ExperienceAdmin, '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Expériences }
+
+    admin.skill:
+        class: AdminBundle\Admin\SkillAdmin
+        arguments: [~, ResumeBundle\Entity\Skill, AdminBundle:SkillAdmin, '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Compétances }
