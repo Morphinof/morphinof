@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use ResumeBundle\Entity\Experience;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,12 +93,16 @@ class ExperienceAdminController extends CRUDController
                 $this->admin->checkAccess('create', $object);
 
                 try {
+                    /** @var Experience $object */
                     $object = $this->admin->create($object);
 
                     /** @var User $user */
                     $user = $this->getUser();
+
+                    $object->setOwner($user);
                     $user->getExperiences()->add($object);
 
+                    $this->admin->update($object);
                     $this->admin->update($user);
 
                     if ($this->isXmlHttpRequest()) {

@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use ResumeBundle\Entity\Education;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\Form\Form;
@@ -95,12 +96,16 @@ class EducationAdminController extends CRUDController
                 $this->admin->checkAccess('create', $object);
 
                 try {
+                    /** @var Education $object */
                     $object = $this->admin->create($object);
 
                     /** @var User $user */
                     $user = $this->getUser();
+
+                    $object->setOwner($user);
                     $user->getEducations()->add($object);
 
+                    $this->admin->update($object);
                     $this->admin->update($user);
 
                     if ($this->isXmlHttpRequest()) {

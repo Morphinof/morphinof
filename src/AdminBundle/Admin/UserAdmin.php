@@ -3,8 +3,8 @@
 namespace AdminBundle\Admin;
 
 use CoreBundle\Enum\ContextEnum;
-use Doctrine\DBAL\Types\ArrayType;
-use ResumeBundle\Form\EducationType;
+use Doctrine\ORM\QueryBuilder;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Doctrine\ORM\EntityManager;
@@ -15,7 +15,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 
-use CoreBundle\Enum\RolesEnum;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use UserBundle\Entity\User;
 use UserBundle\Form\ContactType;
 use UserBundle\Form\ProfileType;
 
@@ -25,10 +26,13 @@ use UserBundle\Form\ProfileType;
  */
 class UserAdmin extends AbstractAdmin
 {
+    /** @var TokenStorage $token */
+    private $token;
+
     /** @var EntityManager $em */
     private $em;
 
-    public function __construct($code, $class, $baseControllerName, EntityManager $entityManager)
+    public function __construct($code, $class, $baseControllerName, TokenStorage $token, EntityManager $entityManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 
@@ -39,7 +43,33 @@ class UserAdmin extends AbstractAdmin
             '_sort_by' => 'id'
         );
 
+        $this->token = $token;
         $this->em = $entityManager;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+
+        /** @var EntityManager $em */
+        $em = $query->getEntityManager();
+
+        $repository = $em->getRepository('UserBundle:User');
+
+        $qb = $repository->createQueryBuilder('u');
+
+        if (!$user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $qb
+            ->andWhere('u = :user')
+            ->setParameter('user', $user);
+        }
+
+        return new ProxyQuery($qb);
     }
 
     /**

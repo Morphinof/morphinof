@@ -36,7 +36,15 @@ sonata_media:
                 small: { width: 60, height: 60, quality: 100 }
                 medium: { width: 80, height: 80, quality: 100 }
                 big:   { width: 500, height: 500, quality: 100 }
-        avatar:
+        avatars:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 60, height: 60, quality: 100 }
+                medium: { width: 80, height: 80, quality: 100 }
+                big:   { width: 500, height: 500, quality: 100 }
+        logos:
             providers:
                 - sonata.media.provider.image
 

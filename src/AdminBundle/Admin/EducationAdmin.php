@@ -2,8 +2,10 @@
 
 namespace AdminBundle\Admin;
 
-use Doctrine\DBAL\Types\ArrayType;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -13,12 +15,10 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\MediaBundle\Form\Type\MediaType;
 
-use CoreBundle\Enum\RolesEnum;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use UserBundle\Form\ContactType;
-use UserBundle\Form\ProfileType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use UserBundle\Entity\User;
 
 /**
  * Class EducationAdmin
@@ -26,10 +26,13 @@ use UserBundle\Form\ProfileType;
  */
 class EducationAdmin extends AbstractAdmin
 {
+    /** @var TokenStorage $token */
+    private $token;
+
     /** @var EntityManager $em */
     private $em;
 
-    public function __construct($code, $class, $baseControllerName, EntityManager $entityManager)
+    public function __construct($code, $class, $baseControllerName, TokenStorage $token, EntityManager $entityManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 
@@ -40,7 +43,37 @@ class EducationAdmin extends AbstractAdmin
             '_sort_by' => 'year'
         );
 
+        $this->token = $token;
         $this->em = $entityManager;
+    }
+
+    /**
+     * @param string $context
+     * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+     */
+    public function createQuery($context = 'list')
+    {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+
+        /** @var EntityManager $em */
+        $em = $query->getEntityManager();
+
+        $repository = $em->getRepository('ResumeBundle:Education');
+
+        $qb = $repository->createQueryBuilder('e');
+
+        if (!$user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $qb
+            ->andWhere('e.owner = :owner')
+            ->setParameter('owner', $user);
+        }
+
+        return new ProxyQuery($qb);
     }
 
     /**
@@ -67,6 +100,14 @@ class EducationAdmin extends AbstractAdmin
             (
                 'label' => 'Propriétraire',
                 'class' => 'UserBundle:User',
+                'query_builder' => function (EntityRepository $repository)
+                {
+                    return $repository->createQueryBuilder('e')
+                    ->leftJoin('e.profile', 'profile')
+                    ->leftJoin('profile.owner', 'owner')
+                    ->where('owner = :owner')
+                    ->setParameter('owner', $this->token->getToken()->getUser());
+                },
                 'disabled' => true,
             )
         )
@@ -162,6 +203,15 @@ class EducationAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+        ->add
+        (
+            'owner',
+            null,
+            array
+            (
+                'label' => 'Propriétraire',
+            )
+        )
         ->add
         (
             'title',

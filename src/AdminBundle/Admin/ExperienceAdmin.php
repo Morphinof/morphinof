@@ -3,6 +3,8 @@
 namespace AdminBundle\Admin;
 
 use CoreBundle\Enum\ContextEnum;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 use Doctrine\ORM\EntityManager;
@@ -12,10 +14,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use UserBundle\Entity\User;
 
 /**
  * Class ExperienceAdmin
@@ -23,10 +28,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class ExperienceAdmin extends AbstractAdmin
 {
+    /** @var TokenStorage $token */
+    private $token;
+
     /** @var EntityManager $em */
     private $em;
 
-    public function __construct($code, $class, $baseControllerName, EntityManager $entityManager)
+    public function __construct($code, $class, $baseControllerName, TokenStorage $token, EntityManager $entityManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 
@@ -37,7 +45,33 @@ class ExperienceAdmin extends AbstractAdmin
             '_sort_by' => 'from'
         );
 
+        $this->token = $token;
         $this->em = $entityManager;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+
+        /** @var EntityManager $em */
+        $em = $query->getEntityManager();
+
+        $repository = $em->getRepository('ResumeBundle:Experience');
+
+        $qb = $repository->createQueryBuilder('e');
+
+        if (!$user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $qb
+            ->andWhere('e.owner = :owner')
+            ->setParameter('owner', $user);
+        }
+
+        return new ProxyQuery($qb);
     }
 
     /**
@@ -62,6 +96,12 @@ class ExperienceAdmin extends AbstractAdmin
             (
                 'label' => 'Propriétraire',
                 'class' => 'UserBundle:User',
+                'query_builder' => function (EntityRepository $repository)
+                {
+                    return $repository->createQueryBuilder('e')
+                    ->where('e = :owner')
+                    ->setParameter('owner', $this->token->getToken()->getUser());
+                },
                 'disabled' => true,
             )
         )

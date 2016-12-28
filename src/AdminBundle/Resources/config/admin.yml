@@ -1,24 +1,24 @@
 services:
     admin.user:
         class: AdminBundle\Admin\UserAdmin
-        arguments: [~, UserBundle\Entity\User, ~, '@doctrine.orm.entity_manager']
+        arguments: [~, UserBundle\Entity\User, ~, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Gestion des utilisateurs }
 
     admin.education:
         class: AdminBundle\Admin\EducationAdmin
-        arguments: [~, ResumeBundle\Entity\Education, AdminBundle:EducationAdmin, '@doctrine.orm.entity_manager']
+        arguments: [~, ResumeBundle\Entity\Education, AdminBundle:EducationAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Diplômes }
 
     admin.experience:
         class: AdminBundle\Admin\ExperienceAdmin
-        arguments: [~, ResumeBundle\Entity\Experience, AdminBundle:ExperienceAdmin, '@doctrine.orm.entity_manager']
+        arguments: [~, ResumeBundle\Entity\Experience, AdminBundle:ExperienceAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Expériences }
 
     admin.skill:
         class: AdminBundle\Admin\SkillAdmin
-        arguments: [~, ResumeBundle\Entity\Skill, AdminBundle:SkillAdmin, '@doctrine.orm.entity_manager']
+        arguments: [~, ResumeBundle\Entity\Skill, AdminBundle:SkillAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Compétances }

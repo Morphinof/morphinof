@@ -124,7 +124,7 @@ class Experience
      *
      * @return Experience
      */
-    public function setAvatar(Media $logo = null)
+    public function setLogo(Media $logo = null)
     {
         $this->logo = $logo;
 
@@ -136,7 +136,7 @@ class Experience
      *
      * @return Media
      */
-    public function getAvatar()
+    public function getLogo()
     {
         return $this->logo;
     }
