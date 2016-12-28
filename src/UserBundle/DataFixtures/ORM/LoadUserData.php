@@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use ResumeBundle\Enum\TemplateEnum;
 use UserBundle\Entity\Profile;
 use UserBundle\Entity\User;
 
@@ -81,7 +82,10 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $profile['hobbies']
         );
         $profile->setOwner($user);
+
         $user->setProfile($profile);
+        $user->getPreferences()->setOwner($user);
+        $user->getPreferences()->setTemplate(TemplateEnum::THREE_COLOR);
 
         $this->manager->persist($user);
 

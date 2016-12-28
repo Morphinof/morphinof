@@ -1,4 +1,4 @@
-{% extends "ResumeBundle::layout.html.twig" %}
+{% extends "ResumeBundle::three-color.html.twig" %}
 
 {% set title = 'Voici mon CV :)' %}
 
@@ -43,18 +43,18 @@
                 </p>
             </div>
 
-            {% include '@Resume/Index/partials/educations.html.twig' %}
+            {% include '@Resume/ThreeColor/partials/educations.html.twig' %}
 
-            {% include '@Resume/Index/partials/experiences.html.twig' %}
+            {% include '@Resume/ThreeColor/partials/experiences.html.twig' %}
         </div>
         <div class="col-xs-12 col-sm-5">
-            {% include '@Resume/Index/partials/contact.html.twig' %}
+            {% include '@Resume/ThreeColor/partials/contact.html.twig' %}
 
-            {% include '@Resume/Index/partials/skills.html.twig' %}
+            {% include '@Resume/ThreeColor/partials/skills.html.twig' %}
 
-            {% include '@Resume/Index/partials/languages.html.twig' %}
+            {% include '@Resume/ThreeColor/partials/languages.html.twig' %}
 
-            {% include '@Resume/Index/partials/hobbies.html.twig' %}
+            {% include '@Resume/ThreeColor/partials/hobbies.html.twig' %}
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,68 @@
+{% import "form.twig" as macro %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>
+        {% block title %}CVilized{% endblock %}
+    </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Timeline Style CV / Resume / vCard Bootstrap Template.">
+    <meta name="author" content="The Develovers">
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('bundles/resume/CVilized/theme/assets/ico/apple-touch-icon-144-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('bundles/resume/CVilized/theme/assets/ico/apple-touch-icon-114-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('bundles/resume/CVilized/theme/assets/ico/apple-touch-icon-72-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/resume/CVilized/theme/assets/ico/apple-touch-icon-57-precomposed.png') }}">
+    <link rel="shortcut icon" href="{{ asset('bundles/resume/CVilized/theme/assets/ico/favicon.png') }}">
+
+    {% block stylesheets %}
+        {# '@CoreBundle/Resources/public/css/plugins/ionRangeSlider/normalize.css' #}
+
+        {% stylesheets
+            '@CoreBundle/Resources/public/css/bootstrap.css'
+            '@CoreBundle/Resources/public/font-awesome/css/font-awesome.css'
+
+            '@ResumeBundle/Resources/public/CVilized/theme/assets/css/main.css'
+        %}
+            <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+</head>
+
+<body id="top" data-spy="scroll" data-target="#main-nav">
+    {% block body %}{% endblock %}
+</body>
+
+{% block javascripts %}
+    {% javascripts
+        '@CoreBundle/Resources/public/js/jquery-2.1.1.js'
+        '@CoreBundle/Resources/public/js/bootstrap.min.js'
+
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/plugins/map/jquery.ui.map.full.min.js'
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/plugins/scrolling/jquery.scrollTo-1.4.3.1-min.js'
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/plugins/scrolling/jquery.localscroll-1.2.7-min.js'
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/plugins/parsley/parsley.min.js'
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/plugins/autohidingnavbar/jquery.bootstrap-autohidingnavbar.min.js'
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/plugins/jquery-easypiechart/jquery.easypiechart.min.js'
+        '@ResumeBundle/Resources/public/CVilized/theme/assets/js/main.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAaLzHepseqfeJYL4lqLyEAvil272K9T7s"></script>
+
+    <script>
+        $(document).ready
+        (
+            function()
+            {
+
+            }
+        );
+    </script>
+{% endblock %}
+</html>

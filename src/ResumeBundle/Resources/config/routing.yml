@@ -3,3 +3,13 @@ resume_homepage:
     defaults:
         _controller: ResumeBundle:Index:index
         username: 'morphinof'
+
+3color_homepage:
+    path:     /3color/{username}
+    defaults:
+        _controller: ResumeBundle:ThreeColor:index
+
+cvilized_homepage:
+    path:     /cvilized/{username}
+    defaults:
+        _controller: ResumeBundle:CVilized:index

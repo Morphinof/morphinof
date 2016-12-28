@@ -18,6 +18,7 @@ use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use UserBundle\Entity\User;
 use UserBundle\Form\ContactType;
+use UserBundle\Form\PreferencesType;
 use UserBundle\Form\ProfileType;
 
 /**
@@ -169,6 +170,25 @@ class UserAdmin extends AbstractAdmin
         (
             'contact',
             ContactType::class,
+            array
+            (
+                'label' => false,
+                'required' => false,
+            )
+        )
+        ->end()
+        ->with
+        (
+            'Préférences',
+            array
+            (
+                'class' => 'col-md-4',
+            )
+        )
+        ->add
+        (
+            'preferences',
+            PreferencesType::class,
             array
             (
                 'label' => false,

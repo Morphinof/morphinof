@@ -4,13 +4,12 @@ namespace ResumeBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 
-use ResumeBundle\Enum\TemplateEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use UserBundle\Entity\User;
 use UserBundle\Repository\UserRepository;
 
-class IndexController extends Controller
+class CVilizedController extends Controller
 {
     public function indexAction($username)
     {
@@ -25,8 +24,6 @@ class IndexController extends Controller
 
         if (is_null($user)) throw new \Exception(vsprintf('Unable to load user %s', $username ? $username : 'null'));
 
-        $template = $user->getPreferences()->getTemplate() ?? TemplateEnum::THREE_COLOR;
-
-        return $this->redirectToRoute(TemplateEnum::__route($template), array('username' => $user->getUsername()));
+        return $this->render('ResumeBundle:CVilized:index.html.twig', array('user' => $user));
     }
 }

@@ -11,6 +11,7 @@ use Application\Sonata\MediaBundle\Entity\Media;
 
 use ResumeBundle\Entity\Education;
 use ResumeBundle\Entity\Experience;
+use ResumeBundle\Entity\Preferences;
 use UserBundle\Entity\Profile;
 
 /**
@@ -67,6 +68,13 @@ class User extends BaseUser
      */
     protected $experiences;
 
+    /**
+     * @var Preferences
+     *
+     * @ORM\OneToOne(targetEntity="ResumeBundle\Entity\Preferences", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    protected $preferences;
+
     public function __construct()
     {
         parent::__construct();
@@ -76,6 +84,7 @@ class User extends BaseUser
         $this->contact = new Contact();
         $this->educations = new ArrayCollection();
         $this->experiences = new ArrayCollection();
+        $this->preferences = new Preferences();
     }
 
     /**
@@ -222,5 +231,29 @@ class User extends BaseUser
     public function getExperiences()
     {
         return $this->experiences;
+    }
+
+    /**
+     * Set preferences
+     *
+     * @param Preferences $preferences
+     *
+     * @return User
+     */
+    public function setPreferences(Preferences $preferences = null)
+    {
+        $this->preferences = $preferences;
+
+        return $this;
+    }
+
+    /**vv
+     * Get preferences
+     *
+     * @return Preferences
+     */
+    public function getPreferences()
+    {
+        return $this->preferences;
     }
 }
