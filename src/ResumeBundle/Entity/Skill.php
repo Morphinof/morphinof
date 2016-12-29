@@ -4,6 +4,7 @@ namespace ResumeBundle\Entity;
 
 use Application\Sonata\ClassificationBundle\Document\Tag;
 
+use CoreBundle\Traits\DescribableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 use CoreBundle\Traits\CreatedUpdatedTrait;
@@ -21,6 +22,7 @@ use UserBundle\Entity\User;
 class Skill
 {
     use CreatedUpdatedTrait;
+    use DescribableTrait;
 
     /**
      * @var int

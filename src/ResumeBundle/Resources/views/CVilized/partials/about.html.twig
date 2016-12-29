@@ -1,10 +1,11 @@
+{% if user is defined %}
 <!-- ABOUT ME -->
 <section class="section about-me" id="about-me">
     <div class="container">
-        <h2 class="heading">ABOUT ME</h2>
-        <p>Monotonectally conceptualize go forward relationships and effective paradigms. Uniquely build team building convergence rather than progressive manufactured products. Quickly build professional web services through cross functional vortals. Synergistically transform functionalized e-markets through performance based human capital. Energistically engage global core competencies vis-a-vis superior architectures.</p>
-        <p>Holisticly foster process-centric core competencies whereas impactful meta-services. Seamlessly evisculate accurate leadership vis-a-vis highly efficient users. Authoritatively grow multifunctional action items and competitive processes. Collaboratively maximize resource sucking.</p>
+        <h2 class="heading">A propos de moi</h2>
+        {{ user.profile.about }}
         <div class="row interest">
+        {% if user.profile.hobbies | length > 0 %}
             <div class="col-md-3">
                 <h3 class="sub-heading"><span class="glyphicon glyphicon-headphones"></span> Music</h3>
                 <p>Efficiently revolutionize one-to-one potentialities before B2B models. Continually leverage other's resource-leveling niche markets whereas focused processes. Distinctively transition high standards in total linkage.</p>
@@ -22,6 +23,7 @@
                 <p>Holisticly restore resource-leveling methodologies rather than distinctive e-services. Seamlessly whiteboard unique quality vectors via functionalized catalysts for change. Enthusiastically embrace proactive outsourcing through.</p>
             </div>
         </div>
+        {% endif %}
         <div class="social">
             <h3 class="sub-heading">Follow me on:</h3>
             <ul class="social-icons">
@@ -35,3 +37,4 @@
     </div>
 </section>
 <!-- END ABOUT ME -->
+{% endif %}

@@ -11,7 +11,6 @@
 		$('#main-nav').localScroll(1000);
 		$('#header').localScroll(1000);
 
-
 		/*-----------------------------------/
 		/* SKILLS
 		/*----------------------------------*/
@@ -29,7 +28,6 @@
 				animate: 2000
 			});
 		}
-
 
 		/*-----------------------------------/
 		/* GOOGLE MAPS
@@ -56,15 +54,14 @@
 			});
 		}
 
-
 		/*-----------------------------------/
 		/* AJAX CONTACT FORM
 		/*----------------------------------*/
 
-		if($('#contact-form').length > 0) {
-			$('#contact-form').parsley();
-
-			$('#contact-form').submit( function(e) {
+		var contactForm = $('#contact-form');
+		if(contactForm.length > 0) {
+            contactForm.parsley();
+            contactForm.submit( function(e) {
 
 				e.preventDefault();
 

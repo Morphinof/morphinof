@@ -4,6 +4,7 @@ namespace AdminBundle\Admin;
 
 use CoreBundle\Enum\ContextEnum;
 use Doctrine\ORM\QueryBuilder;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -16,6 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use UserBundle\Entity\User;
 use UserBundle\Form\ContactType;
 use UserBundle\Form\PreferencesType;
@@ -30,10 +32,13 @@ class UserAdmin extends AbstractAdmin
     /** @var TokenStorage $token */
     private $token;
 
+    /** @var AuthorizationChecker $authChecker */
+    private $authChecker;
+
     /** @var EntityManager $em */
     private $em;
 
-    public function __construct($code, $class, $baseControllerName, TokenStorage $token, EntityManager $entityManager)
+    public function __construct($code, $class, $baseControllerName, TokenStorage $token, AuthorizationChecker $authChecker, EntityManager $entityManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 
@@ -45,7 +50,16 @@ class UserAdmin extends AbstractAdmin
         );
 
         $this->token = $token;
+        $this->authChecker = $authChecker;
         $this->em = $entityManager;
+    }
+
+    /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('impersonate', $this->getRouterIdParameter().'/impersonate');
     }
 
     public function createQuery($context = 'list')
@@ -253,19 +267,31 @@ class UserAdmin extends AbstractAdmin
             (
                 'label' => 'Rôles',
             )
-        )
+        );
+
+        $actions = array
+        (
+            'show' => array(),
+            'edit' => array(),
+            'delete' => array(),
+        );
+
+        if ($this->token->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN') || $this->authChecker->isGranted('ROLE_PREVIOUS_ADMIN'))
+        {
+            $actions['impersonate'] = array
+            (
+                'template' => 'AdminBundle::CRUD/list__action_impersonate.html.twig'
+            );
+        }
+
+        $listMapper
         ->add
         (
             '_action',
             null,
             array
             (
-                'actions' => array
-                (
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                )
+                'actions' => $actions
             )
         );
     }

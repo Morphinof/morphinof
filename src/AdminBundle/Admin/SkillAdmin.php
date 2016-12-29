@@ -135,6 +135,21 @@ class SkillAdmin extends AbstractAdmin
                 ),
             )
         )
+        ->add
+        (
+            'resume',
+            CKEditorType::class,
+            array
+            (
+                'label' => 'Résumé',
+                'config_name' => 'default',
+                'attr' => array
+                (
+                    'rows' => 10,
+                    'cols' => 76,
+                )
+            )
+        )
         ->end();
     }
 

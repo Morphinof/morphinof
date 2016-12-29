@@ -10,7 +10,7 @@ security:
 
     role_hierarchy:
         ROLE_USER:        ROLE_USER
-        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN, ROLE_SONATA_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     firewalls:
@@ -29,6 +29,7 @@ security:
 
             logout:       true
             anonymous:    true
+            switch_user:  true
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
