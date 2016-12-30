@@ -37,6 +37,8 @@ class AppKernel extends Kernel
             new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
+            new Addressable\Bundle\AddressableBundle(),
+
             new AppBundle\AppBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),

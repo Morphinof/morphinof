@@ -2,6 +2,8 @@
 
 namespace UserBundle\Entity;
 
+use Addressable\Bundle\Model\AddressableInterface;
+use Addressable\Bundle\Model\Traits\ORM\AddressableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,8 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="contact")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\ContactRepository")
  */
-class Contact
+class Contact implements AddressableInterface
 {
+    use AddressableTrait;
+
     /**
      * @var int
      *
@@ -92,6 +96,17 @@ class Contact
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getFullAddress()
+    {
+        if (!is_null($this->streetNumber) && !is_null($this->streetName) && !is_null($this->city) && !is_null($this->country))
+            return $this->streetNumber.' '.$this->streetName.', '.$this->city.' '.$this->country;
+
+        return null;
     }
 
     /**

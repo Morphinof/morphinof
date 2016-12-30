@@ -4,6 +4,7 @@ namespace ResumeBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 
+use ResumeBundle\Enum\TemplateEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use UserBundle\Entity\User;
@@ -24,6 +25,6 @@ class ThreeColorController extends Controller
 
         if (is_null($user)) throw new \Exception(vsprintf('Unable to load user %s', $username ? $username : 'null'));
 
-        return $this->render('ResumeBundle:ThreeColor:index.html.twig', array('user' => $user));
+        return $this->render('ResumeBundle:ThreeColor:index.html.twig', array('user' => $user, 'template' => TemplateEnum::THREE_COLOR));
     }
 }

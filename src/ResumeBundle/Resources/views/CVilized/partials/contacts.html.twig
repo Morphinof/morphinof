@@ -48,16 +48,16 @@
                     </form>
                 </div>
             </div>
-
+            {% if user.contact.address is not null %}
             <div class="col-md-6">
-                <p>Credibly matrix cross-unit best practices with enterprise-wide niches. Intrinsicly transform worldwide quality vectors vis-a-vis resource-leveling web services. Synergistically impact just in time alignments whereas prospective alignments.</p>
                 <div class="address-lines">
-                    <p>12345 North Main Street</p>
-                    <p>New York, 2233445</p>
-                    <p>Mobile: (1800) 765 - 4321</p>
-                    <p>Email: <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></p>
+                    <p>{{ user.contact.address.streetNumber }} {{ user.contact.address.streetName }}</p>
+                    <p>{{ user.contact.address.city }}, {{ user.contact.address.zipCode }}, {{ user.contact.address.country }}</p>
+                    <p>Téléphone: {{ user.contact.telephone }}</p>
+                    <p>E-mail: <a href="mailto:{{ user.contact.email }}">{{ user.contact.email }}</a></p>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>

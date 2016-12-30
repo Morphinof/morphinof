@@ -49,6 +49,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - AddressableBundle:Form:fields.html.twig
 
 # Assetic
 assetic:
