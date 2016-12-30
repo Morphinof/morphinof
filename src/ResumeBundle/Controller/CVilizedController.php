@@ -25,6 +25,6 @@ class CVilizedController extends Controller
 
         if (is_null($user)) throw new \Exception(vsprintf('Unable to load user %s', $username ? $username : 'null'));
 
-        return $this->render('ResumeBundle:CVilized:index.html.twig', array('user' => $user, 'template' => TemplateEnum::CVILIZED));
+        return $this->render('ResumeBundle:'.TemplateEnum::CVILIZED.':index.html.twig', array('user' => $user, 'template' => TemplateEnum::CVILIZED));
     }
 }

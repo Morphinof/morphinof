@@ -1,0 +1,46 @@
+{% extends "ResumeBundle::numo.html.twig" %}
+
+{% set title = 'CV de l\'utilisateur ' ~ app.user.username | default('Inconnu') %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    {% include 'ResumeBundle:Numo/partials:nav-bar.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:intro.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:portfolio.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:skills.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:services.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:contact.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:footer.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials:footer-bootom.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock %}

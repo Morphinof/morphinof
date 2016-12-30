@@ -1,7 +1,7 @@
-{% extends "::three-color.html.twig" %}
+{% extends "::numo.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - 3Color
+    {{ parent() }} - Numo
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,7 +16,5 @@
 {%block body %}
     {{ parent() }}
 
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
 {% endblock %}

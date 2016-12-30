@@ -1,0 +1,23 @@
+{% if user is defined %}
+<!-- Intro section start -->
+<section id="intro" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hello wow bounceInDown">
+                    <h1>Bonjour je m'appelles, {{ user.profile.fullName }}</h1>
+                    {% if user.profile.profession is not null %}
+                    <h3><span class="rotate">{{ user.profile.profession }}</span></h3>
+                    {% endif %}
+                </div>
+                <a href="#profile">
+                    <div class="mouse-icon">
+                        <div class="wheel"></div>
+                    </div>
+                </a>
+            </div>
+        </div><!-- .row -->
+    </div><!-- .container -->
+</section>
+<!-- Intro section end -->
+{% endif %}

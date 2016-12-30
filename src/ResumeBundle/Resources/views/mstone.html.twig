@@ -1,7 +1,7 @@
-{% extends "::three-color.html.twig" %}
+{% extends "::mstone.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - 3Color
+    {{ parent() }} - MStone
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,7 +16,8 @@
 {%block body %}
     {{ parent() }}
 
-    <div class="container">
+    <div class="wrapper">
         {% block content %}{% endblock %}
     </div>
+
 {% endblock %}

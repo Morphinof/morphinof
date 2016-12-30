@@ -8,6 +8,8 @@ class TemplateEnum extends AbstractEnum
 {
     const THREE_COLOR = '3Color';
     const CVILIZED = 'CVilized';
+    const NUMO = 'Numo';
+    const MSTONE = 'MStone';
 
     /**
      * @param null $constant
@@ -19,6 +21,8 @@ class TemplateEnum extends AbstractEnum
         {
             case self::THREE_COLOR: return '3color_homepage';
             case self::CVILIZED: return 'cvilized_homepage';
+            case self::NUMO: return 'numo_homepage';
+            case self::MSTONE: return 'mstone_homepage';
             default:
                 return null;
         }
@@ -33,6 +37,8 @@ class TemplateEnum extends AbstractEnum
         (
             self::THREE_COLOR => '3 color',
             self::CVILIZED => 'CVilized',
+            self::NUMO => 'Numo',
+            self::MSTONE => 'MStone',
         );
     }
 }

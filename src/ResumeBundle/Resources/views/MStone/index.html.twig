@@ -1,0 +1,64 @@
+{% extends "ResumeBundle::mstone.html.twig" %}
+
+{% set title = 'CV de l\'utilisateur ' ~ app.user.username | default('Inconnu') %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    {% include '@Resume/MStone/partials/pre-loader.html.twig' %}
+
+    {% include '@Resume/MStone/partials/navigation.html.twig' %}
+
+    {% include '@Resume/MStone/partials/intro.html.twig' %}
+
+    {% include '@Resume/MStone/partials/profile-contact.html.twig' %}
+
+    {% include '@Resume/MStone/partials/profile.html.twig' %}
+
+    {% include '@Resume/MStone/partials/stats.html.twig' %}
+
+    {% include '@Resume/MStone/partials/services.html.twig' %}
+
+    {% include '@Resume/MStone/partials/callout.html.twig' %}
+
+    {% include '@Resume/MStone/partials/resume.html.twig' %}
+
+    {% include '@Resume/MStone/partials/clients.html.twig' %}
+
+    {% include '@Resume/MStone/partials/portfolio.html.twig' %}
+
+    {% include '@Resume/MStone/partials/contact.html.twig' %}
+
+    {% include '@Resume/MStone/partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        /* ---------------------------------------------- /*
+         * Background images
+         /* ---------------------------------------------- */
+        $('#intro').backstretch([
+            '/bundles/resume/MStone/SlideShow/assets/images/bg3.jpg',
+            '/bundles/resume/MStone/SlideShow/assets/images/bg4.jpg',
+            '/bundles/resume/MStone/SlideShow/assets/images/bg2.jpg'
+        ], {duration: 3000, fade: 750});
+    </script>
+{% endblock %}

@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserBundle\Entity\User;
 use UserBundle\Repository\UserRepository;
 
-class ThreeColorController extends Controller
+class MStoneController extends Controller
 {
     public function indexAction($username)
     {
@@ -25,6 +25,6 @@ class ThreeColorController extends Controller
 
         if (is_null($user)) throw new \Exception(vsprintf('Unable to load user %s', $username ? $username : 'null'));
 
-        return $this->render('ResumeBundle:'.TemplateEnum::THREE_COLOR.':index.html.twig', array('user' => $user, 'template' => TemplateEnum::THREE_COLOR));
+        return $this->render('ResumeBundle:'.TemplateEnum::MSTONE.':index.html.twig', array('user' => $user, 'template' => TemplateEnum::MSTONE));
     }
 }

@@ -13,3 +13,13 @@ cvilized_homepage:
     path:     /cvilized/{username}
     defaults:
         _controller: ResumeBundle:CVilized:index
+
+cvilized_numo:
+    path:     /numo/{username}
+    defaults:
+        _controller: ResumeBundle:Numo:index
+
+cvilized_mstone:
+    path:     /mstone/{username}
+    defaults:
+        _controller: ResumeBundle:MStone:index

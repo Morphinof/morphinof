@@ -1,6 +1,6 @@
 {% extends "ResumeBundle::cvilized.html.twig" %}
 
-{% set title = 'CV' %}
+{% set title = 'CV de l\'utilisateur ' ~ app.user.username | default('Inconnu') %}
 
 {% block title %}
     {{ parent() }} - {{ title }}
