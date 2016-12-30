@@ -3,7 +3,7 @@ services:
         class: AdminBundle\Admin\UserAdmin
         arguments: [~, UserBundle\Entity\User, ~, '@security.token_storage', '@security.authorization_checker', '@doctrine.orm.entity_manager']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Gestion des utilisateurs }
+            - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Liste des utilisateurs }
 
     admin.education:
         class: AdminBundle\Admin\EducationAdmin
@@ -22,3 +22,9 @@ services:
         arguments: [~, ResumeBundle\Entity\Skill, AdminBundle:SkillAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Compétances }
+
+    admin.hobby:
+        class: AdminBundle\Admin\HobbyAdmin
+        arguments: [~, ResumeBundle\Entity\Hobby, AdminBundle:HobbyAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Intérêts }

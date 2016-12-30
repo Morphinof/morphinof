@@ -1,0 +1,18 @@
+{% block user_block %}
+    <li role="menuitem">
+        <a href="{{ path('admin_user_user_edit', {'id': app.user.id}) }}">
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+            Profil
+        </a>
+        {% if app.user.id and is_granted('ROLE_PREVIOUS_ADMIN') %}
+            <a href="{{ path('admin_user_user_list', {'_switch_user': '_exit'}) }}">
+                <i class="fa fa-user-secret" aria-hidden="true"></i>
+                Stopper l'impersonification
+            </a>
+        {% endif %}
+        <a href="{{ path('fos_user_security_logout') }}">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            Se déconnecter
+        </a>
+    </li>
+{% endblock %}

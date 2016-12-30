@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: "doctrine/doctrine.yml" }
     - { resource: "doctrine/migrations.yml" }
+    - { resource: "sonata/admin.yml" }
     - { resource: "sonata/sonata.yml" }
     - { resource: "sonata/sonata_classification.yml" }
     - { resource: "sonata/media.yml" }

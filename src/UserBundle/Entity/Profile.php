@@ -69,13 +69,7 @@ class Profile
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\ClassificationBundle\Entity\Tag")
-     * @ORM\JoinTable
-     * (
-     *      name="profile_hobbies",
-     *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", unique=false)}
-     * )
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Hobby", mappedBy="profile")
      */
     protected $hobbies;
 

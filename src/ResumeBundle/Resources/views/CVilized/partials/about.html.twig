@@ -3,25 +3,17 @@
 <section class="section about-me" id="about-me">
     <div class="container">
         <h2 class="heading">A propos de moi</h2>
-        {{ user.profile.about }}
+        {{ user.profile.about | raw }}
         <div class="row interest">
         {% if user.profile.hobbies | length > 0 %}
+            {% for hobby in user.profile.hobbies %}
             <div class="col-md-3">
-                <h3 class="sub-heading"><span class="glyphicon glyphicon-headphones"></span> Music</h3>
-                <p>Efficiently revolutionize one-to-one potentialities before B2B models. Continually leverage other's resource-leveling niche markets whereas focused processes. Distinctively transition high standards in total linkage.</p>
+                <h3 class="sub-heading">
+                    {% if hobby.glyph is not null %}<i class="fa fa-{{ hobby.glyph }}" aria-hidden="true"></i>{% endif %} {{ hobby.tag.name }}
+                </h3>
+                <p>{{ hobby.resume | raw }}</p>
             </div>
-            <div class="col-md-3">
-                <h3 class="sub-heading"><span class="glyphicon glyphicon-film"></span> Movies</h3>
-                <p>Holisticly pursue pandemic services before distributed experiences. Collaboratively envisioneer just in time niches before ubiquitous e-services. Appropriately enable scalable e-business with leveraged opportunities.</p>
-            </div>
-            <div class="col-md-3">
-                <h3 class="sub-heading"><span class="glyphicon glyphicon-briefcase"></span> Traveling</h3>
-                <p>Authoritatively transition global web services vis-a-vis user-centric content. Rapidiously innovate principle-centered resources via intuitive models. Monotonectally integrate collaborative core competencies before best-of-breed potentialities.</p>
-            </div>
-            <div class="col-md-3">
-                <h3 class="sub-heading"><span class="glyphicon glyphicon-book"></span> Books</h3>
-                <p>Holisticly restore resource-leveling methodologies rather than distinctive e-services. Seamlessly whiteboard unique quality vectors via functionalized catalysts for change. Enthusiastically embrace proactive outsourcing through.</p>
-            </div>
+            {% endfor %}
         </div>
         {% endif %}
         <div class="social">
