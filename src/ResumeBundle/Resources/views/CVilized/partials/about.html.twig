@@ -17,13 +17,23 @@
         </div>
         {% endif %}
         <div class="social">
-            <h3 class="sub-heading">Follow me on:</h3>
+            <h3 class="sub-heading">Suivez moi sur :</h3>
             <ul class="social-icons">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                {% if user.contact.facebook is not null %}
+                <li><a href="https://www.facebook.com/{{ user.contact.facebook }}"><i class="fa fa-facebook"></i></a></li>
+                {% endif %}
+                {% if user.contact.twitter is not null %}
+                <li><a href="https://twitter.com/{{ user.contact.twitter }}"><i class="fa fa-twitter"></i></a></li>
+                {% endif %}
+                {% if user.contact.googlePlus is not null %}
+                <li><a href="https://plus.google.com/{{ user.contact.googlePlus }}"><i class="fa fa-google-plus"></i></a></li>
+                {% endif %}
+                {% if user.contact.linkedIn is not null %}
+                <li><a href="https://www.linkedin.com/{{ user.contact.linkedIn }}"><i class="fa fa-linkedin"></i></a></li>
+                {% endif %}
+                {% if user.contact.dribbble is not null %}
+                <li><a href="https://dribbble.com/{{ user.contact.dribbble }}"><i class="fa fa-dribbble"></i></a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

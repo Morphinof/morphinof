@@ -1,8 +1,11 @@
+{% if user is defined %}
 <!-- CONTACTS -->
 <section class="section contacts" id="contacts">
     <div class="container">
         <h2 class="heading">Contacts</h2>
-        <p>Continually promote world-class methodologies through equity invested results. Monotonectally target stand-alone ideas via cross-media collaboration and idea-sharing. Seamlessly grow innovative markets.</p>
+        {% if user.contact.description is not null %}
+            <p>{{ user.contact.description | raw }}</p>
+        {% endif %}
         <div class="row google-map">
             <div class="map-canvas"></div>
         </div>
@@ -59,3 +62,4 @@
     </div>
 </section>
 <!-- END CONTACTS -->
+{% endif %}

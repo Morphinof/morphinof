@@ -24,16 +24,23 @@ class Contact
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    private $telephone;
+    private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $email;
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
+     */
+    private $telephone;
 
     /**
      * @var string
@@ -57,6 +64,27 @@ class Contact
     private $skype;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="google_plus", type="string", length=255, nullable=true, unique=true)
+     */
+    private $googlePlus;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="linked_in", type="string", length=255, nullable=true, unique=true)
+     */
+    private $linkedIn;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dribbble", type="string", length=255, nullable=true, unique=true)
+     */
+    private $dribbble;
+
+    /**
      * Get id
      *
      * @return int
@@ -64,30 +92,6 @@ class Contact
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set telephone
-     *
-     * @param string $telephone
-     *
-     * @return Contact
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    /**
-     * Get telephone
-     *
-     * @return string
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
     }
 
     /**
@@ -112,6 +116,54 @@ class Contact
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Contact
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     *
+     * @return Contact
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
     }
 
     /**
@@ -184,5 +236,77 @@ class Contact
     public function getSkype()
     {
         return $this->skype;
+    }
+
+    /**
+     * Set googlePlus
+     *
+     * @param string $googlePlus
+     *
+     * @return Contact
+     */
+    public function setGooglePlus($googlePlus)
+    {
+        $this->googlePlus = $googlePlus;
+
+        return $this;
+    }
+
+    /**
+     * Get googlePlus
+     *
+     * @return string
+     */
+    public function getGooglePlus()
+    {
+        return $this->googlePlus;
+    }
+
+    /**
+     * Set linkedIn
+     *
+     * @param string $linkedIn
+     *
+     * @return Contact
+     */
+    public function setLinkedIn($linkedIn)
+    {
+        $this->linkedIn = $linkedIn;
+
+        return $this;
+    }
+
+    /**
+     * Get linkedIn
+     *
+     * @return string
+     */
+    public function getLinkedIn()
+    {
+        return $this->linkedIn;
+    }
+
+    /**
+     * Set dribbble
+     *
+     * @param string $dribbble
+     *
+     * @return Contact
+     */
+    public function setDribbble($dribbble)
+    {
+        $this->dribbble = $dribbble;
+
+        return $this;
+    }
+
+    /**
+     * Get dribbble
+     *
+     * @return string
+     */
+    public function getDribbble()
+    {
+        return $this->dribbble;
     }
 }

@@ -1,40 +1,29 @@
+{% if user is defined and user.experiences | length > 0 %}
 <!-- RESUME -->
 <section class="section resume" id="resume">
     <div class="container">
-        <h2 class="heading">RESUME</h2>
+        <h2 class="heading">CV</h2>
         <ul class="timeline">
-            <li class="year">2013</li>
+            {% for experience in user.experiences %}
+            <li class="year">{{ experience.startedOn | date('Y') }}</li>
             <li class="event">
                 <h3 class="heading">Senior Web Designer</h3>
-                <span class="month"><i class="fa fa-calendar"></i>September 2007 - present</span>
-                <p>Dramatically reconceptualize diverse imperatives whereas out-of-the-box manufactured products. Dynamically negotiate seamless data via proactive ideas. Globally seize revolutionary imperatives rather than standardized niches.</p>
+                <span class="month">
+                    <i class="fa fa-calendar"></i>
+                    {{ experience.startedOn | date('M Y') }} -
+                    {% if experience.endedOn is not null %}
+                        {{ experience.endedOn | date('M Y') }}
+                    {% else %}
+                        actuelement
+                    {% endif %}
+                </span>
+                <p>
+                    {{ experience.resume | raw }}
+                </p>
             </li>
-            <li class="event">
-                <h3 class="heading">Web Developer &amp; Designer</h3>
-                <span class="month"><i class="fa fa-calendar"></i>January 2007 - September 2007</span>
-                <p>Dynamically procrastinate proactive methodologies and multimedia based materials. Phosfluorescently incentivize magnetic leadership skills before inexpensive users.</p>
-            </li>
-            <li class="year">2006</li>
-            <li class="event">
-                <h3 class="heading">Internship Program at Visual Dream Inc.</h3>
-                <span class="month"><i class="fa fa-calendar"></i>August 2006 - December 2006</span>
-                <p>Globally transition unique solutions vis-a-vis dynamic niche markets. Interactively recaptiualize superior leadership without end-to-end catalysts for change. Globally extend worldwide data without quality. Efficiently disseminate premium markets for strategic initiatives. Completely orchestrate effective e-business and unique partnerships.</p>
-            </li>
-            <li class="event">
-                <h3 class="heading">Freelance Project</h3>
-                <span class="month"><i class="fa fa-calendar"></i>June 2006 - August 2006</span>
-                <p>Globally transition unique solutions vis-a-vis dynamic niche markets. Interactively recaptiualize superior leadership without end-to-end catalysts for change. Globally extend worldwide data without quality. Efficiently disseminate premium markets for strategic initiatives. Completely orchestrate effective e-business and unique partnerships.</p>
-                <figure>
-                    <img src="{{ asset('bundles/resume/CVilized/theme/assets/img/skills.png') }}" alt="Skills" />
-                </figure>
-            </li>
-            <li class="year">2003</li>
-            <li class="event">
-                <h3 class="heading">University of Design</h3>
-                <span class="month"><i class="fa fa-calendar"></i>October 2003 - May 2006</span>
-                <p> Globally extend worldwide data without quality. Efficiently disseminate premium markets for strategic initiatives. Completely orchestrate effective e-business and unique partnerships.</p>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </section>
 <!-- END RESUME -->
+{% endif %}

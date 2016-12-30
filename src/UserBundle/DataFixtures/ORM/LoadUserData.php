@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use ResumeBundle\Enum\TemplateEnum;
+use UserBundle\Entity\Contact;
 use UserBundle\Entity\Profile;
 use UserBundle\Entity\User;
 
@@ -36,6 +37,17 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 'birthDate' => new \DateTime('1984-06-14'),
                 'about' => '<p>I&#39;m a programmer, i love the&nbsp;<strong>web</strong>,&nbsp;i love&nbsp;<strong>PhP</strong>, i love&nbsp;<strong>Symfony&nbsp;</strong>and i love my job !</p>',
                 'hobbies' => array()
+            ),
+            array
+            (
+                'email' => 'morphinof@gmail.com',
+                'telephone' => '0123456789',
+                'facebook' => 'morphinof',
+                'skype' => 'morphinof',
+                'twitter' => 'morphinof',
+                'googlePlus' => 'morphinof',
+                'linkedIn' => 'morphinof',
+                'dribble' => 'morphinof',
             )
         );
         $this->addReference('admin', $admin);
@@ -56,6 +68,17 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 'birthDate' => new \DateTime('NOW'),
                 'about' => '<p>I\'m just John Doe...</p>',
                 'hobbies' => array()
+            ),
+            array
+            (
+                'email' => 'john.doe@gmail.com',
+                'telephone' => '0123456789',
+                'facebook' => 'john.doe',
+                'skype' => 'john.doe',
+                'twitter' => 'john.doe',
+                'googlePlus' => 'john.doe',
+                'linkedIn' => 'john.doe',
+                'dribble' => 'john.doe',
             )
         );
         $this->addReference('user', $user);
@@ -64,7 +87,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
-    public function createUser($userName, $email, $plainPassword, $role, $enabled, $profile)
+    public function createUser($userName, $email, $plainPassword, $role, $enabled, $profile, $contact)
     {
         $user = new User();
         $user->setUsername($userName);
@@ -82,6 +105,12 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $profile['hobbies']
         );
         $profile->setOwner($user);
+
+        $this->setContactData
+        (
+            $user,
+            $contact
+        );
 
         $user->setProfile($profile);
         $user->getPreferences()->setOwner($user);
@@ -109,6 +138,20 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         }
 
         return $profile;
+    }
+
+    public function setContactData(User $user, $data)
+    {
+        $user->getContact()->setEmail($data['email']);
+        $user->getContact()->setTelephone($data['telephone']);
+        $user->getContact()->setFacebook($data['facebook']);
+        $user->getContact()->setSkype($data['skype']);
+        $user->getContact()->setTwitter($data['twitter']);
+        $user->getContact()->setGooglePlus($data['googlePlus']);
+        $user->getContact()->setLinkedIn($data['linkedIn']);
+        $user->getContact()->setDribbble($data['dribble']);
+
+        $this->manager->persist($user->getContact());
     }
 
     public function getOrder()

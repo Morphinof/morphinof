@@ -1,33 +1,21 @@
+{% if user is defined and user.profile.skills | length > 0 %}
 <!-- SKILLS -->
 <section class="section skills" id="skills">
     <div class="container">
-        <h2 class="heading sr-only">SKILLS</h2>
+        <h2 class="heading sr-only">Compétances</h2>
         <div class="row">
+            {% for skill in user.profile.skills %}
             <div class="col-md-4">
                 <div class="skill-chart">
-                    <div class="pie-chart" id="chart1" data-percent="92">
-                        <span class="percent">92%</span>
+                    <div class="pie-chart" id="chart1" data-percent="{{ skill.level * 100 }}">
+                        <span class="percent">{{ skill.level * 100 }}%</span>
                     </div>
-                    <span class="chart-title">Web Design</span>
+                    <span class="chart-title">{{ skill.tag.name }}</span>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="skill-chart">
-                    <div class="pie-chart" id="chart2" data-percent="85">
-                        <span class="percent">85%</span>
-                    </div>
-                    <span class="chart-title">WordPress</span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="skill-chart">
-                    <div class="pie-chart" id="chart3" data-percent="78">
-                        <span class="percent">78%</span>
-                    </div>
-                    <span class="chart-title">PHP</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 <!-- END SKILLS -->
+{% endif %}

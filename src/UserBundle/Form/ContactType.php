@@ -2,6 +2,7 @@
 
 namespace UserBundle\Form;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,22 @@ class ContactType extends AbstractType
                 'attr' => array
                 (
                     'placeholder' => 'E-mail',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'description',
+            CKEditorType::class,
+            array
+            (
+                'label' => 'Description',
+                'config_name' => 'default',
+                'attr' => array
+                (
+                    'rows' => 10,
+                    'cols' => 76,
                 ),
                 'required' => false
             )
@@ -78,6 +95,48 @@ class ContactType extends AbstractType
                 'attr' => array
                 (
                     'placeholder' => 'Skype',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'googlePlus',
+            TextType::class,
+            array
+            (
+                'label' => 'Google+',
+                'attr' => array
+                (
+                    'placeholder' => 'Google+',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'linkedIn',
+            TextType::class,
+            array
+            (
+                'label' => 'LinkedIn',
+                'attr' => array
+                (
+                    'placeholder' => 'LinkedIn',
+                ),
+                'required' => false
+            )
+        )
+        ->add
+        (
+            'dribbble',
+            TextType::class,
+            array
+            (
+                'label' => 'Dribbble',
+                'attr' => array
+                (
+                    'placeholder' => 'Dribbble',
                 ),
                 'required' => false
             )

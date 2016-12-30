@@ -21,8 +21,7 @@ class PreferencesType extends AbstractType
             array
             (
                 'label' => 'CV template',
-                'choices' => TemplateEnum::__toAssoc(),
-                'required' => false
+                'choices' => TemplateEnum::__toAssoc()
             )
         );
     }
