@@ -1,3 +1,4 @@
+{% if user is defined %}
 <!-- Profile section start -->
 <section id="profile" class="section">
     <div class="container">
@@ -7,60 +8,56 @@
                 <p>Visual Designer. Front-end Developer. C# Programmer.</p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xs wow bounceInLeft">
-                <img class="avatar" src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/photo.jpg') }}" alt="">
+                {% if user.avatar is not null %}
+                    {% media user.avatar, 'mstone' %}
+                {% else %}
+                    <img class="avatar" src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/photo.jpg') }}" alt="">
+                {% endif %}
             </div>
             <div class="col-md-3 col-sm-6 wow bounceInUp">
                 <div class="profile-widget">
                     <h3>Skillset</h3>
 
-                    <h5>UX Design</h5>
-                    <div class="skill-bar">
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-off"></div>
-                    </div>
-
-                    <h5>HTML / CSS3 / SASS</h5>
-                    <div class="skill-bar">
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-off"></div>
-                        <div class="skill-rate-off"></div>
-                    </div>
-
-                    <h5>Javascript</h5>
-                    <div class="skill-bar">
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-on"></div>
-                    </div>
-
-                    <h5>Ajax</h5>
-                    <div class="skill-bar">
-                        <div class="skill-rate-on"></div>
-                        <div class="skill-rate-off"></div>
-                        <div class="skill-rate-off"></div>
-                        <div class="skill-rate-off"></div>
-                    </div>
+                    {% if user.profile.skills | length > 0 %}
+                        {% for skill in user.profile.skills %}
+                        <h5>{{ skill.tag.name }}</h5>
+                        <div class="skill-bar">
+                            <div class="skill-rate-{% if skill.level >= 0.25 %}on{% else %}off{% endif %}"></div>
+                            <div class="skill-rate-{% if skill.level >= 0.50 %}on{% else %}off{% endif %}"></div>
+                            <div class="skill-rate-{% if skill.level >= 0.75 %}on{% else %}off{% endif %}"></div>
+                            <div class="skill-rate-{% if skill.level == 1 %}on{% else %}off{% endif %}"></div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="profile-widget">
                     <h3>Social Profiles</h3>
                     <ul class="widget-social">
-                        <li><a href="#"><i class="fa fa-facebook fa-fw"></i></a></li>
-                        <li><a href="#"><i class="fa fa-github-alt"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        {% if user.contact.facebook is not null %}
+                            <li><a href="https://www.facebook.com/{{ user.contact.facebook }}"><i class="fa fa-facebook fa-fw"></i></a></li>
+                        {% endif %}
+                        {% if user.contact.gitHub is not null %}
+                        <li><a href="https://github.com/{{ user.contact.facebook }}"><i class="fa fa-github-alt"></i></a></li>
+                        {% endif %}
+                        {% if user.contact.dribbble is not null %}
+                        <li><a href="https://www.dribbble.com/{{ user.contact.facebook }}"><i class="fa fa-dribbble"></i></a></li>
+                        {% endif %}
+                        {% if user.contact.googlePlus is not null %}
+                        <li><a href="https://plus.google.com/{{ user.contact.facebook }}"><i class="fa fa-google-plus"></i></a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div><!-- .col-md-3 -->
+            {% if user.profile.about is not null %}
             <div class="col-md-6 col-sm-12 wow bounceInRight">
                 <h3>Profesional Profile</h3>
-                <p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend. I am so happy, my dear friend.</p>
-                <p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend.</p>
+                <p>
+                    {{ user.profile.about | raw }}
+                </p>
             </div>
+            {% endif %}
         </div><!-- .row -->
     </div><!-- .container -->
 </section>
 <!-- Profile section end -->
+{% endif %}

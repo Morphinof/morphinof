@@ -89,6 +89,13 @@ class Contact implements AddressableInterface
     private $dribbble;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="gitHub", type="string", length=255, nullable=true, unique=true)
+     */
+    private $gitHub;
+
+    /**
      * Get id
      *
      * @return int
@@ -323,5 +330,29 @@ class Contact implements AddressableInterface
     public function getDribbble()
     {
         return $this->dribbble;
+    }
+
+    /**
+     * Set gitHub
+     *
+     * @param string $gitHub
+     *
+     * @return Contact
+     */
+    public function setGitHub($gitHub)
+    {
+        $this->gitHub = $gitHub;
+
+        return $this;
+    }
+
+    /**
+     * Get gitHub
+     *
+     * @return string
+     */
+    public function getGitHub()
+    {
+        return $this->gitHub;
     }
 }

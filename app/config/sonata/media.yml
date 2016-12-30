@@ -25,33 +25,34 @@ sonata_media:
                 - sonata.media.provider.vimeo
 
             formats:
-                small: { width: 100, height: 100, quality: 100 }
-                big:   { width: 500, height: 500, quality: 100 }
+                small:  { width: 100, height: 100, quality: 100 }
+                big:    { width: 500, height: 500, quality: 100 }
         user:
             providers:
                 - sonata.media.provider.image
                 - sonata.media.provider.file
 
             formats:
-                small: { width: 60, height: 60, quality: 100 }
+                small:  { width: 60, height: 60, quality: 100 }
                 medium: { width: 80, height: 80, quality: 100 }
-                big:   { width: 500, height: 500, quality: 100 }
+                big:    { width: 500, height: 500, quality: 100 }
         avatars:
             providers:
                 - sonata.media.provider.image
 
             formats:
-                small: { width: 60, height: 60, quality: 100 }
+                small:  { width: 60, height: 60, quality: 100 }
                 medium: { width: 80, height: 80, quality: 100 }
-                big:   { width: 500, height: 500, quality: 100 }
+                big:    { width: 500, height: 500, quality: 100 }
+                mstone: { width: 500, height: 680, quality: 100 }
         logos:
             providers:
                 - sonata.media.provider.image
 
             formats:
-                small: { width: 60, height: 60, quality: 100 }
+                small:  { width: 60, height: 60, quality: 100 }
                 medium: { width: 80, height: 80, quality: 100 }
-                big:   { width: 500, height: 500, quality: 100 }
+                big:    { width: 500, height: 500, quality: 100 }
     cdn:
         server:
             path: /uploads/media # http://media.sonata-project.org/
