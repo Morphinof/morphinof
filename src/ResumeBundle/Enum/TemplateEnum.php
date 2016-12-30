@@ -6,7 +6,7 @@ use CoreBundle\Enum\AbstractEnum;
 
 class TemplateEnum extends AbstractEnum
 {
-    const THREE_COLOR = '3Color';
+    const THREE_COLOR = 'ThreeColor';
     const CVILIZED = 'CVilized';
     const NUMO = 'Numo';
     const MSTONE = 'MStone';
