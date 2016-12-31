@@ -28,3 +28,15 @@ services:
         arguments: [~, ResumeBundle\Entity\Hobby, AdminBundle:HobbyAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Intérêts }
+
+    admin.portfolio:
+        class: AdminBundle\Admin\PortfolioAdmin
+        arguments: [~, ResumeBundle\Entity\Portfolio, AdminBundle:PortfolioAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Portfolio }
+
+    admin.project:
+        class: AdminBundle\Admin\ProjectAdmin
+        arguments: [~, ResumeBundle\Entity\Project, AdminBundle:ProjectAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Projets }

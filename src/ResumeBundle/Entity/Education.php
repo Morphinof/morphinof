@@ -34,7 +34,7 @@ class Education
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="educations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $owner;
+    private $owner;
 
     /**
      * @var integer

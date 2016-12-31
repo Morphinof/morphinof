@@ -39,7 +39,7 @@ class Skill
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Profile", inversedBy="skills")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
      */
-    protected $profile;
+    private $profile;
 
     /**
      * @var Tag

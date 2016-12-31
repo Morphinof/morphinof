@@ -10,4 +10,6 @@ class ContextEnum extends AbstractEnum
     const HOBBIES = 'hobbies';
     const SKILLS = 'skills';
     const LOGOS = 'logos';
+    const PORTFOLIO = 'portfolio';
+    const PROJECT = 'project';
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "162c7a0c9d30996f43f4cfe00ae95439",
-    "content-hash": "1ccc33a246037f42ab0ffe93686f2455",
+    "hash": "d3e19d6cb8805e510acae697969e4fc1",
+    "content-hash": "ec093df6bbd55b0097dbf89e8bc190bd",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -2466,6 +2466,68 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2016-09-23 18:09:57"
+        },
+        {
+            "name": "shapecode/hidden-entity-type-bundle",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shapecode/hidden-entity-type-bundle.git",
+                "reference": "fbe1030efec3663136ef2dd9a01bac26f470e8c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shapecode/hidden-entity-type-bundle/zipball/fbe1030efec3663136ef2dd9a01bac26f470e8c1",
+                "reference": "fbe1030efec3663136ef2dd9a01bac26f470e8c1",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "~2.6",
+                "doctrine/orm": "~2.5",
+                "php": "~5.5|~7.0",
+                "symfony/config": "~2.8|~3.0",
+                "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/form": "~2.8|~3.0",
+                "symfony/framework-bundle": "~2.8|~3.0",
+                "symfony/http-kernel": "~2.8|~3.0",
+                "symfony/options-resolver": "~2.8|~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-release/2.0": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Loges",
+                    "email": "develop@nikita-loges.de",
+                    "homepage": "http://nikita-loges.de"
+                },
+                {
+                    "name": "Glifery",
+                    "email": "glifery@gmail.com"
+                }
+            ],
+            "description": "Hidden field for Symfony2 entities",
+            "homepage": "https://github.com/shapecode/hidden-entity-type-bundle",
+            "keywords": [
+                "entity",
+                "form",
+                "hidden",
+                "symfony",
+                "type"
+            ],
+            "time": "2016-07-27 14:08:28"
         },
         {
             "name": "sonata-project/admin-bundle",

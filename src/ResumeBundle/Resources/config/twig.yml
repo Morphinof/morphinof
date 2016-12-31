@@ -1,0 +1,6 @@
+services:
+  resume_bundle.twig.resume_extension:
+    class: ResumeBundle\Twig\ResumeExtension
+    arguments: ["@doctrine.orm.entity_manager"]
+    tags:
+      - { name: twig.extension }

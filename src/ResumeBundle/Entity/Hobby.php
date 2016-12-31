@@ -39,7 +39,7 @@ class Hobby
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Profile", inversedBy="hobbies")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
      */
-    protected $profile;
+    private $profile;
 
     /**
      * @var Tag

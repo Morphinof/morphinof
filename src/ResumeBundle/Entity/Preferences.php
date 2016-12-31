@@ -30,7 +30,7 @@ class Preferences
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="preferences")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $owner;
+    private $owner;
 
     /**
      * @var string

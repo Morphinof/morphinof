@@ -11,8 +11,8 @@ use Application\Sonata\MediaBundle\Entity\Media;
 
 use ResumeBundle\Entity\Education;
 use ResumeBundle\Entity\Experience;
+use ResumeBundle\Entity\Portfolio;
 use ResumeBundle\Entity\Preferences;
-use UserBundle\Entity\Profile;
 
 /**
  * @ORM\Entity
@@ -75,6 +75,13 @@ class User extends BaseUser
      */
     protected $preferences;
 
+    /**
+     * @var Portfolio
+     *
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Portfolio", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    protected $portfolios;
+
     public function __construct()
     {
         parent::__construct();
@@ -85,6 +92,7 @@ class User extends BaseUser
         $this->educations = new ArrayCollection();
         $this->experiences = new ArrayCollection();
         $this->preferences = new Preferences();
+        $this->portfolios = new ArrayCollection();
     }
 
     /**
@@ -255,5 +263,52 @@ class User extends BaseUser
     public function getPreferences()
     {
         return $this->preferences;
+    }
+
+    /**
+     * Add portfolio
+     *
+     * @param Portfolio $portfolio
+     *
+     * @return User
+     */
+    public function addPortfolio(Portfolio $portfolio)
+    {
+        $this->portfolios[] = $portfolio;
+
+        return $this;
+    }
+
+    /**
+     * Remove portfolio
+     *
+     * @param Portfolio $portfolio
+     */
+    public function removePortfolio(Portfolio $portfolio)
+    {
+        $this->portfolios->removeElement($portfolio);
+    }
+
+    /**
+     * Set portfolios
+     *
+     * @param ArrayCollection $portfolios
+     * @return User
+     */
+    public function setPortfolios(ArrayCollection $portfolios)
+    {
+        $this->portfolios = $portfolios;
+
+        return $this;
+    }
+
+    /**
+     * Get portfolios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPortfolios()
+    {
+        return $this->portfolios;
     }
 }

@@ -19,6 +19,8 @@ sonata_admin:
           - admin.experience
           - admin.skill
           - admin.hobby
+          - admin.portfolio
+          - admin.project
         roles: [ 'ROLE_USER' ]
       admin.classification:
         label: Classification

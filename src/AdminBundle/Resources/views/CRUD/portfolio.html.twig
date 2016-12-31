@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined and get_portfolio(object) is not null %}
+        <span class="label label-info">Portfolio {{ object.id }}</span>
+    {% else %}
+        <span class="label label-info">Pas de portfolio</span>
+    {% endif %}
+{% endblock %}

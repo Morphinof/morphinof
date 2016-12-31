@@ -29,7 +29,7 @@ class Experience
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var User
@@ -37,14 +37,14 @@ class Experience
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="experiences")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $owner;
+    private $owner;
 
     /**
      * @var string
      *
      * @ORM\Column(name="company", type="string", length=255)
      */
-    protected $company;
+    private $company;
 
     /**
      * @var Media
@@ -52,7 +52,7 @@ class Experience
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="logo_id", referencedColumnName="id", nullable=true)
      */
-    protected $logo;
+    private $logo;
 
     public function __construct()
     {
