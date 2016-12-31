@@ -2,23 +2,24 @@
 
 namespace ResumeBundle\Entity;
 
-use CoreBundle\Traits\CreatedUpdatedTrait;
-use CoreBundle\Traits\DescribableTrait;
+use Application\Sonata\ClassificationBundle\Document\Tag;
 
+use CoreBundle\Traits\DescribableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
-use Application\Sonata\MediaBundle\Entity\Media;
+use CoreBundle\Traits\CreatedUpdatedTrait;
 
+use UserBundle\Entity\Profile;
 use UserBundle\Entity\User;
 
 /**
- * Project
+ * Service
  *
- * @ORM\Table(name="project")
- * @ORM\Entity(repositoryClass="ResumeBundle\Repository\ProjectRepository")
+ * @ORM\Table(name="service")
+ * @ORM\Entity(repositoryClass="ResumeBundle\Repository\ServiceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Project
+class Service
 {
     use CreatedUpdatedTrait;
     use DescribableTrait;
@@ -41,12 +42,11 @@ class Project
     private $owner;
 
     /**
-     * @var Media
+     * @var string
      *
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
+     * @ORM\Column(name="glyph", type="string", length=255, nullable=true)
      */
-    private $image;
+    private $glyph;
 
     /**
      * Get id
@@ -63,7 +63,7 @@ class Project
      *
      * @param User $owner
      *
-     * @return Project
+     * @return Service
      */
     public function setOwner(User $owner = null)
     {
@@ -83,27 +83,27 @@ class Project
     }
 
     /**
-     * Set image
+     * Set glyph
      *
-     * @param Media $image
+     * @param string $glyph
      *
-     * @return Project
+     * @return Service
      */
-    public function setImage(Media $image = null)
+    public function setGlyph($glyph)
     {
-        $this->image = $image;
+        $this->glyph = $glyph;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get glyph
      *
-     * @return Media
+     * @return string
      */
-    public function getImage()
+    public function getGlyph()
     {
-        return $this->image;
+        return $this->glyph;
     }
 
     /**

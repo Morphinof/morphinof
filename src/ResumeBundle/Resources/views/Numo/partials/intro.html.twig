@@ -1,3 +1,4 @@
+{% if user is defined %}
 <!-- INTRO-->
 <!--===============================================================-->
 <div class="bg-intro" id="home">
@@ -5,10 +6,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h1 class="text-center">HEY ! <br> I'm John Doe Web and Graphic Designer</h1>
+                    <h1 class="text-center">
+                        Bonjour ! <br>
+                        Je suis {{ user.profile.fullName }}
+                        {% if user.profile.profession is not null %}
+                            {{ user.profile.fullName }}
+                        {% endif %}
+                    </h1>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="arrow-down"></div>
+{% endif %}

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use ResumeBundle\Entity\Portfolio;
 use ResumeBundle\Entity\Project;
 use ResumeBundle\Repository\PortfolioRepository;
+use UserBundle\Entity\User;
 
 /**
  * A TWIG Extension providing various tools
@@ -33,7 +34,8 @@ class ResumeExtension extends \Twig_Extension
     {
         return array
         (
-            'get_portfolio' => new \Twig_Function_Method($this, 'getPortfolio'),
+            'get_project_portfolio' => new \Twig_Function_Method($this, 'getProjectPortfolio'),
+            'get_main_portfolio' => new \Twig_Function_Method($this, 'getMainPortfolio'),
         );
     }
 
@@ -41,12 +43,24 @@ class ResumeExtension extends \Twig_Extension
      * @param Project $project
      * @return Portfolio | null
      */
-    public function getPortfolio(Project $project)
+    public function getProjectPortfolio(Project $project)
     {
         /** @var PortfolioRepository $repository */
         $repository = $this->em->getRepository('ResumeBundle:Portfolio');
 
-        return $repository->getPortfolio($project);
+        return $repository->getProjectPortfolio($project);
+    }
+
+    /**
+     * @param User $user
+     * @return null|Portfolio
+     */
+    public function getMainPortfolio(User $user)
+    {
+        /** @var PortfolioRepository $repository */
+        $repository = $this->em->getRepository('ResumeBundle:Portfolio');
+
+        return $repository->getMainPortfolio($user);
     }
 
     public function getName()

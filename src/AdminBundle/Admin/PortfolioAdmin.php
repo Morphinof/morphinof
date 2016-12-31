@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -48,6 +49,14 @@ class PortfolioAdmin extends AbstractAdmin
 
         $this->token = $token;
         $this->em = $entityManager;
+    }
+
+    /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('set_main_portfolio', $this->getRouterIdParameter().'/set-main-portfolio');
     }
 
     public function createQuery($context = 'list')
@@ -225,8 +234,11 @@ class PortfolioAdmin extends AbstractAdmin
         ->add
         (
             'owner',
-            EntityType::class,
-            array()
+            null,
+            array
+            (
+                'label' => 'Propriétaire',
+            )
         )
         ->add
         (
@@ -239,6 +251,10 @@ class PortfolioAdmin extends AbstractAdmin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
+                    'set_main_portfolio' => array
+                    (
+                        'template' => 'AdminBundle::CRUD/list__action_set_main_portfolio.html.twig'
+                    )
                 )
             )
         );

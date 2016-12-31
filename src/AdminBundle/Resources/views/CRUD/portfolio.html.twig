@@ -1,8 +1,11 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {% if object is defined and get_portfolio(object) is not null %}
-        <span class="label label-info">Portfolio {{ object.id }}</span>
+    {% set portfolio = get_project_portfolio(object) %}
+    {% if object is defined and portfolio is not null %}
+        <a class="label label-info" href="{{ path('admin_resume_portfolio_edit', {'id': portfolio.id}) }}">
+            Portfolio {{ portfolio.id }}
+        </a>
     {% else %}
         <span class="label label-info">Pas de portfolio</span>
     {% endif %}

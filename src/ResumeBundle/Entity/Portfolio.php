@@ -55,11 +55,19 @@ class Portfolio
     private $projects;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="main_portfolio", type="boolean")
+     */
+    private $mainPortfolio;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->mainPortfolio = false;
     }
 
     /**
@@ -143,6 +151,33 @@ class Portfolio
         return $this->projects;
     }
 
+    /**
+     * Set mainPortfolio
+     *
+     * @param boolean $mainPortfolio
+     *
+     * @return Portfolio
+     */
+    public function setMainPortfolio($mainPortfolio)
+    {
+        $this->mainPortfolio = $mainPortfolio;
+
+        return $this;
+    }
+
+    /**
+     * Get mainPortfolio
+     *
+     * @return boolean
+     */
+    public function getMainPortfolio()
+    {
+        return $this->mainPortfolio;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return 'Portfolio de '.$this->owner->getProfile()->getFullName().' : '.$this->title;

@@ -68,9 +68,11 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                small:  { width: 200, height: 200, quality: 100 }
-                medium: { width: 300, height: 300, quality: 100 }
-                big:    { width: 500, height: 500, quality: 100 }
+                small:        { width: 200, height: 200, quality: 100 }
+                medium:       { width: 300, height: 300, quality: 100 }
+                big:          { width: 500, height: 500, quality: 100 }
+                numo_medium:  { width: 320, height: 340, quality: 100 }
+                numo_big:     { width: 640, height: 480, quality: 100 }
     cdn:
         server:
             path: /uploads/media # http://media.sonata-project.org/

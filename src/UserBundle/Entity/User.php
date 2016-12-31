@@ -13,6 +13,8 @@ use ResumeBundle\Entity\Education;
 use ResumeBundle\Entity\Experience;
 use ResumeBundle\Entity\Portfolio;
 use ResumeBundle\Entity\Preferences;
+use ResumeBundle\Entity\Project;
+use ResumeBundle\Entity\Service;
 
 /**
  * @ORM\Entity
@@ -76,11 +78,25 @@ class User extends BaseUser
     protected $preferences;
 
     /**
-     * @var Portfolio
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Portfolio", mappedBy="owner", cascade={"persist", "remove"})
      */
     protected $portfolios;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Project", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    protected $projects;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Service", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    protected $services;
 
     public function __construct()
     {
@@ -93,6 +109,8 @@ class User extends BaseUser
         $this->experiences = new ArrayCollection();
         $this->preferences = new Preferences();
         $this->portfolios = new ArrayCollection();
+        $this->projects = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     /**
@@ -305,10 +323,104 @@ class User extends BaseUser
     /**
      * Get portfolios
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getPortfolios()
     {
         return $this->portfolios;
+    }
+
+    /**
+     * Add project
+     *
+     * @param Project $project
+     *
+     * @return User
+     */
+    public function addProject(Project $project)
+    {
+        $this->projects[] = $project;
+
+        return $this;
+    }
+
+    /**
+     * Remove project
+     *
+     * @param Project $project
+     */
+    public function removeProject(Project $project)
+    {
+        $this->projects->removeElement($project);
+    }
+
+    /**
+     * Set projects
+     *
+     * @param ArrayCollection $projects
+     * @return User
+     */
+    public function setProjects(ArrayCollection $projects)
+    {
+        $this->projects = $projects;
+
+        return$this;
+    }
+
+    /**
+     * Get projects
+     *
+     * @return ArrayCollection
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
+     * Add service
+     *
+     * @param Service $service
+     *
+     * @return User
+     */
+    public function addService(Service $service)
+    {
+        $this->services[] = $service;
+
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param Service $service
+     */
+    public function removeService(Service $service)
+    {
+        $this->services->removeElement($service);
+    }
+
+    /**
+     * Set services
+     *
+     * @param ArrayCollection $services
+     * @return User
+     */
+    public function setServices(ArrayCollection $services)
+    {
+        $this->services = $services;
+
+        return $this;
+    }
+
+    /**
+     * Get services
+     *
+     * @return ArrayCollection
+     */
+    public function getServices()
+    {
+        return $this->services;
     }
 }

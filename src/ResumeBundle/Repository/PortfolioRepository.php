@@ -2,7 +2,9 @@
 
 namespace ResumeBundle\Repository;
 
+use ResumeBundle\Entity\Portfolio;
 use ResumeBundle\Entity\Project;
+use UserBundle\Entity\User;
 
 /**
  * PortfolioRepository
@@ -12,7 +14,11 @@ use ResumeBundle\Entity\Project;
  */
 class PortfolioRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getPortfolio(Project $project)
+    /**
+     * @param Project $project
+     * @return null | Portfolio
+     */
+    public function getProjectPortfolio(Project $project)
     {
         $qb = $this->createQueryBuilder('p');
 
@@ -20,6 +26,23 @@ class PortfolioRepository extends \Doctrine\ORM\EntityRepository
         ->andWhere($qb->expr()->isMemberOf(':project', 'p.projects'))
         ->setParameter('project', $project);
         ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @param User $user
+     * @return null | Portfolio
+     */
+    public function getMainPortfolio(User $user)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb
+        ->leftJoin('p.owner', 'owner')
+        ->where('p.mainPortfolio = true')
+        ->andWhere('owner = :owner')
+        ->setParameter('owner', $user);
 
         return $qb->getQuery()->getOneOrNullResult();
     }

@@ -113,7 +113,7 @@ class ProfileType extends AbstractType
                 },
                 'multiple' => true,
                 'attr' => array(),
-                'required' => false,
+                'disabled' => true,
             )
         )
         ->add
@@ -133,7 +133,7 @@ class ProfileType extends AbstractType
                 },
                 'multiple' => true,
                 'attr' => array(),
-                'required' => false,
+                'disabled' => true,
             )
         );
     }

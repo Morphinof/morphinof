@@ -2,22 +2,17 @@
 
 namespace AdminBundle\Controller;
 
-use ResumeBundle\Entity\Experience;
-use ResumeBundle\Entity\Portfolio;
-use ResumeBundle\Entity\Project;
-use ResumeBundle\Repository\PortfolioRepository;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 
 use UserBundle\Entity\User;
+use ResumeBundle\Entity\Service;
 
-class PortfolioAdminController extends CRUDController
+class ServiceAdminController extends CRUDController
 {
     /**
      * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
@@ -31,14 +26,14 @@ class PortfolioAdminController extends CRUDController
 
         try {
             $twig
-                ->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')
-                ->setTheme($formView, $theme);
+            ->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')
+            ->setTheme($formView, $theme);
         } catch (\Twig_Error_Runtime $e) {
             // BC for Symfony < 3.2 where this runtime not exists
             $twig
-                ->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')
-                ->renderer
-                ->setTheme($formView, $theme);
+            ->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')
+            ->renderer
+            ->setTheme($formView, $theme);
         }
     }
 
@@ -98,24 +93,16 @@ class PortfolioAdminController extends CRUDController
                 $this->admin->checkAccess('create', $object);
 
                 try {
-                    /** @var Portfolio $object */
+                    /** @var Service $object */
                     $object = $this->admin->create($object);
 
                     /** @var User $user */
                     $user = $this->getUser();
 
                     $object->setOwner($user);
-                    $user->getPortfolios()->add($object);
-
-                    if (!$object->getProjects()->isEmpty()) {
-                        /** @var Project $project */
-                        foreach ($object->getProjects() as $project){
-                            $project->setOwner($user);
-                            $this->admin->update($object);
-                        }
-                    }
-
                     $this->admin->update($object);
+
+                    $user->getServices()->add($object);
                     $this->admin->update($user);
 
                     if ($this->isXmlHttpRequest()) {
@@ -171,41 +158,5 @@ class PortfolioAdminController extends CRUDController
             'form' => $formView,
             'object' => $object,
         ), null);
-    }
-
-    public function setMainPortfolioAction($id = null)
-    {
-        /** @var Portfolio $object */
-        $object = $this->admin->getSubject();
-
-        if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
-        }
-
-        $em = $this->getDoctrine()->getManager();
-
-        /** @var Portfolio $currentMainPortfolio */
-        $currentMainPortfolio = $em->getRepository('ResumeBundle:Portfolio')->getMainPortfolio($object->getOwner());
-
-        $updateObject = false;
-        if (!is_null($currentMainPortfolio))
-        {
-            $currentMainPortfolio->setMainPortfolio(false);
-            $this->admin->update($currentMainPortfolio);
-
-            if ($currentMainPortfolio->getId() != $object->getId())
-            {
-                $updateObject = true;
-            }
-        }
-        else $updateObject = true;
-
-        if ($updateObject)
-        {
-            $object->setMainPortfolio(true);
-            $this->admin->update($object);
-        }
-
-        return new RedirectResponse($this->admin->generateUrl('list'));
     }
 }

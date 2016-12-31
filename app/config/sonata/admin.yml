@@ -19,6 +19,7 @@ sonata_admin:
           - admin.experience
           - admin.skill
           - admin.hobby
+          - admin.service
           - admin.portfolio
           - admin.project
         roles: [ 'ROLE_USER' ]
