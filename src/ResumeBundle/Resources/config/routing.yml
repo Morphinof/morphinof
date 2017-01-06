@@ -14,12 +14,12 @@ cvilized_homepage:
     defaults:
         _controller: ResumeBundle:CVilized:index
 
-cvilized_numo:
+numo_homepage:
     path:     /numo/{username}
     defaults:
         _controller: ResumeBundle:Numo:index
 
-cvilized_mstone:
+mstone_homepage:
     path:     /mstone/{username}
     defaults:
         _controller: ResumeBundle:MStone:index

@@ -10,3 +10,4 @@ inspinia
 /bin/
 /web/uploads/
 *~
+/app/config/parameters.yml
