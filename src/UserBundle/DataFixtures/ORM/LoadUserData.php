@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use ResumeBundle\Enum\TemplateEnum;
+use ResumeBundle\Enum\VisibilityEnum;
 use UserBundle\Entity\Contact;
 use UserBundle\Entity\Profile;
 use UserBundle\Entity\User;
@@ -115,6 +116,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user->setProfile($profile);
         $user->getPreferences()->setOwner($user);
         $user->getPreferences()->setTemplate(TemplateEnum::THREE_COLOR);
+        $user->setVisibility(VisibilityEnum::RESUME_PUBLIC);
 
         $this->manager->persist($user);
 

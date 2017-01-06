@@ -4,6 +4,7 @@ namespace ResumeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use ResumeBundle\Enum\VisibilityEnum;
 use UserBundle\Entity\User;
 
 /**
@@ -38,6 +39,18 @@ class Preferences
      * @ORM\Column(name="template", type="string", length=255)
      */
     private $template;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="visibility", type="string", length=255)
+     */
+    private $visibility;
+
+    public function __construct()
+    {
+        $this->visibility = VisibilityEnum::RESUME_PUBLIC;
+    }
 
     /**
      * Get id
@@ -95,5 +108,29 @@ class Preferences
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * Set visibility
+     *
+     * @param string $visibility
+     *
+     * @return Preferences
+     */
+    public function setVisibility($visibility)
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    /**
+     * Get visibility
+     *
+     * @return string
+     */
+    public function getVisibility()
+    {
+        return $this->visibility;
     }
 }

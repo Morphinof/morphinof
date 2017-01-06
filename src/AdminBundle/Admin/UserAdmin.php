@@ -6,6 +6,7 @@ use CoreBundle\Enum\ContextEnum;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Doctrine\ORM\EntityManager;
@@ -16,6 +17,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use UserBundle\Entity\User;
@@ -125,7 +128,7 @@ class UserAdmin extends AbstractAdmin
             'Utilisateur',
             array
             (
-                'class'       => 'col-md-4',
+                'class'       => 'col-md-12',
                 #'box_class'   => 'box box-solid box-danger',
                 #'description' => 'Profil',
             )
@@ -136,19 +139,45 @@ class UserAdmin extends AbstractAdmin
             MediaType::class,
             array
             (
+                'label' => 'Avatar',
                 'context' => ContextEnum::AVATAR,
                 'provider' => 'sonata.media.provider.image',
             )
         )
-        ->add('username')
-        ->add('email')
-        ->add('enabled')
+        ->add
+        (
+            'username',
+            TextType::class,
+            array
+            (
+                'label' => 'Pseudonyme',
+            )
+        )
+        ->add
+        (
+            'email',
+            EmailType::class,
+            array
+            (
+                'label' => 'E-mail',
+            )
+        )
+        ->add
+        (
+            'enabled',
+            CheckboxType::class,
+            array
+            (
+                'label' => 'Activé ?',
+            )
+        )
         ->add
         (
             'roles',
             ChoiceType::class,
             array
             (
+                'label' => 'Rôles',
                 'choices' => $rolesChoices,
                 'multiple' => true
             )
@@ -159,7 +188,7 @@ class UserAdmin extends AbstractAdmin
             'Profil',
             array
             (
-                'class' => 'col-md-4',
+                'class' => 'col-md-6',
             )
         )
         ->add
@@ -177,7 +206,7 @@ class UserAdmin extends AbstractAdmin
             'Contact',
             array
             (
-                'class' => 'col-md-4',
+                'class' => 'col-md-6',
             )
         )
         ->add
@@ -193,10 +222,10 @@ class UserAdmin extends AbstractAdmin
         ->end()
         ->with
         (
-            'Préférences',
+            'Préférences du CV',
             array
             (
-                'class' => 'col-md-4',
+                'class' => 'col-md-6',
             )
         )
         ->add
@@ -218,11 +247,51 @@ class UserAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-        ->add('id')
-        ->add('username')
-        ->add('email')
-        ->add('enabled')
-        ->add('roles');
+        ->add
+        (
+            'id',
+            null,
+            array
+            (
+                'label' => 'ID'
+            )
+        )
+        ->add
+        (
+            'username',
+            null,
+            array
+            (
+                'label' => 'Nom d\'utilisateur'
+            )
+        )
+        ->add
+        (
+            'email',
+            null,
+            array
+            (
+                'label' => 'E-mail'
+            )
+        )
+        ->add
+        (
+            'enabled',
+            null,
+            array
+            (
+                'label' => 'Activé'
+            )
+        )
+        ->add
+        (
+            'preferences.visibility',
+            null,
+            array
+            (
+                'label' => 'Visibilité CV'
+            )
+        );
     }
 
     /**
@@ -257,6 +326,15 @@ class UserAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Activé ?'
+            )
+        )
+        ->add
+        (
+            'preferences.visibility',
+            null,
+            array
+            (
+                'label' => 'Visibilité CV'
             )
         )
         ->add

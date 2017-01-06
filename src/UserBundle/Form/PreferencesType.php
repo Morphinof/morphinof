@@ -4,6 +4,7 @@ namespace UserBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use ResumeBundle\Enum\TemplateEnum;
+use ResumeBundle\Enum\VisibilityEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,16 @@ class PreferencesType extends AbstractType
             (
                 'label' => 'CV template',
                 'choices' => TemplateEnum::__toAssoc()
+            )
+        )
+        ->add
+        (
+            'visibility',
+            ChoiceType::class,
+            array
+            (
+                'label' => 'Visibilité de votre CV',
+                'choices' => VisibilityEnum::__toAssoc()
             )
         );
     }

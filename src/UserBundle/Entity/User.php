@@ -15,6 +15,7 @@ use ResumeBundle\Entity\Portfolio;
 use ResumeBundle\Entity\Preferences;
 use ResumeBundle\Entity\Project;
 use ResumeBundle\Entity\Service;
+use ResumeBundle\Enum\VisibilityEnum;
 
 /**
  * @ORM\Entity
