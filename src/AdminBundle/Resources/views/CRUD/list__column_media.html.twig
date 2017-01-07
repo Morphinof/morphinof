@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined and object.media is not null %}
+        {% media object.media, 'admin_list' %}
+    {% endif %}
+{% endblock %}

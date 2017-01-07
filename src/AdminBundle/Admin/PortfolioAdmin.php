@@ -242,6 +242,16 @@ class PortfolioAdmin extends AbstractAdmin
         )
         ->add
         (
+            'projects',
+            null,
+            array
+            (
+                'label' => 'Projets',
+                'template' => 'AdminBundle::CRUD/list__column_projects.html.twig'
+            )
+        )
+        ->add
+        (
             '_action',
             null,
             array

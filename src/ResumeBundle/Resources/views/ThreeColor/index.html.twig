@@ -1,6 +1,6 @@
 {% extends "ResumeBundle::three-color.html.twig" %}
 
-{% set title = 'CV de l\'utilisateur ' ~ app.user.username %}
+{% set title = 'CV de l\'utilisateur ' ~ app.user | default('Anonyme') %}
 
 {% block title %}
     {{ parent() }} - {{ title }}

@@ -1,0 +1,11 @@
+.lock-word .first-word
+{
+    margin-right: 250px;
+}
+
+form ul
+{
+    list-style:none;
+    padding: 0;
+    color: red;
+}

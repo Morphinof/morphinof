@@ -113,7 +113,7 @@ class ProjectAdmin extends AbstractAdmin
         )
         ->add
         (
-            'image',
+            'media',
             MediaType::class,
             array
             (
@@ -203,6 +203,16 @@ class ProjectAdmin extends AbstractAdmin
         )
         ->add
         (
+            'media',
+            null,
+            array
+            (
+                'label' => 'Image',
+                'template' => 'AdminBundle::CRUD/list__column_media.html.twig',
+            )
+        )
+        ->add
+        (
             'owner',
             null,
             array
@@ -217,7 +227,7 @@ class ProjectAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Portfolio',
-                'template' => 'AdminBundle::CRUD/portfolio.html.twig',
+                'template' => 'AdminBundle::CRUD/list__column_portfolio.html.twig',
             )
         )
         ->add

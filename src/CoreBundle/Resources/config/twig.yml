@@ -1,6 +1,12 @@
 services:
   core_bundle.twig.tools_extension:
-    class: CoreBundle\Twig\ToolsExtension
-    arguments: ["@doctrine.orm.entity_manager"]
-    tags:
-      - { name: twig.extension }
+      class: CoreBundle\Twig\ToolsExtension
+      arguments: ["@doctrine.orm.entity_manager"]
+      tags:
+         - { name: twig.extension }
+
+  core_bundle.twig.enum_extension:
+      class: CoreBundle\Twig\EnumExtension
+      arguments: ["@doctrine.orm.entity_manager"]
+      tags:
+          - { name: twig.extension }

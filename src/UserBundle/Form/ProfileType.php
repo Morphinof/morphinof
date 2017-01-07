@@ -8,22 +8,11 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-
-use Doctrine\ORM\EntityRepository;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class ProfileType extends AbstractType
 {
-    /** @var TokenStorage $token */
-    private $token;
-
-    public function __construct(TokenStorage $token)
-    {
-        $this->token = $token;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -103,14 +92,6 @@ class ProfileType extends AbstractType
             array
             (
                 'class' => 'ResumeBundle:Hobby',
-                'query_builder' => function (EntityRepository $repository)
-                {
-                    return $repository->createQueryBuilder('h')
-                    ->leftJoin('h.profile', 'profile')
-                    ->leftJoin('profile.owner', 'owner')
-                    ->andWhere('owner = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-                },
                 'multiple' => true,
                 'attr' => array(),
                 'disabled' => true,
@@ -123,14 +104,6 @@ class ProfileType extends AbstractType
             array
             (
                 'class' => 'ResumeBundle\Entity\Skill',
-                'query_builder' => function (EntityRepository $repository)
-                {
-                    return $repository->createQueryBuilder('s')
-                    ->leftJoin('s.profile', 'profile')
-                    ->leftJoin('profile.owner', 'owner')
-                    ->andWhere('owner = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-                },
                 'multiple' => true,
                 'attr' => array(),
                 'disabled' => true,

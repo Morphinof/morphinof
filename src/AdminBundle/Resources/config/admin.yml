@@ -1,7 +1,7 @@
 services:
     admin.user:
         class: AdminBundle\Admin\UserAdmin
-        arguments: [~, UserBundle\Entity\User, ~, '@security.token_storage', '@security.authorization_checker', '@doctrine.orm.entity_manager']
+        arguments: [~, UserBundle\Entity\User, AdminBundle:UserAdmin, '@security.token_storage', '@security.authorization_checker', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Liste des utilisateurs }
 

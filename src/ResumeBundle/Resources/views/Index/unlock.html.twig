@@ -1,0 +1,68 @@
+{% extends "InspiniaBundle::layout.html.twig" %}
+
+{% set title = 'Ce profil est privé' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+        '@ResumeBundle/Resources/public/css/resume.css'
+    %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+    <div class="lock-word animated fadeInDown">
+        <span class="first-word">PROFIL</span><span>PRIVE</span>
+    </div>
+
+    <div class="middle-box text-center lockscreen animated fadeInDown">
+        <div class="m-b-md">
+            {% if user.avatar is not null %}
+                {% media user.avatar, 'small' with {'class': 'img-circle circle-border'} %}
+            {% else %}
+                <img alt="image" class="img-circle circle-border" width="160" src="{{ asset('bundles/resume/img/user.jpg') }}">
+            {% endif %}
+        </div>
+
+        <h3>{{ user.profile.fullName }}</h3>
+
+        <p>Désolé, le profil de {{ user.profile.fullName }} est privé.</p>
+        <p>Veuillez entrez le code de déverrouillage du profil pour pouvoir le visualiser</p>
+
+        {{ form_start(form, {'method': 'POST', 'attr': { 'id': 'form-resume-unlock', 'class': 'm-t', 'role': 'form' } }) }}
+
+            {{ form_errors(form) }}
+
+            {{ form_label(form.seed) }}
+            <div class="form-group">
+                {{ form_errors(form.seed) }}
+                {{ form_widget(form.seed) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary block full-width">Déverrouiller le profil</button>
+
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock %}

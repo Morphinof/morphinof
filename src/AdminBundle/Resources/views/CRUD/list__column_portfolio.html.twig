@@ -2,6 +2,7 @@
 
 {% block field %}
     {% set portfolio = get_project_portfolio(object) %}
+
     {% if object is defined and portfolio is not null %}
         <a class="label label-info" href="{{ path('admin_resume_portfolio_edit', {'id': portfolio.id}) }}">
             Portfolio {{ portfolio.id }}

@@ -31,6 +31,20 @@ class TemplateEnum extends AbstractEnum
     /**
      * @return array
      */
+    public static function __toChoice()
+    {
+        return array
+        (
+            '3 color' => self::THREE_COLOR,
+            'CVilized' => self::CVILIZED,
+            'Numo' => self::NUMO,
+            'MStone' => self::MSTONE,
+        );
+    }
+
+    /**
+     * @return array
+     */
     public static function __toAssoc()
     {
         return array

@@ -1,0 +1,6 @@
+{% if object is defined %}
+    <a href="{{ path('resume_homepage', {'username': object.username }) }}" target="_blank" class="btn btn-sm btn-default" title="Voir CV">
+        <i class="fa fa-vcard" aria-hidden="true"></i>
+        Voir CV
+    </a>
+{% endif %}

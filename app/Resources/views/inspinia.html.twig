@@ -105,7 +105,7 @@
 </head>
 
 <body
-    {% if bodyBackground is defined and bodyBackground is not null %}class="{{ bodyBackground }}"{% endif %}
+    class="{{ bodyBackground | default('gray-bg') }}"
     {% if mdSkin is defined and mdSkin is not null %}class="md-skin fixed-sidebar fixed-nav"{% endif %}
     {% if canvasMenu is defined and canvasMenu is not null %}class="canvas-menu"{% endif %}
 >

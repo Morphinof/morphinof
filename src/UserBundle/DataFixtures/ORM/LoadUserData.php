@@ -116,7 +116,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user->setProfile($profile);
         $user->getPreferences()->setOwner($user);
         $user->getPreferences()->setTemplate(TemplateEnum::THREE_COLOR);
-        $user->setVisibility(VisibilityEnum::RESUME_PUBLIC);
+        $user->getPreferences()->setVisibility(VisibilityEnum::RESUME_PUBLIC);
+        $user->getPreferences()->generateSeed();
 
         $this->manager->persist($user);
 

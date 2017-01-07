@@ -1,25 +1,30 @@
 resume_homepage:
-    path:     /resume/{username}
+    path:     /{username}
     defaults:
         _controller: ResumeBundle:Index:index
-        username: 'morphinof'
+        username: null
 
-3color_homepage:
-    path:     /3color/{username}
+resume_unlock:
+    path:     /{username}/deverouiller
+    defaults:
+        _controller: ResumeBundle:Index:unlock
+
+resume_3color_homepage:
+    path:     /{username}/3color
     defaults:
         _controller: ResumeBundle:ThreeColor:index
 
-cvilized_homepage:
-    path:     /cvilized/{username}
+resume_cvilized_homepage:
+    path:     /{username}/cvilized
     defaults:
         _controller: ResumeBundle:CVilized:index
 
-numo_homepage:
-    path:     /numo/{username}
+resume_numo_homepage:
+    path:     /{username}/numo
     defaults:
         _controller: ResumeBundle:Numo:index
 
-mstone_homepage:
-    path:     /mstone/{username}
+resume_mstone_homepage:
+    path:     /{username}/mstone
     defaults:
         _controller: ResumeBundle:MStone:index

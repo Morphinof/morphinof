@@ -30,3 +30,10 @@ services:
         class: ResumeBundle\Form\ProjectType
         tags:
             - { name: form.type, alias: resume_bundle_project_type }
+
+    resume_bundle.form.check_seed:
+        class: ResumeBundle\Form\CheckSeedType
+        arguments:
+            - '@user_bundle.user'
+        tags:
+            - { name: form.type, alias: resume_bundle_check_seed_type }

@@ -10,7 +10,7 @@ _sonata_admin:
 
 resume:
     resource: "@ResumeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /cv
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"

@@ -230,7 +230,7 @@ class HobbyAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Glyph Font Awesome',
-                'template' => 'AdminBundle::CRUD/fa-glyph.html.twig'
+                'template' => 'AdminBundle::CRUD/list__column_fa_glyph.html.twig'
             )
         )
         ->add
@@ -240,6 +240,7 @@ class HobbyAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Résumé',
+                'template' => 'AdminBundle::CRUD/list__column_resume.html.twig'
             )
         )
         ->add

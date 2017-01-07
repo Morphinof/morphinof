@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined %}
+        <span class="label label-{{ enum_css_class('ResumeBundle\\Enum\\VisibilityEnum', object.preferences.visibility) }}">
+            {{ enum_assoc_value('ResumeBundle\\Enum\\VisibilityEnum', object.preferences.visibility) }}
+        </span>
+    {% endif %}
+{% endblock %}

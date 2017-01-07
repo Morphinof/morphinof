@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined and object.preferences.seed %}
+        <span class="label label-info">
+            {{ object.preferences.seed }}
+        </span>
+    {% endif %}
+{% endblock %}

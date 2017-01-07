@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined %}
+        {% for project in object.projects %}
+            <a href="{{ path('admin_resume_project_edit', { 'id': project.id }) }}">
+                {% media project.media, 'admin_list' %}
+            </a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

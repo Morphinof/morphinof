@@ -63,6 +63,7 @@ class UserAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('impersonate', $this->getRouterIdParameter().'/impersonate');
+        $collection->add('generate_seed', $this->getRouterIdParameter().'/generate-seed');
     }
 
     public function createQuery($context = 'list')
@@ -334,7 +335,18 @@ class UserAdmin extends AbstractAdmin
             null,
             array
             (
-                'label' => 'Visibilité CV'
+                'label' => 'Visibilité CV',
+                'template' => 'AdminBundle::CRUD/list__column_preference_visibility.html.twig',
+            )
+        )
+        ->add
+        (
+            'preferences.seed',
+            null,
+            array
+            (
+                'label' => 'Seed',
+                'template' => 'AdminBundle::CRUD/list__column_generate_seed.html.twig',
             )
         )
         ->add
@@ -352,6 +364,14 @@ class UserAdmin extends AbstractAdmin
             'show' => array(),
             'edit' => array(),
             'delete' => array(),
+            'resume' => array
+            (
+                'template' => 'AdminBundle::CRUD/list__action_resume.html.twig'
+            ),
+            'generate_seed' => array
+            (
+                'template' => 'AdminBundle::CRUD/list__action_generate_seed.html.twig'
+            ),
         );
 
         if ($this->token->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN') || $this->authChecker->isGranted('ROLE_PREVIOUS_ADMIN'))

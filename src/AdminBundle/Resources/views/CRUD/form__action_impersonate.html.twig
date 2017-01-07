@@ -1,12 +1,12 @@
 {% if app.user.hasRole('ROLE_SUPER_ADMIN') or is_granted('ROLE_PREVIOUS_ADMIN') %}
     {% if object is defined %}
         {% if object.id == app.user.id and is_granted('ROLE_PREVIOUS_ADMIN') %}
-            <a href="{{ path('admin_user_user_list', {'_switch_user': '_exit'}) }}" class="btn btn-sm btn-default" title="Impersonifier">
+            <a href="{{ path('admin_user_user_list', {'_switch_user': '_exit'}) }}" class="btn btn-default" title="Impersonifier">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 Stopper l'impersonification
             </a>
         {% elseif object.id != app.user.id %}
-            <a href="{{ path('admin_user_user_list', {'_switch_user': object.username }) }}" class="btn btn-sm btn-default" title="Impersonifier">
+            <a href="{{ path('admin_user_user_list', {'_switch_user': object.username }) }}" class="btn btn-default" title="Impersonifier">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 Impersonifier
             </a>

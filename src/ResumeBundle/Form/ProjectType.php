@@ -32,7 +32,7 @@ class ProjectType extends AbstractType
         )
         ->add
         (
-            'image',
+            'media',
             MediaType::class,
             array
             (

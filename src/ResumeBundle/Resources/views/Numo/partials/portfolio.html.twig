@@ -16,8 +16,8 @@
                     {% if portfolio.projects | length > 0 %}
                         {% for project in portfolio.projects %}
                             <div class="col-sm-4 margin-bottom-xs">
-                                <a class="lightbox wrapper-portfolio" href="{% path project.image, 'numo_big' %}">
-                                    <img class="img-responsive" src="{% path project.image, 'numo_medium' %}" alt="{{ project.title }}">
+                                <a class="lightbox wrapper-portfolio" href="{% path project.media, 'numo_big' %}">
+                                    <img class="img-responsive" src="{% path project.media, 'numo_medium' %}" alt="{{ project.title }}">
                                     <h3 class="category">{{ project.title }}</h3>
                                 </a>
                             </div>

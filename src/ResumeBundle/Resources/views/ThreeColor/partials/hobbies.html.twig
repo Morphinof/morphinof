@@ -1,13 +1,11 @@
 {% if user is defined %}
-<!-- HOBBIES -->
-<div class="box">
-    <h2>Hobbies</h2>
     {% if user.profile.hobbies | length > 0 %}
-        {% for hobbie in user.profile.hobbies %}
-            <div class="hobby">{{ hobbie.name }}</div>
-        {% endfor %}
-    {% else %}
-        Pas de hobbies
+        <!-- HOBBIES -->
+        <div class="box">
+            <h2>Hobbies</h2>
+            {% for hobbie in user.profile.hobbies %}
+                <div class="hobby">{{ hobbie.tag.name }}</div>
+            {% endfor %}
+        </div>
     {% endif %}
-</div>
 {% endif %}

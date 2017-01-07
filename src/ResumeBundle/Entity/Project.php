@@ -46,7 +46,7 @@ class Project
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
      */
-    private $image;
+    private $media;
 
     /**
      * Get id
@@ -83,27 +83,27 @@ class Project
     }
 
     /**
-     * Set image
+     * Set media
      *
-     * @param Media $image
+     * @param Media $media
      *
      * @return Project
      */
-    public function setImage(Media $image = null)
+    public function setMedia(Media $media = null)
     {
-        $this->image = $image;
+        $this->media = $media;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get media
      *
      * @return Media
      */
-    public function getImage()
+    public function getMedia()
     {
-        return $this->image;
+        return $this->media;
     }
 
     /**

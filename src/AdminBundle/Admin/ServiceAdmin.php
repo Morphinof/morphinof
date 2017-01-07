@@ -221,7 +221,7 @@ class ServiceAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Glyph Font Awesome',
-                'template' => 'AdminBundle::CRUD/fa-glyph.html.twig'
+                'template' => 'AdminBundle::CRUD/list__column_fa_glyph.html.twig'
             )
         )
         ->add

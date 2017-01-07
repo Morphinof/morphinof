@@ -424,4 +424,12 @@ class User extends BaseUser
     {
         return $this->services;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->username;
+    }
 }

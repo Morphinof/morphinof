@@ -2,13 +2,14 @@
 
 namespace UserBundle\Form;
 
-use Doctrine\ORM\EntityRepository;
-use ResumeBundle\Enum\TemplateEnum;
-use ResumeBundle\Enum\VisibilityEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use ResumeBundle\Enum\TemplateEnum;
+use ResumeBundle\Enum\VisibilityEnum;
 
 class PreferencesType extends AbstractType
 {
@@ -22,7 +23,7 @@ class PreferencesType extends AbstractType
             array
             (
                 'label' => 'CV template',
-                'choices' => TemplateEnum::__toAssoc()
+                'choices' => TemplateEnum::__toChoice()
             )
         )
         ->add
@@ -32,7 +33,17 @@ class PreferencesType extends AbstractType
             array
             (
                 'label' => 'Visibilité de votre CV',
-                'choices' => VisibilityEnum::__toAssoc()
+                'choices' => VisibilityEnum::__toChoice()
+            )
+        )
+        ->add
+        (
+            'seed',
+            TextType::class,
+            array
+            (
+                'label' => 'Seed',
+                'disabled' => true
             )
         );
     }
