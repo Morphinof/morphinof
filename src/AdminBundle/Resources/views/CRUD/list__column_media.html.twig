@@ -1,7 +1,31 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {% if object is defined and object.media is not null %}
-        {% media object.media, 'admin_list' %}
+    {% if
+        object is defined and
+        (
+            object.avatar is defined or
+            object.logo is defined or
+            object.image is defined or
+            object.media is defined
+        )
+    %}
+        {% if object.avatar is defined and object.avatar is not null %}
+            <a href="{% path object.avatar, 'reference' %}" target="_blank">
+                {% media object.avatar, 'admin_list' %}
+            </a>
+        {% elseif object.logo is defined and object.logo is not null %}
+            <a href="{% path object.logo, 'reference' %}" target="_blank">
+                {% media object.logo, 'admin_list' %}
+            </a>
+        {% elseif object.image is defined and object.image is not null %}
+            <a href="{% path object.image, 'reference' %}" target="_blank">
+                {% media object.image, 'admin_list' %}
+            <a>
+        {% elseif object.media is defined and object.media is not null %}
+            <a href="{% path object.media, 'reference' %}" target="_blank">
+                {% media object.media, 'admin_list' %}
+            </a>
+        {% endif %}
     {% endif %}
 {% endblock %}

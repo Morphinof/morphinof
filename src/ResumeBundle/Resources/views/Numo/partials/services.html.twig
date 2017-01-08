@@ -1,92 +1,32 @@
-<!-- SERVICES-->
-<!--===============================================================-->
-<div class="bg-services" id="services">
-    <div class="container">
+{% if user is defined %}
+    {% if user.services | length > 0 %}
+        <!-- SERVICES-->
+        <!--===============================================================-->
+        <div class="bg-services" id="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="title">SERVICES</h2>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row margin-bottom">
+                    {% for service in user.services %}
+                    <div class="col-sm-6 margin-bottom-xs">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-{{ service.glyph }} fa-4x"></i>
+                            </div>
+                            <div class="col-xs-10">
+                                <h3>{{ service.title }}</h3>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="title">SERVICES</h2>
-                <hr>
-            </div>
-        </div>
-
-        <div class="row margin-bottom">
-            <div class="col-sm-6 margin-bottom-xs">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-code fa-4x"></i>
+                                {{ service.resume | raw }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-xs-10">
-                        <h3>Web Development</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque metus at metus tristique tincidunt.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-pencil-square-o fa-4x"></i>
-                    </div>
-                    <div class="col-xs-10">
-                        <h3>Graphic Design</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque metus at metus tristique tincidunt.
-                        </p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="row margin-bottom">
-            <div class="col-sm-6 margin-bottom-xs">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-desktop fa-4x"></i>
-                    </div>
-                    <div class="col-xs-10">
-                        <h3>Brand Identity</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque metus at metus tristique tincidunt.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-bolt fa-4x"></i>
-                    </div>
-                    <div class="col-xs-10">
-                        <h3>Fast Delivery</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque metus at metus tristique tincidunt.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 margin-bottom-xs">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-comments fa-4x"></i>
-                    </div>
-                    <div class="col-xs-10">
-                        <h3>7/24 Support</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque metus at metus tristique tincidunt.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <i class="fa fa-mobile"></i>
-                    </div>
-                    <div class="col-xs-10">
-                        <h3>Responsive Design</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque metus at metus tristique tincidunt.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    {% endif %}
+{% endif %}

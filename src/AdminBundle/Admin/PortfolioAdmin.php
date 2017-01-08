@@ -92,6 +92,23 @@ class PortfolioAdmin extends AbstractAdmin
         /** @var Portfolio $portfolio */
         $portfolio = $this->getSubject();
 
+        $owner =  array
+        (
+            'label' => 'Propriétraire',
+            'class' => 'UserBundle:User',
+            'disabled' => true,
+        );
+
+        if (!$this->token->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $owner['query_builder'] = function (EntityRepository $repository)
+            {
+                return $repository->createQueryBuilder('e')
+                    ->where('e = :owner')
+                    ->setParameter('owner', $this->token->getToken()->getUser());
+            };
+        }
+
         $formMapper
         ->tab
         (
@@ -110,18 +127,7 @@ class PortfolioAdmin extends AbstractAdmin
         (
             'owner',
             EntityType::class,
-            array
-            (
-                'label' => 'Propriétraire',
-                'class' => 'UserBundle:User',
-                'query_builder' => function (EntityRepository $repository)
-                {
-                    return $repository->createQueryBuilder('e')
-                    ->where('e = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-                },
-                'disabled' => true,
-            )
+           $owner
         )
         ->add
         (

@@ -209,6 +209,20 @@ class ContactType extends AbstractType
                 ),
                 'required' => false
             )
+        )
+        ->add
+        (
+            'tumblr',
+            TextType::class,
+            array
+            (
+                'label' => 'Tumblr',
+                'attr' => array
+                (
+                    'placeholder' => 'Tumblr',
+                ),
+                'required' => false
+            )
         );
     }
 

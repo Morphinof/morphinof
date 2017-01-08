@@ -16,7 +16,7 @@ sonata_media:
             allowed_mime_types: ['application/pdf', 'application/x-pdf','image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png']
     default_context: default # you need to set a context
     contexts:
-        default:  # the default context is mandatory
+        default: # the default context is mandatory
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
@@ -73,12 +73,32 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                admin_list:   { width: 40, height: 40, quality: 100 }
-                small:        { width: 200, height: 200, quality: 100 }
-                medium:       { width: 300, height: 300, quality: 100 }
-                big:          { width: 500, height: 500, quality: 100 }
-                numo_medium:  { width: 320, height: 340, quality: 100 }
-                numo_big:     { width: 640, height: 480, quality: 100 }
+                admin_list:       { width: 40, height: 40, quality: 100 }
+                small:            { width: 200, height: 200, quality: 100 }
+                medium:           { width: 300, height: 300, quality: 100 }
+                big:              { width: 500, height: 500, quality: 100 }
+                numo_medium:      { width: 320, height: 340, quality: 100 }
+                numo_big:         { width: 640, height: 480, quality: 100 }
+                mstone_small:     { width: 160, height: 160, quality: 100 }
+                mstone_medium:    { width: 500, height: 680, quality: 100 }
+                mstone_big:       { width: 1800, height: 718, quality: 100 }
+                mstone_portfolio: { width: 900, height: 600, quality: 100 }
+
+        customer:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                admin_list:       { width: 40, height: 40, quality: 100 }
+                small:            { width: 200, height: 200, quality: 100 }
+                medium:           { width: 300, height: 300, quality: 100 }
+                big:              { width: 500, height: 500, quality: 100 }
+                numo_medium:      { width: 320, height: 340, quality: 100 }
+                numo_big:         { width: 640, height: 480, quality: 100 }
+                mstone_small:     { width: 160, height: 160, quality: 100 }
+                mstone_medium:    { width: 500, height: 680, quality: 100 }
+                mstone_big:       { width: 1800, height: 718, quality: 100 }
+                mstone_customer:  { width: 160, height: 160, quality: 100 }
     cdn:
         server:
             path: /uploads/media # http://media.sonata-project.org/

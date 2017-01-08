@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 headline wow bounceInDown">
-                <h2>Mark Stone</h2>
-                <p>Visual Designer. Front-end Developer. C# Programmer.</p>
+                <h2>{{ user.profile.fullName }}</h2>
+                <p>{{ user.profile.profession }}</p>
             </div>
             <div class="col-md-3 col-sm-6 hidden-xs wow bounceInLeft">
                 {% if user.avatar is not null %}
@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-3 col-sm-6 wow bounceInUp">
                 <div class="profile-widget">
-                    <h3>Skillset</h3>
+                    <h3>Compétences</h3>
 
                     {% if user.profile.skills | length > 0 %}
                         {% for skill in user.profile.skills %}
@@ -31,7 +31,7 @@
                     {% endif %}
                 </div>
                 <div class="profile-widget">
-                    <h3>Social Profiles</h3>
+                    <h3>Réseaux sociaux</h3>
                     <ul class="widget-social">
                         {% if user.contact.facebook is not null %}
                             <li><a href="https://www.facebook.com/{{ user.contact.facebook }}"><i class="fa fa-facebook fa-fw"></i></a></li>
@@ -50,7 +50,7 @@
             </div><!-- .col-md-3 -->
             {% if user.profile.about is not null %}
             <div class="col-md-6 col-sm-12 wow bounceInRight">
-                <h3>Profesional Profile</h3>
+                <h3>Profil professionel</h3>
                 <p>
                     {{ user.profile.about | raw }}
                 </p>

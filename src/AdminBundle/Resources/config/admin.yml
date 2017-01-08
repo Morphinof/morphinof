@@ -21,7 +21,7 @@ services:
         class: AdminBundle\Admin\SkillAdmin
         arguments: [~, ResumeBundle\Entity\Skill, AdminBundle:SkillAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: CV, label: Compétances }
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Compétences }
 
     admin.service:
         class: AdminBundle\Admin\ServiceAdmin
@@ -46,3 +46,9 @@ services:
         arguments: [~, ResumeBundle\Entity\Project, AdminBundle:ProjectAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Projets }
+
+    admin.customer:
+        class: AdminBundle\Admin\CustomerAdmin
+        arguments: [~, ResumeBundle\Entity\Customer, AdminBundle:CustomerAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Clients }

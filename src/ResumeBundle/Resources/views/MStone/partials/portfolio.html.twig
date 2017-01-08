@@ -1,90 +1,47 @@
-<!-- Portfolio section start -->
-<section id="portfolio" class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 headline wow bounceInDown">
-                <h2>Portfolio</h2>
-                <p>My best works.</p>
-            </div>
-            <div class="col-md-4 col-sm-6 wow bounceInLeft">
-                <a href="assets/images/p1.jpg" class="pop-up" title="Caption 1">
-                    <div class="portfolio-item">
-                        <div class="portfolio-item-preview">
-                            <img src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p1.jpg') }}" alt="">
-                        </div>
-                        <div class="portfolio-item-description">
-                            <h3>Some work</h3>
-                            <p>Category</p>
-                        </div>
+{% if user is defined %}
+    {% set portfolio = get_main_portfolio(user) %}
+
+    {% if portfolio is not null %}
+        <!-- Portfolio section start -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 headline wow bounceInDown">
+                        <h2>{{ portfolio.title }}</h2>
+                        <p>{{ portfolio.resume | raw }}</p>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 wow bounceInUp">
-                <a href="https://vimeo.com/45830194" class="video-pop-up" title="Caption 2">
-                    <div class="portfolio-item">
-                        <div class="portfolio-item-preview">
-                            <img src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p2.jpg') }}" alt="">
-                        </div>
-                        <div class="portfolio-item-description">
-                            <h3>Some work</h3>
-                            <p>Category</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 wow bounceInRight">
-                <a href="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p3.jpg') }}" class="pop-up" title="Caption 3">
-                    <div class="portfolio-item">
-                        <div class="portfolio-item-preview">
-                            <img src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p3.jpg') }}" alt="">
-                        </div>
-                        <div class="portfolio-item-description">
-                            <h3>Some work</h3>
-                            <p>Category</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 wow bounceInUp" data-wow-delay=".2s">
-                <a href="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p5.jpg') }}" class="pop-up" title="Caption 4">
-                    <div class="portfolio-item">
-                        <div class="portfolio-item-preview">
-                            <img src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p5.jpg') }}g" alt="">
-                        </div>
-                        <div class="portfolio-item-description">
-                            <h3>Some work</h3>
-                            <p>Category</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 wow bounceInUp" data-wow-delay=".4s">
-                <a href="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p8.jpg') }}" class="pop-up" title="Caption 5">
-                    <div class="portfolio-item">
-                        <div class="portfolio-item-preview">
-                            <img src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p8.jpg') }}" alt="">
-                        </div>
-                        <div class="portfolio-item-description">
-                            <h3>Some work</h3>
-                            <p>Category</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6 wow bounceInUp" data-wow-delay=".6s">
-                <a href="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p6.jpg') }}" class="pop-up" title="Caption 6">
-                    <div class="portfolio-item">
-                        <div class="portfolio-item-preview">
-                            <img src="{{ asset('bundles/resume/MStone/Slideshow/assets/images/p6.jpg') }}" alt="">
-                        </div>
-                        <div class="portfolio-item-description">
-                            <h3>Some work</h3>
-                            <p>Category</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div><!-- .row -->
-    </div><!-- .container -->
-</section>
-<!-- Portfolio section end -->
+
+                    {% set animationIndex = 0 %}
+                    {% set animations = ['bounceInLeft', 'bounceInUp', 'bounceInRight', 'bounceInUp'] %}
+
+                    {% if portfolio.projects | length > 0 %}
+                        {% for project in portfolio.projects %}
+                            {% if project.media is not null %}
+                            <div class="col-md-4 col-sm-6 wow {{ animations[animationIndex] }}">
+                                <a href="{% path project.media, 'mstone_portfolio' %}" class="pop-up" title="{{ project.media.name }}">
+                                    <div class="portfolio-item">
+                                        <div class="portfolio-item-preview">
+                                            <img src="{% path project.media, 'mstone_portfolio' %}" alt="{{ project.media.name }}">
+                                        </div>
+                                        <div class="portfolio-item-description">
+                                            <h3>{{ project.title }}</h3>
+                                            <p>{{ project.resume | raw }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+
+                            {% if animationIndex < animations | length - 1 %}
+                                {% set animationIndex = animationIndex + 1 %}
+                            {% else %}
+                                {% set animationIndex = 0 %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </section>
+        <!-- Portfolio section end -->
+        {% endif %}
+{% endif %}

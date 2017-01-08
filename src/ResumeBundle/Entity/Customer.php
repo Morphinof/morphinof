@@ -2,24 +2,23 @@
 
 namespace ResumeBundle\Entity;
 
-use Application\Sonata\ClassificationBundle\Document\Tag;
-
+use CoreBundle\Traits\CreatedUpdatedTrait;
 use CoreBundle\Traits\DescribableTrait;
+
 use Doctrine\ORM\Mapping as ORM;
 
-use CoreBundle\Traits\CreatedUpdatedTrait;
+use Application\Sonata\MediaBundle\Entity\Media;
 
-use UserBundle\Entity\Profile;
 use UserBundle\Entity\User;
 
 /**
- * Service
+ * Customer
  *
- * @ORM\Table(name="service")
- * @ORM\Entity(repositoryClass="ResumeBundle\Repository\ServiceRepository")
+ * @ORM\Table(name="customer")
+ * @ORM\Entity(repositoryClass="ResumeBundle\Repository\CustomerRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Service
+class Customer
 {
     use CreatedUpdatedTrait;
     use DescribableTrait;
@@ -42,11 +41,12 @@ class Service
     private $owner;
 
     /**
-     * @var string
+     * @var Media
      *
-     * @ORM\Column(name="glyph", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
      */
-    private $glyph;
+    private $media;
 
     /**
      * Get id
@@ -63,7 +63,7 @@ class Service
      *
      * @param User $owner
      *
-     * @return Service
+     * @return Customer
      */
     public function setOwner(User $owner = null)
     {
@@ -83,27 +83,27 @@ class Service
     }
 
     /**
-     * Set glyph
+     * Set media
      *
-     * @param string $glyph
+     * @param Media $media
      *
-     * @return Service
+     * @return Customer
      */
-    public function setGlyph($glyph)
+    public function setMedia(Media $media = null)
     {
-        $this->glyph = $glyph;
+        $this->media = $media;
 
         return $this;
     }
 
     /**
-     * Get glyph
+     * Get media
      *
-     * @return string
+     * @return Media
      */
-    public function getGlyph()
+    public function getMedia()
     {
-        return $this->glyph;
+        return $this->media;
     }
 
     /**

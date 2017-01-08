@@ -1,0 +1,27 @@
+{% if user is defined %}
+    {% if user.customers | length > 0 %}
+        <!-- Callout section start -->
+        <section id="clients" class="callout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 hidden-xs wow bounceInLeft">
+                        <h3>Clients</h3>
+                    </div>
+                    <div class="col-md-9 wow bounceInRight">
+                        <div id="owl-clients" class="owl-carousel">
+                            {% for customer in user.customers %}
+                                {% if customer.media is not null %}
+                                    <div class="owl-item">
+                                        <img src="{% path customer.media, 'mstone_customer' %}" alt="{{ customer.media.name }}">
+                                        <h4>{{ customer.title }}</h4>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div><!-- .col-md-9 -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </section>
+        <!-- Callout section end -->
+    {% endif %}
+{% endif %}

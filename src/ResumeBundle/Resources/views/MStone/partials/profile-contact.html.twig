@@ -1,28 +1,36 @@
 {% if user is defined %}
-<!-- Profile contact callout section -->
-<section id="profile-contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 wow bounceInLeft">
-                <div class="profile-item">
-                    <i class="fa fa-envelope-o"></i>
-                    <h5><a href="mailto:{{ user.contact.email }}">{{ user.contact.email }}</a></h5>
-                </div>
-            </div>
-            <div class="col-sm-4 wow bounceInUp">
-                <div class="profile-item">
-                    <i class="fa fa-phone"></i>
-                    <h5>{{ user.contact.telephone | phone }}</h5>
-                </div>
-            </div>
-            <div class="col-sm-4 wow bounceInRight">
-                <div class="profile-item">
-                    <i class="fa fa-map-marker"></i>
-                    <h5>{{ user.contact.fullAddress }}</h5>
-                </div>
-            </div>
-        </div><!-- .row -->
-    </div><!-- .container -->
-</section>
-<!-- Profile contact callout section -->
+    {% if user.contact.email is not null or user.contact.telephone is not null or user.contact.fullAddress is not null %}
+        <!-- Profile contact callout section -->
+        <section id="profile-contact">
+            <div class="container">
+                <div class="row">
+                    {% if user.contact.email is not null %}
+                    <div class="col-sm-4 wow bounceInLeft">
+                        <div class="profile-item">
+                            <i class="fa fa-envelope-o"></i>
+                            <h5><a href="mailto:{{ user.contact.email }}">{{ user.contact.email }}</a></h5>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user.contact.telephone is not null %}
+                    <div class="col-sm-4 wow bounceInUp">
+                        <div class="profile-item">
+                            <i class="fa fa-phone"></i>
+                            <h5>{{ user.contact.telephone | phone }}</h5>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user.contact.fullAddress is not null %}
+                    <div class="col-sm-4 wow bounceInRight">
+                        <div class="profile-item">
+                            <i class="fa fa-map-marker"></i>
+                            <h5>{{ user.contact.fullAddress }}</h5>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </section>
+        <!-- Profile contact callout section -->
+    {% endif %}
 {% endif %}

@@ -2,31 +2,32 @@
 
 namespace AdminBundle\Admin;
 
-use CoreBundle\Enum\ContextEnum;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\MediaBundle\Form\Type\MediaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\EntityRepository;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+
+use CoreBundle\Enum\ContextEnum;
 use UserBundle\Entity\User;
+use ResumeBundle\Entity\Customer;
 
 /**
- * Class ServiceAdmin
+ * Class CustomerAdmin
  * @package AdminBundle\Admin
  */
-class ServiceAdmin extends AbstractAdmin
+class CustomerAdmin extends AbstractAdmin
 {
     /** @var TokenStorage $token */
     private $token;
@@ -60,15 +61,15 @@ class ServiceAdmin extends AbstractAdmin
         /** @var EntityManager $em */
         $em = $query->getEntityManager();
 
-        $repository = $em->getRepository('ResumeBundle:Service');
+        $repository = $em->getRepository('ResumeBundle:Customer');
 
-        $qb = $repository->createQueryBuilder('s');
+        $qb = $repository->createQueryBuilder('c');
 
         if (!$user->hasRole('ROLE_SUPER_ADMIN'))
         {
             $qb
-            ->leftJoin('s.owner', 'owner')
-            ->where('owner = :owner')
+            ->leftJoin('c.owner', 'owner')
+            ->andWhere('owner = :owner')
             ->setParameter('owner', $user);
         }
 
@@ -80,70 +81,45 @@ class ServiceAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        # Getting glyphs from FA css file
-        $finder = new Finder();
-        $finder
-        ->in(__DIR__.'/../../CoreBundle/Resources/public/font-awesome/css/')
-        ->files()
-        ->name('font-awesome.css');
-
-        $css = null;
-        foreach ($finder->files() as $file) $css = $file;
-
-        /** @var $css \SplFileInfo */
-        $contents = $css->getContents();
-
-        $glyphs = $tmp = array();
-        preg_match_all('/.fa-(.*):.*/i', $contents, $glyphs);
-        $glyphs = $glyphs[1];
-
-        foreach ($glyphs as $glyph)
-        {
-            $tmp[$glyph] = $glyph;
-        }
-
-        $glyphs = $tmp;
-        ksort($glyphs);
+        /** @var Customer $customer */
+        $customer = $this->getSubject();
 
         $formMapper
+        ->tab(!is_null($customer) && !is_null($customer->getTitle()) ? 'Client '.$customer->getTitle() : 'Nouveau client')
         ->with
         (
-            'Hobby',
+            'Client',
             array
             (
                 'class' => 'col-md-12',
             )
         )
         ->add
-            (
-                'owner',
-                EntityType::class,
-                array
-                (
-                    'label' => 'Propriétraire',
-                    'class' => 'UserBundle:User',
-                    'query_builder' => function (EntityRepository $repository)
-                    {
-                        return $repository->createQueryBuilder('e')
-                            ->where('e = :owner')
-                            ->setParameter('owner', $this->token->getToken()->getUser());
-                    },
-                    'disabled' => true,
-                )
-            )
-        ->add
         (
-            'glyph',
-            ChoiceType::class,
+            'owner',
+            EntityType::class,
             array
             (
-                'label' => 'Glyphe',
-                'choices' => $glyphs,
-                'attr' => array
-                (
-                    'placeholder' => 'Choisissez une glyphe',
-                ),
-                'empty_data'  => null,
+                'label' => 'Propriétraire',
+                'class' => 'UserBundle:User',
+                'query_builder' => function (EntityRepository $repository)
+                {
+                    return $repository->createQueryBuilder('e')
+                    ->where('e = :owner')
+                    ->setParameter('owner', $this->token->getToken()->getUser());
+                },
+                'disabled' => true,
+            )
+        )
+        ->add
+        (
+            'media',
+            MediaType::class,
+            array
+            (
+                'label' => 'Logo',
+                'context' => ContextEnum::CUSTOMER,
+                'provider' => 'sonata.media.provider.image',
             )
         )
         ->add
@@ -152,11 +128,25 @@ class ServiceAdmin extends AbstractAdmin
             TextType::class,
             array
             (
-                'label' => 'Titre',
+                'label' => 'Nom',
                 'attr' => array
                 (
-                    'placeholder' => 'Titre',
+                    'placeholder' => 'Nom',
                 ),
+            )
+        )
+        ->add
+        (
+            'description',
+            TextType::class,
+            array
+            (
+                'label' => 'Description',
+                'attr' => array
+                (
+                    'placeholder' => 'Description',
+                ),
+                'required' => false,
             )
         )
         ->add
@@ -174,6 +164,7 @@ class ServiceAdmin extends AbstractAdmin
                 )
             )
         )
+        ->end()
         ->end();
     }
 
@@ -183,28 +174,16 @@ class ServiceAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+        ->add('id')
         ->add
         (
             'title',
             null,
             array
             (
-                'label' => 'Titre'
+                'label' => 'Nom'
             )
         );
-
-        if ($this->token->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN'))
-        {
-            $datagridMapper->add
-            (
-                'owner',
-                null,
-                array
-                (
-                    'label' => 'Propriétaire',
-                )
-            );
-        }
     }
 
     /**
@@ -215,39 +194,30 @@ class ServiceAdmin extends AbstractAdmin
         $listMapper
         ->add
         (
-            'glyph',
+            'title',
             null,
             array
             (
-                'label' => 'Glyph Font Awesome',
-                'template' => 'AdminBundle::CRUD/list__column_fa_glyph.html.twig'
+                'label' => 'Nom'
+            )
+        )
+        ->add
+        (
+            'media',
+            null,
+            array
+            (
+                'label' => 'Logo',
+                'template' => 'AdminBundle::CRUD/list__column_media.html.twig',
             )
         )
         ->add
         (
             'owner',
-            EntityType::class,
-            array
-            (
-                'label' => 'Propriétaire',
-            )
-        )
-        ->add
-        (
-            'title',
             null,
             array
             (
-                'label' => 'Titre',
-            )
-        )
-        ->add
-        (
-            'resume',
-            'html',
-            array
-            (
-                'label' => 'Résumé',
+                'label' => 'Propriétaire',
             )
         )
         ->add

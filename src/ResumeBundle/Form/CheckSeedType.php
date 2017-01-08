@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use UserBundle\Entity\User;
-use ResumeBundle\Entity\Preferences;
 
 class CheckSeedType extends AbstractType
 {

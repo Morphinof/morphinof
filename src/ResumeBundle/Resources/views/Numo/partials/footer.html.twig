@@ -1,14 +1,24 @@
+{% if user is defined %}
 <!-- FOOTER-->
 <!--===============================================================-->
 <div class="bg-footer">
     <div class="container">
         <div class="row text-center">
             <div class="col-sm-12">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-dribbble"></i></a>
-                <a href="#"><i class="fa fa-tumblr"></i></a>
+                {% if user.contact.facebook is not null %}
+                    <a href="https://www.facebook.com/{{ user.contact.facebook }}"><i class="fa fa-facebook"></i></a>
+                {% endif %}
+                {% if user.contact.twitter is not null %}
+                    <a href="https://www.twitter.com/{{ user.contact.twitter }}"><i class="fa fa-twitter"></i></a>
+                {% endif %}
+                {% if user.contact.dribbble is not null %}
+                    <a href="https://www.dribbble.com/{{ user.contact.dribbble }}"><i class="fa fa-dribbble"></i></a>
+                {% endif %}
+                {% if user.contact.tumblr is not null %}
+                    <a href="https://www.tumblr.com/{{ user.contact.tumblr }}"><i class="fa fa-tumblr"></i></a>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% endif %}

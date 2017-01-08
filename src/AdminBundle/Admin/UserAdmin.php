@@ -239,6 +239,26 @@ class UserAdmin extends AbstractAdmin
                 'required' => false,
             )
         )
+        ->end()
+        ->with
+        (
+            'Fichiers',
+            array
+            (
+                'class' => 'col-md-6',
+            )
+        )
+        ->add
+        (
+            'resumeFile',
+            MediaType::class,
+            array
+            (
+                'label' => 'CV',
+                'context' => ContextEnum::USER,
+                'provider' => 'sonata.media.provider.file',
+            )
+        )
         ->end();
     }
 
@@ -301,7 +321,16 @@ class UserAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-        ->add('id')
+        ->add
+        (
+            'avatar',
+            null,
+            array
+            (
+                'label' => 'Avatar',
+                'template' => 'AdminBundle::CRUD/list__column_media.html.twig',
+            )
+        )
         ->add
         (
             'username',
@@ -351,11 +380,12 @@ class UserAdmin extends AbstractAdmin
         )
         ->add
         (
-            'roles',
+            'customers',
             null,
             array
             (
-                'label' => 'Rôles',
+                'label' => 'Clients',
+                'template' => 'AdminBundle::CRUD/list__column_customers.html.twig'
             )
         );
 

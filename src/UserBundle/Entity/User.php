@@ -9,6 +9,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 
 use Application\Sonata\MediaBundle\Entity\Media;
 
+use ResumeBundle\Entity\Customer;
 use ResumeBundle\Entity\Education;
 use ResumeBundle\Entity\Experience;
 use ResumeBundle\Entity\Portfolio;
@@ -99,6 +100,21 @@ class User extends BaseUser
      */
     protected $services;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Customer", mappedBy="owner", cascade={"persist", "remove"})
+     */
+    protected $customers;
+
+    /**
+     * @var Media
+     *
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="resume_file_id", referencedColumnName="id", nullable=true)
+     */
+    protected $resumeFile;
+
     public function __construct()
     {
         parent::__construct();
@@ -112,6 +128,10 @@ class User extends BaseUser
         $this->portfolios = new ArrayCollection();
         $this->projects = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->customers = new ArrayCollection();
+
+        # Files
+        $this->resumeFile = null;
     }
 
     /**
@@ -423,6 +443,77 @@ class User extends BaseUser
     public function getServices()
     {
         return $this->services;
+    }
+
+    /**
+     * Add customer
+     *
+     * @param Customer $customer
+     *
+     * @return User
+     */
+    public function addCustomer(Customer $customer)
+    {
+        $this->customers[] = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Remove customer
+     *
+     * @param Customer $customer
+     */
+    public function removeCustomer(Customer $customer)
+    {
+        $this->customers->removeElement($customer);
+    }
+
+    /**
+     * Set customers
+     *
+     * @param ArrayCollection $customers
+     * @return User
+     */
+    public function setCustomers(ArrayCollection $customers)
+    {
+        $this->customers = $customers;
+
+        return$this;
+    }
+
+    /**
+     * Get customers
+     *
+     * @return ArrayCollection
+     */
+    public function getCustomers()
+    {
+        return $this->customers;
+    }
+
+    /**
+     * Set resume file
+     *
+     * @param Media $media
+     *
+     * @return User
+     */
+    public function setResumeFile(Media $media = null)
+    {
+        $this->resumeFile = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get resume file
+     *
+     * @return Media
+     */
+    public function getResumeFile()
+    {
+        return $this->resumeFile;
     }
 
     /**

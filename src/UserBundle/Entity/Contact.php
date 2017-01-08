@@ -96,6 +96,13 @@ class Contact implements AddressableInterface
     private $gitHub;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="tumblr", type="string", length=255, nullable=true, unique=true)
+     */
+    private $tumblr;
+
+    /**
      * Get id
      *
      * @return int
@@ -354,5 +361,29 @@ class Contact implements AddressableInterface
     public function getGitHub()
     {
         return $this->gitHub;
+    }
+
+    /**
+     * Set tumblr
+     *
+     * @param string $tumblr
+     *
+     * @return Contact
+     */
+    public function setTumblr($tumblr)
+    {
+        $this->tumblr = $tumblr;
+
+        return $this;
+    }
+
+    /**
+     * Get tumblr
+     *
+     * @return string
+     */
+    public function getTumblr()
+    {
+        return $this->tumblr;
     }
 }

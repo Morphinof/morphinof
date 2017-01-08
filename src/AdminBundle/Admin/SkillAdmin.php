@@ -82,7 +82,7 @@ class SkillAdmin extends AbstractAdmin
         $formMapper
         ->with
         (
-            'Compétances',
+            'Compétences',
             array
             (
                 'class'       => 'col-md-12',

@@ -34,7 +34,7 @@
 
     {% include '@Resume/MStone/partials/resume.html.twig' %}
 
-    {% include '@Resume/MStone/partials/clients.html.twig' %}
+    {% include '@Resume/MStone/partials/customers.html.twig' %}
 
     {% include '@Resume/MStone/partials/portfolio.html.twig' %}
 
@@ -51,14 +51,32 @@
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script>
-        /* ---------------------------------------------- /*
-         * Background images
-         /* ---------------------------------------------- */
-        $('#intro').backstretch([
-            '/bundles/resume/MStone/SlideShow/assets/images/bg3.jpg',
-            '/bundles/resume/MStone/SlideShow/assets/images/bg4.jpg',
-            '/bundles/resume/MStone/SlideShow/assets/images/bg2.jpg'
-        ], {duration: 3000, fade: 750});
-    </script>
+    {% if user is defined %}
+        {% set portfolio = get_main_portfolio(user) %}
+
+        {% if portfolio is not null and portfolio.projects | length > 0 %}
+            {% set backstretch = false %}
+
+            {% for project in portfolio.projects %}
+                {% if project.media is defined %}
+                    {% set backstretch = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% if backstretch %}
+            <script>
+                /* ---------------------------------------------- /*
+                 * Background images
+                 /* ---------------------------------------------- */
+                $('#intro').backstretch([
+                    {% for project in portfolio.projects %}
+                        {% if project.media is not null %}
+                            '{% path project.media, 'mstone_big' %}'{% if loop.index != loop.last %},{% endif %}
+                        {% endif %}
+                    {% endfor %}
+                ], {duration: 3000, fade: 750});
+            </script>
+            {% endif %}
+        {% endif %}
+    {% endif %}
 {% endblock %}
