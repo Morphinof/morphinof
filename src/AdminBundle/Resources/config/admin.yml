@@ -55,6 +55,6 @@ services:
 
     admin.blog:
         class: AdminBundle\Admin\BlogAdmin
-        arguments: [~, BlogBundle\Entity\Article, ~, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments: [~, BlogBundle\Entity\Article, AdminBundle:BlogAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Gérer les articles }

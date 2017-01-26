@@ -2,22 +2,28 @@
 
 namespace AdminBundle\Admin;
 
-use CoreBundle\Enum\ContextEnum;
-use Doctrine\ORM\QueryBuilder;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\MediaBundle\Form\Type\MediaType;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+
+use CoreBundle\Enum\ContextEnum;
+
 use UserBundle\Entity\User;
 
 /**
@@ -101,7 +107,7 @@ class BlogAdmin extends AbstractAdmin
             MediaType::class,
             array
             (
-                'label' => 'Avatar',
+                'label' => 'Media',
                 'context' => ContextEnum::AVATAR,
                 'provider' => 'sonata.media.provider.image',
             )
@@ -109,10 +115,68 @@ class BlogAdmin extends AbstractAdmin
         ->add
         (
             'author',
-            TextType::class,
+            EntityType::class,
             array
             (
                 'label' => 'Auteur',
+                'class' => 'UserBundle:User',
+                'query_builder' => function (EntityRepository $repository)
+                {
+                    return $repository->createQueryBuilder('u')
+                    ->where('u = :author')
+                    ->setParameter('author', $this->token->getToken()->getUser());
+                },
+                'disabled' => true,
+            )
+        )
+        ->add
+        (
+            'title',
+            TextType::class,
+            array
+            (
+                'label' => 'Titre',
+                'attr' => array
+                (
+                    'placeholder' => 'Titre',
+                ),
+            )
+        )
+        ->add
+        (
+            'publishedOn',
+            DateType::class,
+            array
+            (
+                'label' => 'Commencer la publication le',
+                'format' => 'd/MM/y', # RFC-3339 date
+                'input' => 'datetime',
+            )
+        )
+        ->add
+        (
+            'stopPublicationOn',
+            DateType::class,
+            array
+            (
+                'label' => 'Stoper la publication le',
+                'format' => 'd/MM/y', # RFC-3339 date
+                'input' => 'datetime',
+            )
+        )
+        ->add
+        (
+            'resume',
+            CKEditorType::class,
+            array
+            (
+                'label' => 'Résumé',
+                'config_name' => 'default',
+                'attr' => array
+                (
+                    'rows' => 10,
+                    'cols' => 76,
+                )
             )
         )
         ->add
@@ -124,6 +188,7 @@ class BlogAdmin extends AbstractAdmin
                 'label' => 'Visible ?',
             )
         )
+
         ->end();
     }
 

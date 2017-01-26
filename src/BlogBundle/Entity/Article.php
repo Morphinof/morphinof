@@ -2,6 +2,11 @@
 
 namespace BlogBundle\Entity;
 
+use CoreBundle\Traits\PublishedTrait;
+use Doctrine\ORM\Mapping\AttributeOverride;
+use Doctrine\ORM\Mapping\AttributeOverrides;
+use Doctrine\ORM\Mapping\Column;
+
 use CoreBundle\Traits\AuthoredTrait;
 use CoreBundle\Traits\CreatedUpdatedTrait;
 use CoreBundle\Traits\DescribableTrait;
@@ -13,6 +18,22 @@ use Application\Sonata\MediaBundle\Entity\Media;
 /**
  * Article
  *
+ * @AttributeOverrides
+ * (
+ *      {
+ *          @AttributeOverride
+ *          (
+ *              name="resume",
+ *              column=@Column
+ *              (
+ *                  name     = "content",
+ *                  type     = "text",
+ *                  nullable = true,
+ *                  unique   = false
+ *              )
+ *          )
+ *      }
+ * )
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="BlogBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -22,6 +43,7 @@ class Article
     use CreatedUpdatedTrait;
     use DescribableTrait;
     use AuthoredTrait;
+    use PublishedTrait;
 
     /**
      * @var int
@@ -103,6 +125,16 @@ class Article
     public function getVisible()
     {
         return $this->visible;
+    }
+
+    /**
+     * Resume alias
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->resume;
     }
 
     /**

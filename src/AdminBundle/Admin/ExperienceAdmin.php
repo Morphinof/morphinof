@@ -183,7 +183,7 @@ class ExperienceAdmin extends AbstractAdmin
             CKEditorType::class,
             array
             (
-                'label' => 'Résumé',
+                'label' => 'Contenu',
                 'config_name' => 'default',
                 'attr' => array
                 (
