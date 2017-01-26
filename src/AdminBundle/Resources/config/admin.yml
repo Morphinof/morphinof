@@ -52,3 +52,9 @@ services:
         arguments: [~, ResumeBundle\Entity\Customer, AdminBundle:CustomerAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Clients }
+
+    admin.blog:
+        class: AdminBundle\Admin\BlogAdmin
+        arguments: [~, BlogBundle\Entity\Article, ~, '@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: Gérer les articles }

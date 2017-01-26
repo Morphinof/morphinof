@@ -1,42 +1,48 @@
 sonata_admin:
-  templates:
-      layout: AdminBundle::standard_layout.html.twig
-      user_block: AdminBundle:Core:user_block.html.twig
-      dashboard: AdminBundle:Core:dashboard.html.twig
-  dashboard:
-    groups:
-      admin.user:
-        label: Utilisateurs
-        label_catalogue: Utilisateurs
-        items:
-          - admin.user
-        roles: [ 'ROLE_SUPER_ADMIN' ]
-      admin.resume:
-        label: CV
-        label_catalogue: CV
-        items:
-          - admin.education
-          - admin.experience
-          - admin.skill
-          - admin.hobby
-          - admin.service
-          - admin.portfolio
-          - admin.project
-          - admin.customer
-        roles: [ 'ROLE_USER' ]
-      admin.classification:
-        label: Classification
-        label_catalogue: Classification
-        items:
-          - sonata.classification.admin.category
-          - sonata.classification.admin.tag
-          - sonata.classification.admin.collection
-          - sonata.classification.admin.context
-        roles: [ 'ROLE_SUPER_ADMIN' ]
-      admin.media:
-        label: Médiathèque
-        label_catalogue: Médiathèque
-        items:
-          - sonata.media.admin.media
-          - sonata.media.admin.gallery
-        roles: [ 'ROLE_SUPER_ADMIN' ]
+    templates:
+        layout: AdminBundle::standard_layout.html.twig
+        user_block: AdminBundle:Core:user_block.html.twig
+        dashboard: AdminBundle:Core:dashboard.html.twig
+    dashboard:
+        groups:
+            admin.user:
+                label: Utilisateurs
+                label_catalogue: Utilisateurs
+                items:
+                    - admin.user
+                roles: [ 'ROLE_SUPER_ADMIN' ]
+            admin.blog:
+                label: Blog
+                label_catalogue: Blog
+                items:
+                    - admin.blog
+                roles: [ 'ROLE_USER' ]
+            admin.resume:
+                label: CV
+                label_catalogue: CV
+                items:
+                    - admin.education
+                    - admin.experience
+                    - admin.skill
+                    - admin.hobby
+                    - admin.service
+                    - admin.portfolio
+                    - admin.project
+                    - admin.customer
+                roles: [ 'ROLE_USER' ]
+            admin.classification:
+                label: Classification
+                label_catalogue: Classification
+                items:
+                    - sonata.classification.admin.category
+                    - sonata.classification.admin.tag
+                    - sonata.classification.admin.collection
+                    - sonata.classification.admin.context
+                roles: [ 'ROLE_SUPER_ADMIN' ]
+            admin.media:
+                label: Médiathèque
+                label_catalogue: Médiathèque
+                items:
+                    - sonata.media.admin.media
+                    - sonata.media.admin.gallery
+                roles: [ 'ROLE_SUPER_ADMIN' ]

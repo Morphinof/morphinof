@@ -43,7 +43,7 @@ class CustomerAdmin extends AbstractAdmin
         (
             '_page' => 1,
             '_sort_order' => 'DESC',
-            '_sort_by' => 'from'
+            '_sort_by' => 'updatedAt'
         );
 
         $this->token = $token;

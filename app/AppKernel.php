@@ -48,6 +48,7 @@ class AppKernel extends Kernel
             new AdminBundle\AdminBundle(),
             new InspiniaBundle\InspiniaBundle(),
             new ResumeBundle\ResumeBundle(),
+            new BlogBundle\BlogBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
