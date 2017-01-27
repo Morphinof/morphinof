@@ -28,8 +28,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul class="pager">
-                            <li class="previous"><a href="#">&larr; Article précédant</a></li>
-                            <li class="next"><a href="#">Article suivant &rarr;</a></li>
+                            <li class="previous">
+                                <a href="{{ path('resume_numo_blog_previous_article', { 'slug': article.slug }) }}">&larr; Article précédant</a>
+                            </li>
+                            <li class="next">
+                                <a href="{{ path('resume_numo_blog_next_article', { 'slug': article.slug }) }}">Article suivant &rarr;</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

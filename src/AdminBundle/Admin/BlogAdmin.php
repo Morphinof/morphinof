@@ -58,6 +58,7 @@ class BlogAdmin extends AbstractAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->add('clone', $this->getRouterIdParameter().'/clone');
     }
 
     public function createQuery($context = 'list')
@@ -385,6 +386,10 @@ class BlogAdmin extends AbstractAdmin
             'show' => array(),
             'edit' => array(),
             'delete' => array(),
+            'clone' => array
+            (
+                'template' => 'AdminBundle::CRUD/list__action_clone_article.html.twig'
+            ),
         );
 
         $listMapper

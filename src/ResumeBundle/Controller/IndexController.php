@@ -2,17 +2,21 @@
 
 namespace ResumeBundle\Controller;
 
+use BlogBundle\Repository\ArticleRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 use Doctrine\ORM\EntityManager;
 
 use ResumeBundle\Enum\TemplateEnum;
 use ResumeBundle\Enum\VisibilityEnum;
 use ResumeBundle\Form\CheckSeedType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use UserBundle\Entity\User;
 use UserBundle\Repository\UserRepository;
+
+use BlogBundle\Entity\Article;
 
 class IndexController extends Controller
 {
@@ -83,16 +87,18 @@ class IndexController extends Controller
     }
 
     /**
-     * Get a blog article by slug
+     * Get a blog article by slug with optional offset
      *
      * @param null $slug
-     * @return array
+     * @param int $offset
+     * @return Article|null
      */
-    public function getBlogArticleBySlug($slug = null)
+    public function getBlogArticleBySlug($slug = null, $offset = 0)
     {
+        /** @var ArticleRepository $repository */
         $repository = $this->getDoctrine()->getRepository('BlogBundle:Article');
 
-        return $repository->findOneBy(array('slug' => $slug));
+        return $repository->findBySlug($slug, $offset);
     }
 
     public function indexAction($username = null)

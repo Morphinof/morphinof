@@ -2,6 +2,12 @@
 
 namespace BlogBundle\Repository;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
+use BlogBundle\Entity\Article;
+
 /**
  * ArticleRepository
  *
@@ -10,4 +16,86 @@ namespace BlogBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByPage($page = 1, $max = 10)
+    {
+        if (!is_numeric($page)) {
+            throw new \InvalidArgumentException(
+                '$page must be an integer ('.gettype($page).' : '.$page.')'
+            );
+        }
+
+        if (!is_numeric($page)) {
+            throw new \InvalidArgumentException(
+                '$max must be an integer ('.gettype($max).' : '.$max.')'
+            );
+        }
+
+        $qb = $this->createQueryBuilder('article');
+        $qb->orderBy('article.createdAt', 'DESC');
+
+        $firstResult = ($page - 1) * $max;
+
+        $query = $qb->getQuery();
+        $query->setFirstResult($firstResult);
+        $query->setMaxResults($max);
+
+        $paginator = new Paginator($query);
+
+        if(($paginator->count() <=  $firstResult) && $page != 1)
+        {
+            throw new NotFoundHttpException('Page not found');
+        }
+
+        return $paginator;
+    }
+
+    public function findBySlug($slug, $offset = 0)
+    {
+        $qb = $this->createQueryBuilder('article');
+
+        $qb
+        ->andWhere('article.slug = :slug')
+        ->setParameter('slug', $slug);
+
+        /** @var Article | null $article */
+        $article = $qb->getQuery()->getSingleResult();
+
+        if ($offset == 0) return $article;
+        else
+        {
+            $author = $article->getAuthor();
+
+            $qb = $this->createQueryBuilder('article');
+            $qb
+            ->where('article.id '.($offset > 0 ? '>' : '<').' :id')
+            ->andWhere('article.author = :author')
+            ->setMaxResults(abs($offset))
+            ->setParameter('id', $article->getId())
+            ->setParameter('author', $author)
+            ->orderBy('article.id', 'desc');
+
+            try
+            {
+                $article = $qb->getQuery()->getSingleResult();
+            }
+            catch (\Exception $e)
+            {
+                # Get min and max id
+                $qb = $this->createQueryBuilder('a');
+                $minMax = $qb->select('min(a.id) as minimum, max(a.id) as maximum')->getQuery()->getScalarResult()[0];
+
+                $qb = $this->createQueryBuilder('article');
+                $qb
+                ->where('article.author = :author')
+                ->setParameter('author', $author);
+
+                if ($offset < 0) $qb->andWhere('article.id = :maximum')->setParameter('maximum', $minMax['maximum']);
+                else $qb->andWhere('article.id = :minimum')->setParameter('minimum', $minMax['minimum']);
+
+                $article = $qb->getQuery()->getSingleResult();
+            }
+        }
+
+        return $article;
+    }
 }

@@ -1,0 +1,6 @@
+{% if object is defined %}
+    <a href="{{ path('admin_blog_article_clone', {'id': object.id }) }}" class="btn btn-sm btn-default" title="Cloner l'article">
+        <i class="fa fa-clone" aria-hidden="true"></i>
+        Cloner
+    </a>
+{% endif %}

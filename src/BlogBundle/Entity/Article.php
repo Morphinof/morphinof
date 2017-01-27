@@ -189,4 +189,16 @@ class Article
     {
         return $this->title;
     }
+
+    /**
+     * Clone function
+     */
+    public function __clone()
+    {
+        if (!is_null($this->id))
+        {
+            $this->id = null;
+            $this->media = null;
+        }
+    }
 }

@@ -324,4 +324,23 @@ class BlogAdminController extends CRUDController
             'elements' => $this->admin->getShow(),
         ), null);
     }
+
+    public function cloneAction($id = null)
+    {
+        /** @var Article $object */
+        $object = $this->admin->getSubject();
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        $clonedObject = clone $object;
+        $clonedObject->setTitle($object->getTitle()." (Clone)");
+
+        $this->admin->create($clonedObject);
+
+        $this->addFlash('sonata_flash_success', 'Article "'.$object->getTitle().'"" (#'.$object->getId().') cloné');
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
+    }
 }

@@ -36,6 +36,16 @@ resume_numo_blog:
         _controller: ResumeBundle:Numo:blog
 
 resume_numo_blog_post:
-    path:     /{username}/numo/blog/{slug}
+    path:     /numo/blog/{slug}
     defaults:
         _controller: ResumeBundle:Numo:blogPost
+
+resume_numo_blog_previous_article:
+    path:     /numo/blog/{slug}/previous
+    defaults:
+        _controller: ResumeBundle:Numo:previousArticle
+
+resume_numo_blog_next_article:
+    path:     /numo/blog/{slug}/next
+    defaults:
+        _controller: ResumeBundle:Numo:nextArticle
