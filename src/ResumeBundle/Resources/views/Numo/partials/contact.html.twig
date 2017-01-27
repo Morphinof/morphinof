@@ -1,13 +1,17 @@
+{% if user is defined %}
 <!-- CONTACT-->
 <!--===============================================================-->
 <div class="bg-contact" id="contact">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h3>Feel free to contact me for your next project</h3>
+                <h3>N'hésitez pas à me contacter</h3>
                 <!-- YOUR E-MAIL-->
-                <a href="mailto:example@example.com" class="mail"><span class="glyphicon glyphicon-envelope"></span>E-MAIL</a>
+                <a href="mailto:{{ user.contact.email | default(user.email) }}" class="mail">
+                    <span class="glyphicon glyphicon-envelope"></span>E-MAIL
+                </a>
             </div>
         </div>
     </div>
 </div>
+{% endif %}

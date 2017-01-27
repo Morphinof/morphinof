@@ -109,7 +109,7 @@ sonata_media:
                 small:            { width: 200, height: 200, quality: 80 }
                 medium:           { width: 300, height: 300, quality: 80 }
                 big:              { width: 500, height: 500, quality: 80 }
-                numo_medium:      { width: 320, height: 340, quality: 80 }
+                numo_medium:      { width: 650, height: 220, quality: 80 }
                 numo_big:         { width: 650, height: 480, quality: 80 }
                 mstone_small:     { width: 160, height: 160, quality: 80 }
                 mstone_medium:    { width: 650, height: 480, quality: 80 }

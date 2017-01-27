@@ -147,6 +147,19 @@ class BlogAdmin extends AbstractAdmin
         )
         ->add
         (
+            'description',
+            TextType::class,
+            array
+            (
+                'label' => 'Description',
+                'attr' => array
+                (
+                    'placeholder' => 'Description de votre article',
+                ),
+            )
+        )
+        ->add
+        (
             'resume',
             CKEditorType::class,
             array
@@ -311,7 +324,23 @@ class BlogAdmin extends AbstractAdmin
             (
                 'label' => 'Titre',
             )
-        )
+        );
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
+            (
+                'slug',
+                null,
+                array
+                (
+                    'label' => 'Slug',
+                )
+            );
+        }
+
+        $listMapper
         ->add
         (
             'visible',

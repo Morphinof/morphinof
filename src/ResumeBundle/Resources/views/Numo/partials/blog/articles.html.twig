@@ -1,0 +1,49 @@
+{% if user is defined and articles is defined and articles | length > 0 %}
+<!-- BLOG-->
+<!--===============================================================-->
+<div class="bg-post">
+    <div class="container">
+        <div class="row row-blog">
+            <div class="col-md-8 col-md-offset-2 wrapper-blog">
+                {% for article in articles %}
+                    {% set url = path('resume_numo_blog_post', { 'username': user.username, 'slug': article.slug }) %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="{{ url }}"><h1 class="title-post">{{ article.title }}</h1></a>
+                        <p class="small author">Par <span class="green">{{ article.author.profile.getFullName() }}</span> · {{ article.createdAt | date('M d, Y') }}</p>
+                        <a href="{{ url }}">
+                            {% if article.media is not null %}
+                                {% media article.media, 'numo_medium' %}
+                            {% else %}
+                                <img class="img-responsive img-featured" src="{{ asset('/bundles/resume/Numo/assets/images/blog.png') }}" alt="featured image">
+                            {% endif %}
+                        </a>
+                        <p>
+                            {{ article.description }}
+                        </p>
+                        <a href="{{ url }}" class="btn btn-default">En savoir plus</a>
+                        <hr>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if pagination is defined %}
+                <div class="row">
+                    <div class="col-sm-12 col-pagination">
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

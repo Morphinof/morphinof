@@ -817,6 +817,18 @@ hr {
     transition: color .22s ease-out;
 }
 
+.wrapper-blog .description-post {
+    margin-top:0px;
+    margin-bottom:20px;
+    text-transform: uppercase;
+    text-align: center;
+    color:#444;
+    -webkit-transition: color .22s ease-out;
+    -moz-transition: color .22s ease-out;
+    -o-transition: color .22s ease-out;
+    transition: color .22s ease-out;
+}
+
 .wrapper-blog a .title-post:hover {
     color:#1BBC9B;
 }

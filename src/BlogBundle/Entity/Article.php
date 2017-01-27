@@ -2,14 +2,18 @@
 
 namespace BlogBundle\Entity;
 
-use CoreBundle\Traits\PublishedTrait;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 use Doctrine\ORM\Mapping\AttributeOverride;
 use Doctrine\ORM\Mapping\AttributeOverrides;
 use Doctrine\ORM\Mapping\Column;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 use CoreBundle\Traits\AuthoredTrait;
 use CoreBundle\Traits\CreatedUpdatedTrait;
 use CoreBundle\Traits\DescribableTrait;
+use CoreBundle\Traits\PublishedTrait;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -55,6 +59,18 @@ class Article
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @Gedmo\Slug
+     * (
+     *      fields={"title"},
+     *      suffix=".html"
+     * )
+     */
+    private $slug;
+
+    /**
      * @var Media
      *
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
@@ -83,6 +99,29 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

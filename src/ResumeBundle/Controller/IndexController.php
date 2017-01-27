@@ -64,6 +64,37 @@ class IndexController extends Controller
         return false;
     }
 
+    /**
+     * Load blog articles by username
+     *
+     * @param null $username
+     * @return array
+     */
+    public function getBlogArticles($username = null)
+    {
+        if (is_null($username))
+            $username = $this->getUser()->getUsername();
+
+        $user = $this->getUserByUsername($username);
+
+        $repository = $this->getDoctrine()->getRepository('BlogBundle:Article');
+
+        return $repository->findBy(array('author' => $user));
+    }
+
+    /**
+     * Get a blog article by slug
+     *
+     * @param null $slug
+     * @return array
+     */
+    public function getBlogArticleBySlug($slug = null)
+    {
+        $repository = $this->getDoctrine()->getRepository('BlogBundle:Article');
+
+        return $repository->findOneBy(array('slug' => $slug));
+    }
+
     public function indexAction($username = null)
     {
         /** @var Session $session */

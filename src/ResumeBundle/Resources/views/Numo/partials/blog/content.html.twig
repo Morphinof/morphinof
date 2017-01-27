@@ -1,0 +1,48 @@
+{% if article is defined and article is not null %}
+<!-- BLOG-->
+<!--===============================================================-->
+<div class="bg-post">
+    <div class="container">
+        <div class="row row-blog">
+            <div class="col-md-8 col-md-offset-2 wrapper-blog">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="title-post">{{ article.title }}</h1>
+                        <p class="small author">Par <span class="green">{{ article.author.profile.getFullName() }}</span> · {{ article.createdAt | date('M d, Y') }}</p>
+                        {% if article.media is not null %}
+                            {% media article.media, 'numo_big' %}
+                        {% else %}
+                            <img class="img-responsive img-featured" src="assets/images/blog.png" alt="featured image">
+                        {% endif %}
+                        <p class="description-post">
+                            {{ article.description }}
+                        </p>
+                    </div>
+                </div>
+
+                {{ article.content | raw }}
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="pager">
+                            <li class="previous"><a href="#">&larr; Article précédant</a></li>
+                            <li class="next"><a href="#">Article suivant &rarr;</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- DISQUS ROW
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="wrapper-disqus">
+                            {# YOUR DISQUS CODE #}
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

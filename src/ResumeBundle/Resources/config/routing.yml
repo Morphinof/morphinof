@@ -28,3 +28,14 @@ resume_mstone_homepage:
     path:     /{username}/mstone
     defaults:
         _controller: ResumeBundle:MStone:index
+
+# Blogs
+resume_numo_blog:
+    path:     /{username}/numo/blog
+    defaults:
+        _controller: ResumeBundle:Numo:blog
+
+resume_numo_blog_post:
+    path:     /{username}/numo/blog/{slug}
+    defaults:
+        _controller: ResumeBundle:Numo:blogPost

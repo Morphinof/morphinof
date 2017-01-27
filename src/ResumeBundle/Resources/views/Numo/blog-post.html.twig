@@ -1,0 +1,55 @@
+{% extends "ResumeBundle::numo.html.twig" %}
+
+{% set title = article.title | default('Echec du chargement de l\'article') ~ ' - Auteur : ' ~ article.author.profile.getFullName() | default('Inconnu') %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,300italic,400italic,600,600italic,700' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+    {% set user = article.author %}
+
+    {% include 'ResumeBundle:Numo/partials/blog:nav-bar.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials/blog:intro.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials/blog:content.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials/blog:footer.html.twig' %}
+
+    {% include 'ResumeBundle:Numo/partials/blog:footer-bottom.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() < 120) {
+                $('.navbar').removeClass('tiny');
+            } else {
+                $('.navbar').addClass('tiny');
+            }
+        });
+
+        $(document).ready(function() {
+            $('.lightbox').magnificPopup({type:'image'});
+        });
+    </script>
+{% endblock %}

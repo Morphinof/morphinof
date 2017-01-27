@@ -1,0 +1,25 @@
+{% if user is defined %}
+<!-- NAVBAR-->
+<!--===============================================================-->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <a class="navbar-brand navbar-brand-blog" href="{{ path('resume_homepage', { 'username': user.username }) }}">
+                    <img src="{{ asset('bundles/resume/Numo/assets/images/logo.png') }}" alt="logo" />
+                </a>
+            </div>
+            <div class="col-sm-8">
+                <h2 class="pull-right title-blog">
+                    <small>
+                        <a class="" href="{{ path('resume_homepage', { 'username': user.username }) }}">
+                            {{ user.profile.getFullName() }}
+                        </a>
+                    </small> -
+                    <a href="{{ path('resume_numo_blog', { 'username': user.username }) }}">BLOG</a>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

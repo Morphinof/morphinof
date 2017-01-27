@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use ResumeBundle\Enum\TemplateEnum;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -273,6 +274,54 @@ class BlogAdminController extends CRUDController
             'action' => 'edit',
             'form' => $formView,
             'object' => $object,
+        ), null);
+    }
+
+    /**
+     * Show action.
+     *
+     * @param int|string|null $id
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException If the object does not exist
+     * @throws AccessDeniedException If access is not granted
+     */
+    public function showAction($id = null)
+    {
+        $request = $this->getRequest();
+        $id = $request->get($this->admin->getIdParameter());
+
+        $object = $this->admin->getObject($id);
+
+        if (!$object) {
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        $this->admin->checkAccess('show', $object);
+
+        $preResponse = $this->preShow($request, $object);
+        if ($preResponse !== null) {
+            return $preResponse;
+        }
+
+        $this->admin->setSubject($object);
+
+        # Default template
+        $template = $this->admin->getTemplate('show');
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        switch ($user->getPreferences()->getTemplate()) {
+            case TemplateEnum::NUMO: $template = 'ResumeBundle:'.TemplateEnum::NUMO.':blog-post.html.twig'; break;
+        }
+
+        return $this->render($template, array(
+            'action' => 'show',
+            'object' => $object,
+            'article' => $object,
+            'elements' => $this->admin->getShow(),
         ), null);
     }
 }
