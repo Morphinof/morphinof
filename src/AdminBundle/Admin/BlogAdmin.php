@@ -91,14 +91,17 @@ class BlogAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+        ->tab
+        (
+            'Article'
+        )
         ->with
         (
-            'Article',
+            'Nouvel article de blog',
             array
             (
-                'class'       => 'col-md-12',
-                #'box_class'   => 'box box-solid box-danger',
-                #'description' => 'Profil',
+                'class' => 'col-md-12',
+                'box_class' => '',
             )
         )
         ->add
@@ -108,7 +111,7 @@ class BlogAdmin extends AbstractAdmin
             array
             (
                 'label' => 'Media',
-                'context' => ContextEnum::AVATAR,
+                'context' => ContextEnum::BLOG,
                 'provider' => 'sonata.media.provider.image',
             )
         )
@@ -138,8 +141,88 @@ class BlogAdmin extends AbstractAdmin
                 'label' => 'Titre',
                 'attr' => array
                 (
-                    'placeholder' => 'Titre',
+                    'placeholder' => 'Titre de votre article',
                 ),
+            )
+        )
+        ->add
+        (
+            'resume',
+            CKEditorType::class,
+            array
+            (
+                'label' => 'Contenu',
+                'config_name' => 'default',
+                'attr' => array
+                (
+                    'rows' => 10,
+                    'cols' => 76,
+                )
+            )
+        )
+        ->end()
+        ->end()
+        ->tab
+        (
+            'Visiblité & Publication'
+        )
+        ->with
+        (
+            'Visiblité',
+            array
+            (
+                'class' => 'col-md-3',
+                'box_class' => '',
+            )
+        )
+        ->add
+        (
+            'visible',
+            CheckboxType::class,
+            array
+            (
+                'label' => 'Visible ?',
+                'required' => false,
+            )
+        )
+        ->end()
+        ->with
+        (
+            'Publication',
+            array
+            (
+                'class' => 'col-md-3',
+                'box_class' => '',
+            )
+        )
+        ->add
+        (
+            'published',
+            CheckboxType::class,
+            array
+            (
+                'label' => 'Publier l\'article ?',
+                'required' => false,
+            )
+        )
+        ->end()
+        ->with
+        (
+            'Durée de la publication',
+            array
+            (
+                'class' => 'col-md-6',
+                'box_class' => '',
+            )
+        )
+        ->add
+        (
+            'timedPublication',
+            CheckboxType::class,
+            array
+            (
+                'label' => 'Publication à durée déterminée ?',
+                'required' => false,
             )
         )
         ->add
@@ -151,6 +234,7 @@ class BlogAdmin extends AbstractAdmin
                 'label' => 'Commencer la publication le',
                 'format' => 'd/MM/y', # RFC-3339 date
                 'input' => 'datetime',
+                'required' => false,
             )
         )
         ->add
@@ -162,33 +246,10 @@ class BlogAdmin extends AbstractAdmin
                 'label' => 'Stoper la publication le',
                 'format' => 'd/MM/y', # RFC-3339 date
                 'input' => 'datetime',
+                'required' => false,
             )
         )
-        ->add
-        (
-            'resume',
-            CKEditorType::class,
-            array
-            (
-                'label' => 'Résumé',
-                'config_name' => 'default',
-                'attr' => array
-                (
-                    'rows' => 10,
-                    'cols' => 76,
-                )
-            )
-        )
-        ->add
-        (
-            'visible',
-            CheckboxType::class,
-            array
-            (
-                'label' => 'Visible ?',
-            )
-        )
-
+        ->end()
         ->end();
     }
 
@@ -214,6 +275,23 @@ class BlogAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        /** @var User $user */
+        $user = $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
+            (
+                'author',
+                null,
+                array
+                (
+                    'label' => 'Auteur',
+                )
+            );
+        }
+
         $listMapper
         ->add
         (
@@ -227,11 +305,49 @@ class BlogAdmin extends AbstractAdmin
         )
         ->add
         (
-            'enabled',
+            'title',
             null,
             array
             (
-                'label' => 'Activé ?'
+                'label' => 'Titre',
+            )
+        )
+        ->add
+        (
+            'visible',
+            null,
+            array
+            (
+                'label' => 'Visible ?',
+                'template' => 'AdminBundle::CRUD/list__column_visible.html.twig',
+            )
+        )
+        ->add
+        (
+            'published',
+            null,
+            array
+            (
+                'label' => 'Publié ?',
+                'template' => 'AdminBundle::CRUD/list__column_published.html.twig',
+            )
+        )
+        ->add
+        (
+            'createdAt',
+            null,
+            array
+            (
+                'label' => 'Créé le',
+            )
+        )
+        ->add
+        (
+            'updatedAt',
+            null,
+            array
+            (
+                'label' => 'Dernière mise à jour',
             )
         );
 

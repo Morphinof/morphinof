@@ -5,18 +5,25 @@ namespace CoreBundle\Traits;
 trait PublishedTrait
 {
     /**
-     * @var \DateTime
+     * @var boolean
      *
-     * @ORM\Column(name="published_on", type="datetime")
+     * @ORM\Column(name="published", type="boolean")
      */
-    protected $publishedOn;
+    protected $published;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="timed_publication", type="boolean")
+     * @ORM\Column(name="timed_publication", type="boolean", nullable=true)
      */
     protected $timedPublication;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="published_on", type="datetime", nullable=true)
+     */
+    protected $publishedOn;
 
     /**
      * @var \DateTime
@@ -26,26 +33,27 @@ trait PublishedTrait
     protected $stopPublicationOn;
 
     /**
-     * Set published on
+     * Set published
      *
-     * @param \DateTime $publishedOn
+     * @param boolean $published
+     *
      * @return $this
      */
-    public function setPublishedOn($publishedOn)
+    public function setPublished($published)
     {
-        $this->publishedOn = $publishedOn;
+        $this->published = $published;
 
         return $this;
     }
 
     /**
-     * Get published on
+     * Get publishec
      *
-     * @return \DateTime
+     * @return boolean
      */
-    public function getPublishedOn()
+    public function getPublished()
     {
-        return $this->publishedOn;
+        return $this->published;
     }
 
     /**
@@ -70,6 +78,29 @@ trait PublishedTrait
     public function getTimedPublication()
     {
         return $this->timedPublication;
+    }
+
+    /**
+     * Set published on
+     *
+     * @param \DateTime $publishedOn
+     * @return $this
+     */
+    public function setPublishedOn($publishedOn)
+    {
+        $this->publishedOn = $publishedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get published on
+     *
+     * @return \DateTime
+     */
+    public function getPublishedOn()
+    {
+        return $this->publishedOn;
     }
 
     /**

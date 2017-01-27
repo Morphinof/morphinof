@@ -4,7 +4,7 @@ namespace CoreBundle\Enum;
 
 class ContextEnum extends AbstractEnum
 {
-    const DEFAULT = 'default';
+    const DEFLT = 'default';
     const USER = 'user';
     const AVATAR = 'avatars';
     const HOBBIES = 'hobbies';
@@ -13,4 +13,5 @@ class ContextEnum extends AbstractEnum
     const PORTFOLIO = 'portfolio';
     const PROJECT = 'project';
     const CUSTOMER = 'customer';
+    const BLOG = 'blog';
 }

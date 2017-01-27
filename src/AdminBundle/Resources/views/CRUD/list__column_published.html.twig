@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined %}
+        <span class="label label-info">{{ object.published ? 'Oui' : 'Non' }}</span>
+    {% endif %}
+{% endblock %}

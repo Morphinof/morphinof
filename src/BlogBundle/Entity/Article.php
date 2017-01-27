@@ -69,6 +69,12 @@ class Article
      */
     private $visible;
 
+    public function __construct()
+    {
+        $this->published = false;
+        $this->visible = true;
+    }
+
     /**
      * Get id
      *
