@@ -2,6 +2,7 @@
 
 namespace UserBundle\Repository;
 
+use ResumeBundle\Entity\Portfolio;
 use UserBundle\Entity\User;
 
 use ResumeBundle\Entity\Customer;
