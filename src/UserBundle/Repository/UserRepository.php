@@ -2,6 +2,7 @@
 
 namespace UserBundle\Repository;
 
+use ResumeBundle\Entity\Portfolio;
 use UserBundle\Entity\User;
 
 use ResumeBundle\Entity\Customer;
@@ -35,6 +36,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         {
             case $object instanceof Education: $property = 'u.educations'; break;
             case $object instanceof Experience: $property = 'u.experiences'; break;
+            case $object instanceof Portfolio: $property = 'u.portfolios'; break;
             case $object instanceof Project:
                 $qb
                 ->from('ResumeBundle:Portfolio', 'p')
