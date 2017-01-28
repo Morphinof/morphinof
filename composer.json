@@ -39,7 +39,8 @@
         "shapecode/hidden-entity-type-bundle": "^2.0",
         "gedmo/doctrine-extensions": "^2.4",
         "tiloweb/pagination-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "^1.2"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "snilius/twig-sort-by-field": "^0.1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

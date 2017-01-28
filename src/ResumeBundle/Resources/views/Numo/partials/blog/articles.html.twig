@@ -11,12 +11,16 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <a href="{{ url }}"><h1 class="title-post">{{ article.title }}</h1></a>
-                            <p class="small author">Par <span class="green">{{ article.author.profile.getFullName() }}</span> · {{ article.createdAt | date('M d, Y') }}</p>
+                            <p class="small author">
+                                Par <span class="green">{{ article.author.profile.getFullName() }}</span> ·
+                                {{ article.createdAt | date('M d, Y') }} ·
+                                {{ article.createdAt | date('h\\hi') }}
+                            </p>
                             <a href="{{ url }}">
                                 {% if article.media is not null %}
                                     {% media article.media, 'numo_medium' %}
                                 {% else %}
-                                    <img class="img-responsive img-featured" src="{{ asset('/bundles/resume/Numo/assets/images/blog.png') }}" alt="featured image">
+                                    <img class="img-responsive img-featured" src="{{ asset('bundles/resume/Numo/assets/images/blog.png') }}" alt="featured image">
                                 {% endif %}
                             </a>
                             <p>

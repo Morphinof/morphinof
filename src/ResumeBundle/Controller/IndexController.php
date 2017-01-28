@@ -51,18 +51,20 @@ class IndexController extends Controller
      */
     protected function canView(User $user, $seed = null)
     {
-        if (!is_null($user))
-        {
-            if
+        if
+        (
             (
-                $this->getUser()->hasRole('ROLE_SUPER_ADMIN') ||
-                $this->getUser()->getId() == $user->getId() ||
-                $user->getPreferences()->getVisibility() == VisibilityEnum::RESUME_PUBLIC ||
-                ($seed == $user->getPreferences()->getSeed())
-            )
-            {
-                return true;
-            }
+                !is_null($this->getUser()) &&
+                (
+                    $this->getUser()->hasRole('ROLE_SUPER_ADMIN') ||
+                    $this->getUser()->getId() == $user->getId()
+                )
+            )||
+            $user->getPreferences()->getVisibility() == VisibilityEnum::RESUME_PUBLIC ||
+            $seed == $user->getPreferences()->getSeed()
+        )
+        {
+            return true;
         }
 
         return false;
@@ -111,19 +113,14 @@ class IndexController extends Controller
 
         $user = $this->getUserByUsername($username);
 
-        if (!is_null($user))
+        if ($this->canView($user, $session->get('seed')))
         {
-            if ($this->canView($user, $session->get('seed')))
-            {
-                $template = $user->getPreferences()->getTemplate() ?? TemplateEnum::THREE_COLOR;
+            $template = $user->getPreferences()->getTemplate() ?? TemplateEnum::THREE_COLOR;
 
-                return $this->redirectToRoute('resume_'.TemplateEnum::__route($template), array('username' => $username));
-            }
-
-            return $this->redirectToRoute('resume_unlock', array('username' => $username));
+            return $this->redirectToRoute('resume_'.TemplateEnum::__route($template), array('username' => $username));
         }
 
-        return $this->redirectToRoute('morphinof_login');
+        return $this->redirectToRoute('resume_unlock', array('username' => $username));
     }
 
     public function unlockAction($username, Request $request)

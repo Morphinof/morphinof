@@ -16,6 +16,11 @@ use BlogBundle\Entity\Article;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countArticles(User $user)
+    {
+
+    }
+
     public function findByPage($page = 1, $max = 10)
     {
         if (!is_numeric($page)) {
@@ -30,8 +35,14 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             );
         }
 
-        $qb = $this->createQueryBuilder('article');
-        $qb->orderBy('article.createdAt', 'DESC');
+        $qb = $this->createQueryBuilder('a');
+
+        /*
+         * TODO : understand why it's not working...
+         */
+        #$qb
+        #->select('a')
+        #->orderBy('a.createdAt', 'DESC');
 
         $firstResult = ($page - 1) * $max;
 

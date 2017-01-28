@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d0f28c63298b4f49b1b2d600bf58f3cc",
-    "content-hash": "b5330cded5432d3109e103863e390b6d",
+    "hash": "20e05875cd5269e4b2d73f2b183babd9",
+    "content-hash": "03b0a8d9a5e828684e5155c16810fac7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2652,6 +2652,45 @@
             "time": "2016-07-27 14:08:28"
         },
         {
+            "name": "snilius/twig-sort-by-field",
+            "version": "v0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/victorhaggqvist/Twig-sort-by-field.git",
+                "reference": "6d02c6d49f93d78526e24ecf8999d322f291aa44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/victorhaggqvist/Twig-sort-by-field/zipball/6d02c6d49f93d78526e24ecf8999d322f291aa44",
+                "reference": "6d02c6d49f93d78526e24ecf8999d322f291aa44",
+                "shasum": ""
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.3",
+                "php": ">=5.5.9",
+                "phpunit/phpunit": "~4.5",
+                "twig/extensions": "~1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Snilius\\Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Häggqvist",
+                    "email": "victor@snilius.com"
+                }
+            ],
+            "description": "A Twig Extension filter to sort an array of entries (objects or arrays) by the specified field",
+            "time": "2016-01-27 00:29:51"
+        },
+        {
             "name": "sonata-project/admin-bundle",
             "version": "3.11.0",
             "source": {
@@ -5030,7 +5069,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }

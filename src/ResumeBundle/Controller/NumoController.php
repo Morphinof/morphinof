@@ -2,11 +2,13 @@
 
 namespace ResumeBundle\Controller;
 
-use BlogBundle\Entity\Article;
-use BlogBundle\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
+use BlogBundle\Entity\Article;
+use BlogBundle\Repository\ArticleRepository;
 use ResumeBundle\Enum\TemplateEnum;
 
 class NumoController extends IndexController
