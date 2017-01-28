@@ -39,10 +39,9 @@ class PortfolioRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('p');
 
         $qb
-        ->leftJoin('p.owner', 'owner')
         ->where('p.mainPortfolio = true')
-        ->andWhere('owner = :owner')
-        ->setParameter('owner', $user);
+        ->andWhere('p in (:portfolios)')
+        ->setParameter('portfolios', $user->getPortfolios());
 
         return $qb->getQuery()->getOneOrNullResult();
     }

@@ -199,6 +199,10 @@ class Article
         {
             $this->id = null;
             $this->media = null;
+
+            $creation = new \DateTime('now');
+
+            $this->setCreatedAt($creation);
         }
     }
 }

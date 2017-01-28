@@ -2,11 +2,13 @@
 
 namespace ResumeBundle\Controller;
 
-use BlogBundle\Entity\Article;
-use BlogBundle\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
+use BlogBundle\Entity\Article;
+use BlogBundle\Repository\ArticleRepository;
 use ResumeBundle\Enum\TemplateEnum;
 
 class NumoController extends IndexController
@@ -41,7 +43,7 @@ class NumoController extends IndexController
         /** @var ArticleRepository $repository */
         $repository = $em->getRepository('BlogBundle:Article');
 
-        $articles = $repository->findByPage($request->query->getInt('page', 1), 3);
+        $articles = $repository->findByPage($request->query->getInt('page', 1), 3, array('author' => $user));
 
         return $this->render('ResumeBundle:'.TemplateEnum::NUMO.':blog.html.twig', array('user' => $user, 'articles' => $articles));
     }

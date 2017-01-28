@@ -16,7 +16,7 @@ use BlogBundle\Entity\Article;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByPage($page = 1, $max = 10)
+    public function findByPage($page = 1, $max = 10, $filters = array())
     {
         if (!is_numeric($page)) {
             throw new \InvalidArgumentException(
@@ -30,8 +30,22 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             );
         }
 
-        $qb = $this->createQueryBuilder('article');
-        $qb->orderBy('article.createdAt', 'DESC');
+        $qb = $this->createQueryBuilder('a');
+        if (!empty($filters))
+        {
+            foreach ($filters as $filter => $value)
+            {
+                $qb->andWhere('a.'.$filter.' = :value')
+                ->setParameter('value', $value);
+            }
+        }
+
+        /*
+         * TODO : understand why it's not working...
+         */
+        #$qb
+        #->select('a')
+        #->orderBy('a.createdAt', 'DESC');
 
         $firstResult = ($page - 1) * $max;
 
@@ -82,7 +96,12 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             {
                 # Get min and max id
                 $qb = $this->createQueryBuilder('a');
-                $minMax = $qb->select('min(a.id) as minimum, max(a.id) as maximum')->getQuery()->getScalarResult()[0];
+                $minMax = $qb
+                ->select('min(a.id) as minimum, max(a.id) as maximum')
+                ->andWhere('a.author = :author')
+                ->setParameter('author', $author)
+                ->getQuery()
+                ->getScalarResult()[0];
 
                 $qb = $this->createQueryBuilder('article');
                 $qb
@@ -92,7 +111,8 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
                 if ($offset < 0) $qb->andWhere('article.id = :maximum')->setParameter('maximum', $minMax['maximum']);
                 else $qb->andWhere('article.id = :minimum')->setParameter('minimum', $minMax['minimum']);
 
-                $article = $qb->getQuery()->getSingleResult();
+                if ($minMax['minimum'] != $minMax['maximum'])
+                    $article = $qb->getQuery()->getSingleResult();
             }
         }
 
