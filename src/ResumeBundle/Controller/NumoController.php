@@ -43,7 +43,7 @@ class NumoController extends IndexController
         /** @var ArticleRepository $repository */
         $repository = $em->getRepository('BlogBundle:Article');
 
-        $articles = $repository->findByPage($request->query->getInt('page', 1), 3);
+        $articles = $repository->findByPage($request->query->getInt('page', 1), 3, array('author' => $user));
 
         return $this->render('ResumeBundle:'.TemplateEnum::NUMO.':blog.html.twig', array('user' => $user, 'articles' => $articles));
     }
