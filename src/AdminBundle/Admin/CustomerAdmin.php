@@ -83,10 +83,11 @@ class CustomerAdmin extends AbstractAdmin
         ->tab(!is_null($customer) && !is_null($customer->getTitle()) ? 'Client '.$customer->getTitle() : 'Nouveau client')
         ->with
         (
-            'Client',
+            'Fiche client',
             array
             (
                 'class' => 'col-md-12',
+                'box_class' => '',
             )
         )
         ->add

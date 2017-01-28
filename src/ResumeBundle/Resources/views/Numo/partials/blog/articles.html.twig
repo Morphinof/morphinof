@@ -18,7 +18,7 @@
                             </p>
                             <a href="{{ url }}">
                                 {% if article.media is not null %}
-                                    {% media article.media, 'numo_medium' %}
+                                    {% media article.media, 'numo_medium' with {'class': 'responsive'} %}
                                 {% else %}
                                     <img class="img-responsive img-featured" src="{{ asset('bundles/resume/Numo/assets/images/blog.png') }}" alt="featured image">
                                 {% endif %}

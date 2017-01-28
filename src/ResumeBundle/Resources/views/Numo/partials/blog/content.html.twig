@@ -13,7 +13,7 @@
                             Par <span class="green">{{ article.author.profile.getFullName() }}</span> · {{ article.createdAt | date('M d, Y') }}
                         </p>
                         {% if article.media is not null %}
-                            {% media article.media, 'numo_big' %}
+                            {% media article.media, 'numo_big' with {'class': 'responsive'} %}
                         {% else %}
                             <img class="img-responsive img-featured" src="{{ asset('bundles/resume/Numo/assets/images/blog.png') }}" alt="featured image">
                         {% endif %}
