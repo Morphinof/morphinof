@@ -9,7 +9,6 @@ use ResumeBundle\Entity\Service;
 use ResumeBundle\Entity\Skill;
 use ResumeBundle\Entity\Education;
 use ResumeBundle\Entity\Experience;
-use ResumeBundle\Entity\Portfolio;
 use ResumeBundle\Entity\Project;
 use ResumeBundle\Entity\Portfolio;
 
