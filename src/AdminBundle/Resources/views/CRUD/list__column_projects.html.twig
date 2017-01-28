@@ -2,10 +2,18 @@
 
 {% block field %}
     {% if object is defined %}
-        {% for project in object.projects %}
-            <a href="{{ path('admin_resume_project_edit', { 'id': project.id }) }}">
-                {% media project.media, 'admin_list' %}
-            </a>
-        {% endfor %}
+        {% if object.projects | length > 0 %}
+            {% for project in object.projects %}
+                <a href="{{ path('admin_resume_project_edit', { 'id': project.id }) }}">
+                    {% if project.media is not null %}
+                        {% media project.media, 'admin_list' %}
+                    {% else %}
+                        <span class="label label-primary">{{ project.title }}</span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        {% else %}
+            <span class="label label-info">Aucun</span>
+        {% endif %}
     {% endif %}
 {% endblock %}

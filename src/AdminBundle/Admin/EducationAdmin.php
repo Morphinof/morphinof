@@ -5,6 +5,7 @@ namespace AdminBundle\Admin;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use ResumeBundle\Repository\EducationRepository;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,6 +20,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use UserBundle\Entity\User;
+use UserBundle\Repository\UserRepository;
 
 /**
  * Class EducationAdmin
@@ -49,31 +51,23 @@ class EducationAdmin extends AbstractAdmin
 
     /**
      * @param string $context
-     * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+     * @return QueryBuilder
      */
     public function createQuery($context = 'list')
     {
-        /** @var User $user */
-        $user =  $this->token->getToken()->getUser();
-
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
 
-        /** @var EntityManager $em */
-        $em = $query->getEntityManager();
-
-        $repository = $em->getRepository('ResumeBundle:Education');
-
-        $qb = $repository->createQueryBuilder('e');
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
 
         if (!$user->hasRole('ROLE_SUPER_ADMIN'))
         {
-            $qb
-            ->andWhere('e.owner = :owner')
-            ->setParameter('owner', $user);
+            $query->where('o.id in (:educations)')
+            ->setParameter('educations', $user->getEducations());
         }
 
-        return new ProxyQuery($qb);
+        return $query;
     }
 
     /**
@@ -90,25 +84,6 @@ class EducationAdmin extends AbstractAdmin
                 'class'       => 'col-md-12',
                 #'box_class'   => 'box box-solid box-danger',
                 #'description' => 'Profil',
-            )
-        )
-        ->add
-        (
-            'owner',
-            EntityType::class,
-            array
-            (
-                'label' => 'Propriétraire',
-                'class' => 'UserBundle:User',
-                'query_builder' => function (EntityRepository $repository)
-                {
-                    return $repository->createQueryBuilder('e')
-                    ->leftJoin('e.profile', 'profile')
-                    ->leftJoin('profile.owner', 'owner')
-                    ->where('owner = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-                },
-                'disabled' => true,
             )
         )
         ->add
@@ -202,16 +177,25 @@ class EducationAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper
-        ->add
-        (
-            'owner',
-            null,
-            array
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
             (
-                'label' => 'Propriétraire',
-            )
-        )
+                'owner',
+                null,
+                array
+                (
+                    'label' => 'Propriétaire',
+                    'template' => 'AdminBundle::CRUD/list__column_owner.html.twig'
+                )
+            );
+        }
+
+        $listMapper
         ->add
         (
             'title',

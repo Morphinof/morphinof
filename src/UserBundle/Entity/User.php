@@ -45,10 +45,18 @@ class User extends BaseUser
     /**
      * @var Profile
      *
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="owner", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
      */
     protected $profile;
+
+    /**
+     * @var Preferences
+     *
+     * @ORM\OneToOne(targetEntity="ResumeBundle\Entity\Preferences", mappedBy="owner", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="preferences_id", referencedColumnName="id")
+     */
+    protected $preferences;
 
     /**
      * @var Contact
@@ -61,49 +69,78 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Education", mappedBy="owner")
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Education", cascade={"persist", "remove"})
+     * @ORM\JoinTable
+     * (
+     *      name="users_educations",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="education_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $educations;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Experience", mappedBy="owner")
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Experience", cascade={"persist", "remove"})
+     * @ORM\JoinTable
+     * (
+     *      name="users_experiences",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="experience_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $experiences;
 
     /**
-     * @var Preferences
-     *
-     * @ORM\OneToOne(targetEntity="ResumeBundle\Entity\Preferences", mappedBy="owner", cascade={"persist", "remove"})
-     */
-    protected $preferences;
-
-    /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Portfolio", mappedBy="owner", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Portfolio", cascade={"persist", "remove"})
+     * @ORM\JoinTable
+     * (
+     *      name="users_portfolios",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="portfolio_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $portfolios;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Project", mappedBy="owner", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Project", cascade={"persist", "remove"})
+     * @ORM\JoinTable
+     * (
+     *      name="users_projects",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $projects;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Service", mappedBy="owner", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Service", cascade={"persist", "remove"})
+     * @ORM\JoinTable
+     * (
+     *      name="users_services",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="service_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $services;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Customer", mappedBy="owner", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Customer", cascade={"persist", "remove"})
+     * @ORM\JoinTable
+     * (
+     *      name="users_customers",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $customers;
 
@@ -180,6 +217,30 @@ class User extends BaseUser
     public function getProfile()
     {
         return $this->profile;
+    }
+
+    /**
+     * Set preferences
+     *
+     * @param Preferences $preferences
+     *
+     * @return User
+     */
+    public function setPreferences(Preferences $preferences = null)
+    {
+        $this->preferences = $preferences;
+
+        return $this;
+    }
+
+    /**vv
+     * Get preferences
+     *
+     * @return Preferences
+     */
+    public function getPreferences()
+    {
+        return $this->preferences;
     }
 
     /**
@@ -278,30 +339,6 @@ class User extends BaseUser
     public function getExperiences()
     {
         return $this->experiences;
-    }
-
-    /**
-     * Set preferences
-     *
-     * @param Preferences $preferences
-     *
-     * @return User
-     */
-    public function setPreferences(Preferences $preferences = null)
-    {
-        $this->preferences = $preferences;
-
-        return $this;
-    }
-
-    /**vv
-     * Get preferences
-     *
-     * @return Preferences
-     */
-    public function getPreferences()
-    {
-        return $this->preferences;
     }
 
     /**

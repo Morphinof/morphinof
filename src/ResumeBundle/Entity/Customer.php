@@ -33,14 +33,6 @@ class Customer
     private $id;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="services")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $owner;
-
-    /**
      * @var Media
      *
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
@@ -56,30 +48,6 @@ class Customer
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param User $owner
-     *
-     * @return Customer
-     */
-    public function setOwner(User $owner = null)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return User
-     */
-    public function getOwner()
-    {
-        return $this->owner;
     }
 
     /**

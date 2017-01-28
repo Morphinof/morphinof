@@ -32,14 +32,6 @@ class Experience
     private $id;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="experiences")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $owner;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="company", type="string", length=255)
@@ -67,30 +59,6 @@ class Experience
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param User $owner
-     *
-     * @return Experience
-     */
-    public function setOwner($owner = null)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return User
-     */
-    public function getOwner()
-    {
-        return $this->owner;
     }
 
     /**

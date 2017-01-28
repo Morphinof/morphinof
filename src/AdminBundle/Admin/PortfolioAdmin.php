@@ -61,27 +61,19 @@ class PortfolioAdmin extends AbstractAdmin
 
     public function createQuery($context = 'list')
     {
-        /** @var User $user */
-        $user =  $this->token->getToken()->getUser();
-
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
 
-        /** @var EntityManager $em */
-        $em = $query->getEntityManager();
-
-        $repository = $em->getRepository('ResumeBundle:Portfolio');
-
-        $qb = $repository->createQueryBuilder('e');
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
 
         if (!$user->hasRole('ROLE_SUPER_ADMIN'))
         {
-            $qb
-            ->andWhere('e.owner = :owner')
-            ->setParameter('owner', $user);
+            $query->where('o.id in (:portfolios)')
+            ->setParameter('portfolios', $user->getPortfolios());
         }
 
-        return new ProxyQuery($qb);
+        return $query;
     }
 
     /**
@@ -91,23 +83,6 @@ class PortfolioAdmin extends AbstractAdmin
     {
         /** @var Portfolio $portfolio */
         $portfolio = $this->getSubject();
-
-        $owner =  array
-        (
-            'label' => 'Propriétraire',
-            'class' => 'UserBundle:User',
-            'disabled' => true,
-        );
-
-        if (!$this->token->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN'))
-        {
-            $owner['query_builder'] = function (EntityRepository $repository)
-            {
-                return $repository->createQueryBuilder('e')
-                    ->where('e = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-            };
-        }
 
         $formMapper
         ->tab
@@ -122,12 +97,6 @@ class PortfolioAdmin extends AbstractAdmin
                 'name' => 'Le portfolio n\'est affiché que dans les thèmes '.TemplateEnum::NUMO.' et '.TemplateEnum::MSTONE,
                 'box_class' => '',
             )
-        )
-        ->add
-        (
-            'owner',
-            EntityType::class,
-           $owner
         )
         ->add
         (
@@ -236,16 +205,27 @@ class PortfolioAdmin extends AbstractAdmin
             (
                 'label' => 'Titre'
             )
-        )
-        ->add
-        (
-            'owner',
-            null,
-            array
+        );
+
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
             (
-                'label' => 'Propriétaire',
-            )
-        )
+                'owner',
+                null,
+                array
+                (
+                    'label' => 'Propriétaire',
+                    'template' => 'AdminBundle::CRUD/list__column_owner.html.twig'
+                )
+            );
+        }
+
+        $listMapper
         ->add
         (
             'projects',

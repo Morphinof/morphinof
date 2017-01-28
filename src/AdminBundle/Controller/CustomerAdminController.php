@@ -102,9 +102,6 @@ class CustomerAdminController extends CRUDController
 
                     /** @var Customer $object */
                     $object = $this->admin->create($object);
-                    $object->setOwner($user);
-
-                    $this->admin->update($object);
 
                     $user->getCustomers()->add($object);
                     $this->admin->update($user);

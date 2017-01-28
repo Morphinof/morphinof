@@ -2,6 +2,6 @@
 
 {% block field %}
     {% if object is defined %}
-        <span class="label label-info">{{ object.published ? 'Oui' : 'Non' }}</span>
+        <span class="label label-default">{{ object.published ? 'Oui' : 'Non' }}</span>
     {% endif %}
 {% endblock %}

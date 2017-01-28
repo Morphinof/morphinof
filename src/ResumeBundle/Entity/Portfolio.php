@@ -34,14 +34,6 @@ class Portfolio
     private $id;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="portfolios")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $owner;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="ResumeBundle\Entity\Project", cascade={"persist", "remove"})
@@ -78,30 +70,6 @@ class Portfolio
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param User $owner
-     *
-     * @return Portfolio
-     */
-    public function setOwner($owner = null)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return User
-     */
-    public function getOwner()
-    {
-        return $this->owner;
     }
 
     /**
@@ -180,6 +148,6 @@ class Portfolio
      */
     public function __toString()
     {
-        return 'Portfolio de '.$this->owner->getProfile()->getFullName().' : '.$this->title;
+        return 'Portfolio #'.$this->id.' : '.$this->title;
     }
 }

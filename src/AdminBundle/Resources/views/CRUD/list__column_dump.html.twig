@@ -2,6 +2,6 @@
 
 {% block field %}
     {% if object is defined %}
-        <span class="label label-default">{{ object.visible ? 'Oui' : 'Non' }}</span>
+        {{ dump(object) }}
     {% endif %}
 {% endblock %}

@@ -30,7 +30,7 @@ class Preferences
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="preferences")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="preferences")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $owner;

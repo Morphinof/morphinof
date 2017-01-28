@@ -1,0 +1,17 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined %}
+        {% set owner = get_owner_of(object) %}
+
+        <div style="text-align: center;">
+            {% if owner is not null %}
+                <a href="{{ path('admin_user_user_edit', { 'id': owner.id }) }}">
+                    <span class="label label-primary">{{ owner.username }}</span>
+                </a>
+            {% else %}
+                <span class="label label-danger">Inconnu</span>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -55,7 +55,7 @@ class LoadEducationData extends AbstractFixture implements OrderedFixtureInterfa
 
         foreach ($educations as $data)
         {
-            $education = $this->createEducation($admin, $data['title'], $data['description'], $data['year'], $data['resume']);
+            $education = $this->createEducation($data['title'], $data['description'], $data['year'], $data['resume']);
             $manager->persist($education);
 
             /** @var User $admin */
@@ -67,10 +67,9 @@ class LoadEducationData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->flush();
     }
 
-    private function createEducation($owner, $title, $description, $year, $resume)
+    private function createEducation($title, $description, $year, $resume)
     {
         $education = new Education();
-        $education->setOwner($owner);
         $education->setTitle($title);
         $education->setDescription($description);
         $education->setYear($year);

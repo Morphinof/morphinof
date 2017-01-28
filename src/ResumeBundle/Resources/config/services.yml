@@ -34,6 +34,6 @@ services:
     resume_bundle.form.check_seed:
         class: ResumeBundle\Form\CheckSeedType
         arguments:
-            - '@user_bundle.user'
+            - '@user_bundle.class.user'
         tags:
             - { name: form.type, alias: resume_bundle_check_seed_type }

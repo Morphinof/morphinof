@@ -2,6 +2,15 @@
 
 namespace UserBundle\Repository;
 
+use UserBundle\Entity\User;
+
+use ResumeBundle\Entity\Customer;
+use ResumeBundle\Entity\Service;
+use ResumeBundle\Entity\Skill;
+use ResumeBundle\Entity\Education;
+use ResumeBundle\Entity\Experience;
+use ResumeBundle\Entity\Project;
+
 /**
  * UserRepository
  *
@@ -10,4 +19,55 @@ namespace UserBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Get the user wner of the object
+     *
+     * @param $object
+     * @return User
+     * @throws \Exception
+     */
+    public function getOwnerOf($object)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $property = null;
+        switch (true)
+        {
+            case $object instanceof Education: $property = 'u.educations'; break;
+            case $object instanceof Experience: $property = 'u.experiences'; break;
+            case $object instanceof Project:
+                $qb
+                ->from('ResumeBundle:Portfolio', 'p')
+                ->where('p member of u.portfolios')
+                ->andWhere(':object member of p.projects')
+                ->setParameter('object', $object);
+                break;
+            case $object instanceof Skill:
+                $qb
+                ->leftJoin('u.services', 'u_s')
+                ->where(':object member of u_s.skills')
+                ->setParameter('object', $object);
+                break;
+            case $object instanceof Service: $property = 'u.services'; break;
+            case $object instanceof Customer: $property = 'u.customers'; break;
+            default:
+                throw new \Exception(__CLASS__.' - Unknown object '.get_class($object));
+        }
+
+        if (!is_null($property))
+        {
+            $qb
+            ->where(':object member of '.$property)
+            ->setParameter('object', $object);
+        }
+
+        $user = null;
+        try
+        {
+            $user = $qb->getQuery()->getSingleResult();
+        }
+        catch (\Exception $exception) {}
+
+        return $user;
+    }
 }

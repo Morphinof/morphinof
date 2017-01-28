@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object is defined and object.author is not null %}
+        <div style="text-align: center;">
+            <a href="{{ path('admin_user_user_edit', { 'id': object.author.id }) }}">
+                {% if object.author.avatar is not null %}
+                    {% media object.avatar, 'admin_list' %}
+                {% else %}
+                    <span class="label label-primary">{{ object.author.username }}</span>
+                {% endif %}
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

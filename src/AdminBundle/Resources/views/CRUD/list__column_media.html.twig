@@ -26,6 +26,8 @@
             <a href="{% path object.media, 'reference' %}" target="_blank">
                 {% media object.media, 'admin_list' %}
             </a>
+        {% else %}
+            <span class="label label-default">Aucun(e)</span>
         {% endif %}
     {% endif %}
 {% endblock %}

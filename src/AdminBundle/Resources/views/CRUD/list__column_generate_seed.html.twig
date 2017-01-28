@@ -2,7 +2,7 @@
 
 {% block field %}
     {% if object is defined and object.preferences.seed %}
-        <span class="label label-info">
+        <span class="label label-warning">
             {{ object.preferences.seed }}
         </span>
     {% endif %}

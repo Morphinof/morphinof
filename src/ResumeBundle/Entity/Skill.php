@@ -67,6 +67,15 @@ class Skill
     }
 
     /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist()
+    {
+        $this->level = round($this->level, 2);
+    }
+
+    /**
      * Set profile
      *
      * @param User $profile

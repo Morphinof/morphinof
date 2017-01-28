@@ -99,9 +99,6 @@ class ServiceAdminController extends CRUDController
                     /** @var User $user */
                     $user = $this->getUser();
 
-                    $object->setOwner($user);
-                    $this->admin->update($object);
-
                     $user->getServices()->add($object);
                     $this->admin->update($user);
 

@@ -1,60 +1,111 @@
 services:
     admin.user:
         class: AdminBundle\Admin\UserAdmin
-        arguments: [~, UserBundle\Entity\User, AdminBundle:UserAdmin, '@security.token_storage', '@security.authorization_checker', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - UserBundle\Entity\User
+            - AdminBundle:UserAdmin
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: Utilisateurs, label: Liste des utilisateurs }
 
     admin.education:
         class: AdminBundle\Admin\EducationAdmin
-        arguments: [~, ResumeBundle\Entity\Education, AdminBundle:EducationAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Education
+            - AdminBundle:EducationAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Diplômes }
 
     admin.experience:
         class: AdminBundle\Admin\ExperienceAdmin
-        arguments: [~, ResumeBundle\Entity\Experience, AdminBundle:ExperienceAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Experience
+            - AdminBundle:ExperienceAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Expériences }
 
     admin.skill:
         class: AdminBundle\Admin\SkillAdmin
-        arguments: [~, ResumeBundle\Entity\Skill, AdminBundle:SkillAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Skill
+            - AdminBundle:SkillAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Compétences }
 
     admin.service:
         class: AdminBundle\Admin\ServiceAdmin
-        arguments: [~, ResumeBundle\Entity\Service, AdminBundle:ServiceAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Service
+            - AdminBundle:ServiceAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Services }
 
     admin.hobby:
         class: AdminBundle\Admin\HobbyAdmin
-        arguments: [~, ResumeBundle\Entity\Hobby, AdminBundle:HobbyAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Hobby
+            - AdminBundle:HobbyAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Intérêts }
 
     admin.portfolio:
         class: AdminBundle\Admin\PortfolioAdmin
-        arguments: [~, ResumeBundle\Entity\Portfolio, AdminBundle:PortfolioAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Portfolio
+            - AdminBundle:PortfolioAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
-            - { name: sonata.admin, manager_type: orm, group: CV, label: Portfolio }
+            - { name: sonata.admin, manager_type: orm, group: CV, label: Portfolios }
 
     admin.project:
         class: AdminBundle\Admin\ProjectAdmin
-        arguments: [~, ResumeBundle\Entity\Project, AdminBundle:ProjectAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Project
+            - AdminBundle:ProjectAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Projets }
 
     admin.customer:
         class: AdminBundle\Admin\CustomerAdmin
-        arguments: [~, ResumeBundle\Entity\Customer, AdminBundle:CustomerAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - ResumeBundle\Entity\Customer
+            - AdminBundle:CustomerAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: CV, label: Clients }
 
     admin.blog:
         class: AdminBundle\Admin\BlogAdmin
-        arguments: [~, BlogBundle\Entity\Article, AdminBundle:BlogAdmin, '@security.token_storage', '@doctrine.orm.entity_manager']
+        arguments:
+            - ~
+            - BlogBundle\Entity\Article
+            - AdminBundle:BlogAdmin
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Gérer les articles }

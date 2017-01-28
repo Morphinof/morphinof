@@ -49,30 +49,25 @@ class ServiceAdmin extends AbstractAdmin
         $this->em = $entityManager;
     }
 
+    /**
+     * @param string $context
+     * @return QueryBuilder
+     */
     public function createQuery($context = 'list')
     {
-        /** @var User $user */
-        $user =  $this->token->getToken()->getUser();
-
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
 
-        /** @var EntityManager $em */
-        $em = $query->getEntityManager();
-
-        $repository = $em->getRepository('ResumeBundle:Service');
-
-        $qb = $repository->createQueryBuilder('s');
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
 
         if (!$user->hasRole('ROLE_SUPER_ADMIN'))
         {
-            $qb
-            ->leftJoin('s.owner', 'owner')
-            ->where('owner = :owner')
-            ->setParameter('owner', $user);
+            $query->where('o.id in (:services)')
+            ->setParameter('services', $user->getServices());
         }
 
-        return new ProxyQuery($qb);
+        return $query;
     }
 
     /**
@@ -114,23 +109,6 @@ class ServiceAdmin extends AbstractAdmin
                 'class' => 'col-md-12',
             )
         )
-        ->add
-            (
-                'owner',
-                EntityType::class,
-                array
-                (
-                    'label' => 'Propriétraire',
-                    'class' => 'UserBundle:User',
-                    'query_builder' => function (EntityRepository $repository)
-                    {
-                        return $repository->createQueryBuilder('e')
-                            ->where('e = :owner')
-                            ->setParameter('owner', $this->token->getToken()->getUser());
-                    },
-                    'disabled' => true,
-                )
-            )
         ->add
         (
             'glyph',
@@ -192,19 +170,6 @@ class ServiceAdmin extends AbstractAdmin
                 'label' => 'Titre'
             )
         );
-
-        if ($this->token->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN'))
-        {
-            $datagridMapper->add
-            (
-                'owner',
-                null,
-                array
-                (
-                    'label' => 'Propriétaire',
-                )
-            );
-        }
     }
 
     /**
@@ -212,6 +177,24 @@ class ServiceAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
+            (
+                'owner',
+                null,
+                array
+                (
+                    'label' => 'Propriétaire',
+                    'template' => 'AdminBundle::CRUD/list__column_owner.html.twig'
+                )
+            );
+        }
+
         $listMapper
         ->add
         (
@@ -221,15 +204,6 @@ class ServiceAdmin extends AbstractAdmin
             (
                 'label' => 'Glyph Font Awesome',
                 'template' => 'AdminBundle::CRUD/list__column_fa_glyph.html.twig'
-            )
-        )
-        ->add
-        (
-            'owner',
-            EntityType::class,
-            array
-            (
-                'label' => 'Propriétaire',
             )
         )
         ->add

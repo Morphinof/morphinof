@@ -2,10 +2,18 @@
 
 {% block field %}
     {% if object is defined %}
-        {% for customer in object.customers %}
-            <a href="{{ path('admin_resume_customer_edit', { 'id': customer.id }) }}">
-                {% media customer.media, 'admin_list' %}
-            </a>
-        {% endfor %}
+        {% if object.customers | length > 0 %}
+            {% for customer in object.customers %}
+                <a href="{{ path('admin_resume_customer_edit', { 'id': customer.id }) }}">
+                    {% if customer.media is not null %}
+                        {% media customer.media, 'admin_list' %}
+                    {% else %}
+                        <span class="label label-primary">{{ customer.title }}</span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        {% else %}
+            <span class="label label-default">Aucun</span>
+        {% endif %}
     {% endif %}
 {% endblock %}

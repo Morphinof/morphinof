@@ -212,9 +212,6 @@ class ProjectAdminController extends CRUDController
             if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
                 try {
                     /** @var Project $object */
-                    if (is_null($object->getOwner())) {
-                        $object->setOwner($this->getUser());
-                    }
                     $object = $this->admin->update($object);
 
                     if ($this->isXmlHttpRequest()) {

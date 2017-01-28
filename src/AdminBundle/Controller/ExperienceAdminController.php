@@ -98,11 +98,8 @@ class ExperienceAdminController extends CRUDController
 
                     /** @var User $user */
                     $user = $this->getUser();
-
-                    $object->setOwner($user);
                     $user->getExperiences()->add($object);
 
-                    $this->admin->update($object);
                     $this->admin->update($user);
 
                     if ($this->isXmlHttpRequest()) {

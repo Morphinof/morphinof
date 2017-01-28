@@ -302,6 +302,7 @@ class BlogAdmin extends AbstractAdmin
                 array
                 (
                     'label' => 'Auteur',
+                    'template' => 'AdminBundle::CRUD/list__column_author.html.twig',
                 )
             );
         }

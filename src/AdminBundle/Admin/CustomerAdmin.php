@@ -50,30 +50,25 @@ class CustomerAdmin extends AbstractAdmin
         $this->em = $entityManager;
     }
 
+    /**
+     * @param string $context
+     * @return QueryBuilder
+     */
     public function createQuery($context = 'list')
     {
-        /** @var User $user */
-        $user =  $this->token->getToken()->getUser();
-
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
 
-        /** @var EntityManager $em */
-        $em = $query->getEntityManager();
-
-        $repository = $em->getRepository('ResumeBundle:Customer');
-
-        $qb = $repository->createQueryBuilder('c');
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
 
         if (!$user->hasRole('ROLE_SUPER_ADMIN'))
         {
-            $qb
-            ->leftJoin('c.owner', 'owner')
-            ->andWhere('owner = :owner')
-            ->setParameter('owner', $user);
+            $query->where('o.id in (:customers)')
+            ->setParameter('customers', $user->getCustomers());
         }
 
-        return new ProxyQuery($qb);
+        return $query;
     }
 
     /**
@@ -92,23 +87,6 @@ class CustomerAdmin extends AbstractAdmin
             array
             (
                 'class' => 'col-md-12',
-            )
-        )
-        ->add
-        (
-            'owner',
-            EntityType::class,
-            array
-            (
-                'label' => 'Propriétraire',
-                'class' => 'UserBundle:User',
-                'query_builder' => function (EntityRepository $repository)
-                {
-                    return $repository->createQueryBuilder('e')
-                    ->where('e = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-                },
-                'disabled' => true,
             )
         )
         ->add
@@ -191,6 +169,24 @@ class CustomerAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
+            (
+                'owner',
+                null,
+                array
+                (
+                    'label' => 'Propriétaire',
+                    'template' => 'AdminBundle::CRUD/list__column_owner.html.twig'
+                )
+            );
+        }
+
         $listMapper
         ->add
         (
@@ -209,15 +205,6 @@ class CustomerAdmin extends AbstractAdmin
             (
                 'label' => 'Logo',
                 'template' => 'AdminBundle::CRUD/list__column_media.html.twig',
-            )
-        )
-        ->add
-        (
-            'owner',
-            null,
-            array
-            (
-                'label' => 'Propriétaire',
             )
         )
         ->add

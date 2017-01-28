@@ -185,8 +185,26 @@ class SkillAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+                ->add
+                (
+                    'owner',
+                    null,
+                    array
+                    (
+                        'label' => 'Propriétaire',
+                        'template' => 'AdminBundle::CRUD/list__column_owner.html.twig'
+                    )
+                );
+        }
+
+
         $listMapper
-        ->add('id')
         ->add
         (
             'tag',

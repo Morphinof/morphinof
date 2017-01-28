@@ -67,7 +67,6 @@ class ExperiencesData extends AbstractFixture implements OrderedFixtureInterface
         {
             $experience = $this->createExperience
             (
-                $admin,
                 $data['title'],
                 $data['description'],
                 $data['company'],
@@ -84,10 +83,9 @@ class ExperiencesData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
-    private function createExperience($owner, $title, $description, $company, $startedOn, $endedOn, $resume)
+    private function createExperience($title, $description, $company, $startedOn, $endedOn, $resume)
     {
         $skill = new Experience();
-        $skill->setOwner($owner);
         $skill->setTitle($title);
         $skill->setCompany($company);
         $skill->setStartedOn($startedOn);

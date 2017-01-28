@@ -26,7 +26,7 @@ class Profile
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="profile")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="profile")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
     protected $owner;

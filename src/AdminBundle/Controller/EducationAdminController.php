@@ -101,11 +101,7 @@ class EducationAdminController extends CRUDController
 
                     /** @var User $user */
                     $user = $this->getUser();
-
-                    $object->setOwner($user);
                     $user->getEducations()->add($object);
-
-                    $this->admin->update($object);
                     $this->admin->update($user);
 
                     if ($this->isXmlHttpRequest()) {

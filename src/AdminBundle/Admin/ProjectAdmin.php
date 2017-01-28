@@ -52,28 +52,20 @@ class ProjectAdmin extends AbstractAdmin
 
     public function createQuery($context = 'list')
     {
-        /** @var User $user */
-        $user =  $this->token->getToken()->getUser();
-
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
 
-        /** @var EntityManager $em */
-        $em = $query->getEntityManager();
-
-        $repository = $em->getRepository('ResumeBundle:Project');
-
-        $qb = $repository->createQueryBuilder('p');
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
 
         if (!$user->hasRole('ROLE_SUPER_ADMIN'))
         {
-            $qb
-            ->leftJoin('p.owner', 'owner')
-            ->andWhere('owner = :owner')
-            ->setParameter('owner', $user);
+            $query
+            ->from('ResumeBundle:Portfolio', 'p')
+            ->where('o member of p.projects');
         }
 
-        return new ProxyQuery($qb);
+        return $query;
     }
 
     /**
@@ -92,23 +84,6 @@ class ProjectAdmin extends AbstractAdmin
             array
             (
                 'class' => 'col-md-12',
-            )
-        )
-        ->add
-        (
-            'owner',
-            EntityType::class,
-            array
-            (
-                'label' => 'Propriétraire',
-                'class' => 'UserBundle:User',
-                'query_builder' => function (EntityRepository $repository)
-                {
-                    return $repository->createQueryBuilder('e')
-                    ->where('e = :owner')
-                    ->setParameter('owner', $this->token->getToken()->getUser());
-                },
-                'disabled' => true,
             )
         )
         ->add
@@ -191,7 +166,35 @@ class ProjectAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        /** @var User $user */
+        $user =  $this->token->getToken()->getUser();
+
+        if ($user->hasRole('ROLE_SUPER_ADMIN'))
+        {
+            $listMapper
+            ->add
+            (
+                'owner',
+                null,
+                array
+                (
+                    'label' => 'Propriétaire',
+                    'template' => 'AdminBundle::CRUD/list__column_owner.html.twig'
+                )
+            );
+        }
+
         $listMapper
+        ->add
+        (
+            'portfolio',
+            null,
+            array
+            (
+                'label' => 'Portfolio',
+                'template' => 'AdminBundle::CRUD/list__column_portfolio.html.twig',
+            )
+        )
         ->add
         (
             'title',
@@ -209,25 +212,6 @@ class ProjectAdmin extends AbstractAdmin
             (
                 'label' => 'Image',
                 'template' => 'AdminBundle::CRUD/list__column_media.html.twig',
-            )
-        )
-        ->add
-        (
-            'owner',
-            null,
-            array
-            (
-                'label' => 'Propriétaire',
-            )
-        )
-        ->add
-        (
-            'portfolio',
-            null,
-            array
-            (
-                'label' => 'Portfolio',
-                'template' => 'AdminBundle::CRUD/list__column_portfolio.html.twig',
             )
         )
         ->add

@@ -62,6 +62,9 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             array(),
             array()
         );
+
+        $manager->persist($admin);
+
         $this->addReference('admin', $admin);
         $this->addReference('admin-profile', $admin->getProfile());
 
@@ -245,6 +248,9 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 ),
             )
         );
+
+        $manager->persist($user);
+
         $this->addReference('user', $user);
         $this->addReference('user-profile', $user->getProfile());
 
@@ -323,7 +329,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         {
             foreach ($services as $service)
             {
-                $this->createService($user, $service['title'], $service['glyph'], $service['resume']);
+                $user->addService($this->createService($service['title'], $service['glyph'], $service['resume']));
             }
         }
 
@@ -331,12 +337,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         {
             $p = $this->createPortfolio
             (
-                $user,
                 $portfolio['portfolio']['title'],
                 'Portfolio de '.$user->getProfile()->getFullName(),
                 'Portfolio de '.$user->getProfile()->getFullName(),
                 true
             );
+
+            $user->addPortfolio($p);
 
             if (isset($portfolio['projects']) && !empty($portfolio['projects']))
             {
@@ -344,7 +351,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 {
                     $project = $this->createProject
                     (
-                        $p->getOwner(),
                         $project['title'],
                         $project['description'],
                         $project['resume']
@@ -352,15 +358,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                     $p->addProject($project);
                 }
             }
-
-            $this->manager->persist($p);
         }
 
         if (!empty($customers))
         {
             foreach ($customers as $customer)
             {
-                $this->createCustomer($user, $customer['title'], $customer['description'], $customer['resume']);
+                $user->addCustomer($this->createCustomer($customer['title'], $customer['description'], $customer['resume']));
             }
         }
 
@@ -368,6 +372,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     }
 
     /**
+     * Create a profile
+     *
      * @param $firstName
      * @param $lastName
      * @param $birthDate
@@ -395,6 +401,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     }
 
     /**
+     * Set contact data
+     *
      * @param User $user
      * @param $data
      */
@@ -414,6 +422,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     }
 
     /**
+     * Create a skill
+     *
      * @param $profile
      * @param $tag
      * @param $level
@@ -441,82 +451,74 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     }
 
     /**
-     * @param $owner
+     * Create a service
+     *
      * @param $title
      * @param $glyph
      * @param $resume
      * @return Service
      */
-    public function createService($owner, $title, $glyph, $resume)
+    public function createService($title, $glyph, $resume)
     {
         $service = new Service();
-        $service->setOwner($owner);
         $service->setTitle($title);
         $service->setGlyph($glyph);
         $service->setResume($resume);
-
-        $this->manager->persist($service);
 
         return $service;
     }
 
     /**
-     * @param $owner
+     * Create a portfolio
+     *
      * @param $title
      * @param $descritpion
      * @param $resume
      * @return Portfolio
      */
-    public function createPortfolio($owner, $title, $descritpion, $resume, $mainPortfolio)
+    public function createPortfolio($title, $descritpion, $resume, $mainPortfolio)
     {
         $portfolio = new Portfolio();
-        $portfolio->setOwner($owner);
         $portfolio->setTitle($title);
         $portfolio->setDescription($descritpion);
         $portfolio->setResume($resume);
         $portfolio->setMainPortfolio($mainPortfolio);
 
-        $this->manager->persist($portfolio);
-
         return $portfolio;
     }
 
     /**
-     * @param $owner
+     * Create a project
+     *
      * @param $title
      * @param $description
      * @param $resume
      * @return Project
      */
-    public function createProject($owner, $title, $description, $resume)
+    public function createProject($title, $description, $resume)
     {
         $project = new Project();
-        $project->setOwner($owner);
         $project->setTitle($title);
         $project->setDescription($description);
         $project->setResume($resume);
-
-        $this->manager->persist($project);
 
         return $project;
     }
 
     /**
-     * @param $owner
+     * Create a customer
+     *
      * @param $title
      * @param $description
      * @param $resume
      * @return Customer
      */
-    public function createCustomer($owner, $title, $description, $resume)
+    public function createCustomer($title, $description, $resume)
     {
         $customer = new Customer();
-        $customer->setOwner($owner);
         $customer->setTitle($title);
         $customer->setDescription($description);
         $customer->setResume($resume);
-
-        $this->manager->persist($customer);
 
         return $customer;
     }
