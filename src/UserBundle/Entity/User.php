@@ -47,7 +47,7 @@ class User extends BaseUser
      * @var Profile
      *
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $profile;
 
@@ -55,7 +55,7 @@ class User extends BaseUser
      * @var Preferences
      *
      * @ORM\OneToOne(targetEntity="ResumeBundle\Entity\Preferences", mappedBy="owner", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="preferences_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="preferences_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $preferences;
 
@@ -63,7 +63,7 @@ class User extends BaseUser
      * @var Contact
      *
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\Contact", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $contact;
 
@@ -74,7 +74,7 @@ class User extends BaseUser
      * @ORM\JoinTable
      * (
      *      name="users_educations",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="education_id", referencedColumnName="id", unique=true)}
      * )
      */
@@ -87,7 +87,7 @@ class User extends BaseUser
      * @ORM\JoinTable
      * (
      *      name="users_experiences",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="experience_id", referencedColumnName="id", unique=true)}
      * )
      */
@@ -100,7 +100,7 @@ class User extends BaseUser
      * @ORM\JoinTable
      * (
      *      name="users_portfolios",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="portfolio_id", referencedColumnName="id", unique=true)}
      * )
      */
@@ -113,7 +113,7 @@ class User extends BaseUser
      * @ORM\JoinTable
      * (
      *      name="users_projects",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id", unique=true)}
      * )
      */
@@ -126,7 +126,7 @@ class User extends BaseUser
      * @ORM\JoinTable
      * (
      *      name="users_services",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="service_id", referencedColumnName="id", unique=true)}
      * )
      */
@@ -139,7 +139,7 @@ class User extends BaseUser
      * @ORM\JoinTable
      * (
      *      name="users_customers",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="customer_id", referencedColumnName="id", unique=true)}
      * )
      */
@@ -149,7 +149,7 @@ class User extends BaseUser
      * @var Media
      *
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="resume_file_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="resume_file_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $resumeFile;
 

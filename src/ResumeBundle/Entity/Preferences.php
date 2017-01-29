@@ -31,7 +31,7 @@ class Preferences
      * @var User
      *
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="preferences")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $owner;
 

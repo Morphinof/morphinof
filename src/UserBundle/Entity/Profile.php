@@ -27,7 +27,7 @@ class Profile
      * @var User
      *
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="profile")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $owner;
 
@@ -76,7 +76,7 @@ class Profile
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Skill", mappedBy="profile")
+     * @ORM\OneToMany(targetEntity="ResumeBundle\Entity\Skill", mappedBy="profile", orphanRemoval=true)
      */
     protected $skills;
 

@@ -16,6 +16,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 
 use FOS\UserBundle\Controller\RegistrationController as FosRegistrationController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use UserBundle\Entity\User;
 
 class RegistrationController extends FosRegistrationController
 {
@@ -62,6 +63,9 @@ class RegistrationController extends FosRegistrationController
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+                /** @var User $user */
+                $user->getProfile()->setOwner($user);
+                $user->getPreferences()->setOwner($user);
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
