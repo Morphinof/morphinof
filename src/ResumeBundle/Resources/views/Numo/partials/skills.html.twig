@@ -28,6 +28,14 @@
                 </div>
                 {% endfor %}
             </div>
+            {% else %}
+                <h2 class="t-a-c">
+                    <p>#Vos compétances ici#</p>
+                    <small class="">(rajoutez des compétances dans votre CV pour les afficher ici)</small>
+                    <a href="{{ path('admin_user_user_edit', { 'id': app.user.id }) }}" class="btn btn-default dim">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </h2>
             {% endif %}
         </div>
     </div>

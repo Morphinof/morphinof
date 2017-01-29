@@ -5,3 +5,8 @@
     letter-spacing: -4px !important;
     margin-bottom: 0 !important;
 }
+
+.alert li
+{
+    list-style-type: none;
+}

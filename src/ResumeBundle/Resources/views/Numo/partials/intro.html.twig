@@ -8,9 +8,19 @@
                 <div class="col-sm-12">
                     <h1 class="text-center">
                         Bonjour ! <br>
-                        Je suis {{ user.profile.fullName }}
-                        {% if user.profile.profession is not null %}
-                            {{ user.profile.fullName }}
+                        {% if user.profile.fullName is not null %}
+                            Je suis {{ user.profile.fullName }}
+                            {% if user.profile.profession is not null %}
+                                {{ user.profile.fullName }}
+                            {% endif %}
+                        {% else %}
+                            <h2 class="t-a-c">
+                                <p>#Votre nom suivi de votre prénom#</p>
+                                <small class="">(remplissez ces données dans votre profil pour les afficher ici)</small>
+                                <a href="{{ path('admin_user_user_edit', { 'id': app.user.id }) }}" class="btn btn-default dim">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </h2>
                         {% endif %}
                     </h1>
                 </div>

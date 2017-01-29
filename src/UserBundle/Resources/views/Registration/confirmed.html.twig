@@ -1,0 +1,59 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set title = 'Login' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+{% endblock %}
+
+{% block modals %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+    <div class="text-center loginscreen animated fadeInDown p-50">
+        <div>
+            <div>
+                <h1 class="logo-name">Morphinof</h1>
+            </div>
+            <h3 class="m-t-30">Bienvenue sur Morphinof.com !</h3>
+
+            {% block fos_user_content %}
+                {% include "@User/Registration/confirmed_content.html.twig" %}
+            {% endblock fos_user_content %}
+
+            <p class="m-t">
+                <small>Morphinof - Inspinia &copy; {{ 'now' | date('Y') }}</small>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock %}

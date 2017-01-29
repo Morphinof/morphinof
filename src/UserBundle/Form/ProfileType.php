@@ -5,6 +5,7 @@ namespace UserBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +27,7 @@ class ProfileType extends AbstractType
                 'attr' => array
                 (
                     'placeholder' => 'Prénom',
+                    'class' => 'form-control'
                 ),
                 'required' => true
             )
@@ -36,10 +38,11 @@ class ProfileType extends AbstractType
             TextType::class,
             array
             (
-                'label' => 'Prénom',
+                'label' => 'Nom',
                 'attr' => array
                 (
-                    'placeholder' => 'Prénom',
+                    'placeholder' => 'Nom',
+                    'class' => 'form-control'
                 ),
                 'required' => true
             )
@@ -54,6 +57,7 @@ class ProfileType extends AbstractType
                 'attr' => array
                 (
                     'placeholder' => 'Profession',
+                    'class' => 'form-control'
                 ),
                 'required' => false
             )
@@ -73,40 +77,15 @@ class ProfileType extends AbstractType
         ->add
         (
             'about',
-            CKEditorType::class,
+            TextareaType::class,
             array
             (
-                'label' => 'A-propos',
-                'config_name' => 'default',
+                'label' => 'A-propos de vous',
                 'attr' => array
                 (
                     'rows' => 10,
                     'cols' => 76,
                 )
-            )
-        )
-        ->add
-        (
-            'hobbies',
-            EntityType::class,
-            array
-            (
-                'class' => 'ResumeBundle:Hobby',
-                'multiple' => true,
-                'attr' => array(),
-                'disabled' => true,
-            )
-        )
-        ->add
-        (
-            'skills',
-            EntityType::class,
-            array
-            (
-                'class' => 'ResumeBundle\Entity\Skill',
-                'multiple' => true,
-                'attr' => array(),
-                'disabled' => true,
             )
         );
     }

@@ -1,0 +1,189 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'SonataMediaBundle:Form:media_widgets_light.html.twig' %}
+
+{% import _self as macro %}
+
+{% macro form_error(element) %}
+    {% if element.vars['errors'] | length > 0 %}
+    <div class="alert alert-danger">
+        {{ form_errors(element) }}
+    </div>
+    {% endif %}
+{% endmacro %}
+
+<div class="wrapper wrapper-content animated fadeInRight text-left">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>
+                Votre inscription en <span style="text-decoration: line-through">4</span> 1 étape<span style="text-decoration: line-through">s</span>
+            </h2>
+            <p>
+                Seule la premiere étape est obligatoire, vous pourrez remplir toutes ces informations plus tard
+            </p>
+
+            {{
+                form_start
+                (
+                    form,
+                    {
+                        'method': 'post',
+                        'action': path('fos_user_registration_register'),
+                        'attr':
+                        {
+                            'id': 'subscribe-form',
+                            'class': 'wizard-big wizard clearfix'
+                        }
+                    }
+                )
+            }}
+                <h1>{{ 'registration.submit'|trans }}</h1>
+                <fieldset>
+                    <h2>Mes identifiants</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.username) }}
+                                <label>{{ form_label(form.username) }}</label>
+                                {{ form_widget(form.username) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.email) }}
+                                <label>{{ form_label(form.email) }}</label>
+                                {{ form_widget(form.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.plainPassword.first) }}
+                                <label>{{ form_label(form.plainPassword.first) }}</label>
+                                {{ form_widget(form.plainPassword.first, {'attr':  {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <label>{{ form_label(form.plainPassword.second) }}</label>
+                                {{ form_widget(form.plainPassword.second, {'attr':  {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <h1>Données de Profil</h1>
+                <fieldset>
+                    <h2>Données de profil</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>{{ form_label(form.avatar) }}</label>
+                                {{ form_widget(form.avatar) }}
+                                {{ macro.form_error(form.avatar) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.profile.firstName) }}
+                                <label>{{ form_label(form.profile.firstName) }}</label>
+                                {{ form_widget(form.profile.firstName) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.profile.lastName) }}
+                                <label>{{ form_label(form.profile.lastName) }}</label>
+                                {{ form_widget(form.profile.lastName) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.profile.birthDate) }}
+                                <label>{{ form_label(form.profile.birthDate) }}</label>
+                                {{ form_widget(form.profile.birthDate) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.profile.profession) }}
+                                <label>{{ form_label(form.profile.profession) }}</label>
+                                {{ form_widget(form.profile.profession) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                {{ macro.form_error(form.profile.about) }}
+                                <label>{{ form_label(form.profile.about) }}</label>
+                                {{ form_widget(form.profile.about) }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <h1>Données de contact</h1>
+                <fieldset>
+                    <h2>Données de contact</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.email) }}
+                                <label>{{ form_label(form.contact.email) }}</label>
+                                {{ form_widget(form.contact.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.telephone) }}
+                                <label>{{ form_label(form.contact.telephone) }}</label>
+                                {{ form_widget(form.contact.telephone) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.facebook) }}
+                                <label>{{ form_label(form.contact.facebook) }}</label>
+                                {{ form_widget(form.contact.facebook) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.twitter) }}
+                                <label>{{ form_label(form.contact.twitter) }}</label>
+                                {{ form_widget(form.contact.twitter) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.skype) }}
+                                <label>{{ form_label(form.contact.skype) }}</label>
+                                {{ form_widget(form.contact.skype) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.googlePlus) }}
+                                <label>{{ form_label(form.contact.googlePlus) }}</label>
+                                {{ form_widget(form.contact.googlePlus) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.linkedIn) }}
+                                <label>{{ form_label(form.contact.linkedIn) }}</label>
+                                {{ form_widget(form.contact.linkedIn) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.dribbble) }}
+                                <label>{{ form_label(form.contact.dribbble) }}</label>
+                                {{ form_widget(form.contact.dribbble) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.contact.tumblr) }}
+                                <label>{{ form_label(form.contact.tumblr) }}</label>
+                                {{ form_widget(form.contact.tumblr) }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <h1>Vos préférences</h1>
+                <fieldset>
+                    <h2>Vos préférences</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ macro.form_error(form.preferences.template) }}
+                                <label>{{ form_label(form.preferences.template) }}</label>
+                                {{ form_widget(form.preferences.template) }}
+                            </div>
+                            <div class="form-group">
+                                {{ macro.form_error(form.preferences.visibility) }}
+                                <label>{{ form_label(form.preferences.visibility) }}</label>
+                                {{ form_widget(form.preferences.visibility) }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

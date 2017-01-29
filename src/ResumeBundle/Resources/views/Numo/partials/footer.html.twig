@@ -5,17 +5,32 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-sm-12">
-                {% if user.contact.facebook is not null %}
-                    <a href="https://www.facebook.com/{{ user.contact.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
-                {% endif %}
-                {% if user.contact.twitter is not null %}
-                    <a href="https://www.twitter.com/{{ user.contact.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
-                {% endif %}
-                {% if user.contact.dribbble is not null %}
-                    <a href="https://www.dribbble.com/{{ user.contact.dribbble }}" target="_blank"><i class="fa fa-dribbble"></i></a>
-                {% endif %}
-                {% if user.contact.tumblr is not null %}
-                    <a href="https://www.tumblr.com/{{ user.contact.tumblr }}" target="_blank"><i class="fa fa-tumblr"></i></a>
+                {%
+                    if user.contact.facebook is not null
+                    or user.contact.twitter is not null
+                    or user.contact.dribbble is not null
+                    or user.contact.tumblr is not null
+                %}
+                    {% if user.contact.facebook is not null %}
+                        <a href="https://www.facebook.com/{{ user.contact.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                    {% endif %}
+                    {% if user.contact.twitter is not null %}
+                        <a href="https://www.twitter.com/{{ user.contact.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                    {% endif %}
+                    {% if user.contact.dribbble is not null %}
+                        <a href="https://www.dribbble.com/{{ user.contact.dribbble }}" target="_blank"><i class="fa fa-dribbble"></i></a>
+                    {% endif %}
+                    {% if user.contact.tumblr is not null %}
+                        <a href="https://www.tumblr.com/{{ user.contact.tumblr }}" target="_blank"><i class="fa fa-tumblr"></i></a>
+                    {% endif %}
+                {% else %}
+                    <h2 class="t-a-c">
+                        <p class="white">#Un lien vers vos réseaux sociaux ici#</p>
+                        <small class="">(renseignez vos réseaux sociaux dans votre profil pour les afficher ici)</small>
+                    </h2>
+                    <a href="{{ path('admin_user_user_edit', { 'id': app.user.id }) }}" class="btn btn-w-m btn-default">
+                        Editer mes réseau sociaux
+                    </a>
                 {% endif %}
             </div>
         </div>

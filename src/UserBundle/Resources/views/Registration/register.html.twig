@@ -1,0 +1,162 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set title = 'Login' %}
+
+{% block title %}
+    {{ parent() }} - {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+        '@CoreBundle/Resources/public/js/plugins/froala/css/froala_editor.pkgd.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/froala_style.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/themes/gray.min.css'
+
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/char_counter.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/code_view.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/colors.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/emoticons.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/file.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/fullscreen.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/image.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/image_manager.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/line_breaker.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/quick_insert.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/special_characters.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/table.min.css'
+        '@CoreBundle/Resources/public/js/plugins/froala/css/plugins/video.min.css'
+    %}
+        <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+{% endblock %}
+
+{% block modals %}
+    <div class="modal inmodal" id="alert-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title"></h4>
+                    <small class="font-bold">Formulaire d'inscription.</small>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" id="alert-modal-close" class="btn btn-white" data-dismiss="modal">Fermer</button>
+                    <button type="button" id="alert-modal-confirm" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+    <div class="text-center loginscreen animated fadeInDown p-50">
+        <div>
+            <div>
+                <h1 class="logo-name">Morphinof</h1>
+            </div>
+            <h3 class="m-t-30">Inscription</h3>
+
+            {% block fos_user_content %}
+                {% include "@User/Registration/register_content.html.twig" %}
+            {% endblock fos_user_content %}
+
+            <a class="btn btn-primary btn-sm" href="{{ path('fos_user_security_login') }}">Vous avez déjà un compte ? Connectez-vous</a>
+
+            <p class="m-t">
+                <small>Morphinof - Inspinia &copy; {{ 'now' | date('Y') }}</small>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+        '@CoreBundle/Resources/public/js/plugins/froala/js/froala_editor.pkgd.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/languages/fr.js'
+
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/align.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/char_counter.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/code_view.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/colors.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/emoticons.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/entities.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/file.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/font_family.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/font_size.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/fullscreen.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/image.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/image_manager.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/inline_style.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/line_breaker.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/link.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/lists.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/paragraph_format.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/paragraph_style.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/print.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/quick_insert.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/quote.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/save.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/special_characters.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/table.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/url.min.js'
+        '@CoreBundle/Resources/public/js/plugins/froala/js/plugins/video.min.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        //CKEDITOR.removeAllListeners();
+        //CKEDITOR.on('loaded', function() {});
+        $(document).ready(function() {
+            $("#subscribe-form").steps({
+                /* Appearance */
+                headerTag: "h1",
+                bodyTag: "fieldset",
+                transitionEffect: "slideLeft",
+                stepsOrientation: "vertical",
+                onFinished: function (event, currentIndex) {
+                    $('#subscribe-form').submit();
+                },
+                onCanceled: function (event, currentIndex) {
+                    var modal = $('#alert-modal');
+
+                    modal.find('.modal-title').html('Annulation');
+                    modal.find('.modal-body').html('Voulez vous vraiment vider le formulaire d\'inscription ?');
+                    modal.find('#alert-modal-confirm').on('click', function () {
+                        $('#subscribe-form').find('input').val('');
+                    });
+                    modal.modal();
+                },
+                /* Labels */
+                labels: {
+                    cancel: "Annuler",
+                    current: "Etape courante:",
+                    pagination: "Pagination",
+                    finish: "Terminer",
+                    next: "Suivant",
+                    previous: "Précédant",
+                    loading: "Chargement ..."
+                }
+            });
+
+            $('textarea').froalaEditor();
+        });
+    </script>
+{% endblock %}

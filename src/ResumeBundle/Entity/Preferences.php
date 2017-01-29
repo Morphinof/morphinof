@@ -56,6 +56,16 @@ class Preferences
      */
     private $seed;
 
+    /**
+     * Seed generation on creation
+     *
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->generateSeed();
+    }
+
     public function __construct()
     {
         $this->visibility = VisibilityEnum::RESUME_PUBLIC;
@@ -150,7 +160,7 @@ class Preferences
      */
     public function generateSeed()
     {
-        $hash = str_shuffle(sha1($this->owner->getUsername()));
+        $hash = str_shuffle(uniqid());
         $start = mt_rand(0, strlen($hash) - self::SEED_LENGTH);
 
         $this->seed = strtoupper(substr($hash, $start, self::SEED_LENGTH));

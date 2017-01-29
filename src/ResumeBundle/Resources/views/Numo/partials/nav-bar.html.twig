@@ -22,6 +22,13 @@
                 <li><a data-scroll href="{{ path('resume_numo_blog', { 'username': user.username }) }}">Blog</a></li>
                 {% endif %}
                 <li><a data-scroll href="#contact"><span class="contact">Contact</span></a></li>
+                {% if app.user is not null and app.user.id == user.id %}
+                <li>
+                    <a href="{{ path('sonata_admin_dashboard') }}">
+                        <span class="admin">Administration</span>
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>

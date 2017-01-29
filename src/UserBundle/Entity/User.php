@@ -17,6 +17,7 @@ use ResumeBundle\Entity\Preferences;
 use ResumeBundle\Entity\Project;
 use ResumeBundle\Entity\Service;
 use ResumeBundle\Enum\VisibilityEnum;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
@@ -233,7 +234,7 @@ class User extends BaseUser
         return $this;
     }
 
-    /**vv
+    /**
      * Get preferences
      *
      * @return Preferences

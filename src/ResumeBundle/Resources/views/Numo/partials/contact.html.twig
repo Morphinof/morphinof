@@ -6,10 +6,17 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <h3>N'hésitez pas à me contacter</h3>
-                <!-- YOUR E-MAIL-->
-                <a href="mailto:{{ user.contact.email | default(user.email) }}" class="mail">
-                    <span class="glyphicon glyphicon-envelope"></span>E-MAIL
-                </a>
+                {% if user.contact.email is not null %}
+                    <!-- YOUR E-MAIL-->
+                    <a href="mailto:{{ user.contact.email | default(user.email) }}" class="mail">
+                        <span class="glyphicon glyphicon-envelope"></span>E-MAIL
+                    </a>
+                {% else %}
+                    <h2 class="t-a-c">
+                        <p>#Un lien vers votre e-mail de contact ici#</p>
+                        <small class="">(renseignez votre e-mail de contact dans votre profil pour l'afficher ici)</small>
+                    </h2>
+                {% endif %}
             </div>
         </div>
     </div>

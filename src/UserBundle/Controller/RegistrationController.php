@@ -2,69 +2,48 @@
 
 namespace UserBundle\Controller;
 
-
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\Session\Session;
-use FOS\UserBundle\Controller\RegistrationController as BaseController;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-/**
- * Controller managing the registration
- *
- */
-class RegistrationController extends BaseController
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserManagerInterface;
+
+use FOS\UserBundle\Controller\RegistrationController as FosRegistrationController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+class RegistrationController extends FosRegistrationController
 {
     /**
-     * @param Request $request
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * Get a user from the Security Token Storage.
+     *
+     * @return mixed
+     *
+     * @throws \LogicException If SecurityBundle is not available
+     *
+     * @see TokenInterface::getUser()
      */
+    protected function getUser()
+    {
+        return ($this->get('security.token_storage')->getToken() ? $this->get('security.token_storage')->getToken()->getUser() : null);
+    }
+
     public function registerAction(Request $request)
     {
-        if($this->getUser() && $this->getUser() != 'anon.')
-        {
-            return $this->redirectToRoute('fos_user_profile_show');
-        }
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
-
         $user = $userManager->createUser();
-
-        $session = $request->getSession();
-        if($session->get('user_found')) {
-            $user = new User();
-            $user->setEmail($session->get('user_email'));
-            $user->setUsername($session->get('user_username'));
-            $user->setFirstName($session->get('user_firstname'));
-            $user->setLastName($session->get('user_lastname'));
-
-            //set the setters
-            $service = $session->get('service');
-            $setter = 'set'.ucfirst($service);
-            $setter_id = $setter.'Id';
-            $setter_token = $setter.'AccessToken';
-
-            $user->$setter_id($session->get('service_id'));
-            $user->$setter_token($session->get('service_access_token'));
-
-            $session->remove('user_email');
-            $session->remove('user_firstname');
-            $session->remove('user_lastname');
-            $session->remove('user_found');
-            $session->remove('service');
-            $session->remove('service_id');
-            $session->remove('service_access_token');
-        }
+        $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -78,65 +57,61 @@ class RegistrationController extends BaseController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-            $user->setInvestorInfo(new InvestorInfo());
-            $user->setSponsorId(sha1($user->getId().'@naxAg0sponsOrsh1p'));
-            $userManager->updateUser($user);
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-            $em = $this->getDoctrine()->getManager();
-            /** @var BadgeRepository $badgeRepository */
-            $badgeRepository = $em->getRepository('AnaxagoBackBundle:Badge');
-            /** @var Badge $badge */
-            $badge = $badgeRepository->findOneBy(array('status' => Constants::BADGE_KYC_EMPTY));
+                $userManager->updateUser($user);
 
-            $user->grantAchievement($badge);
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $response = new RedirectResponse($url);
+                }
 
-            /*
-             * TODO : check if the new user is a godson. If so, update him
-             */
-            $sponsoringRepository = $em->getRepository('SatoripopFrontBundle:Sponsoring');
-            $userRepository = $em->getRepository('AnaxagoBackBundle:User');
-            $isGodson = $sponsoringRepository->isGodson($user->getEmail());
-            if ($isGodson) {
-                $godson = $sponsoringRepository->findByEmail($user->getEmail());
-                $godson->setInscription(new \DateTime());
-                $em->persist($godson);
-            } elseif ($request->cookies->has('sponsor')) {
-                $cookie = $request->cookies->get('sponsor');
-                $godson = new Sponsoring();
-                $godson->setMail($user->getEmail());
-                $godson->setAmount($this->container->getParameter('amount'));
-                $godson->setSponsor($userRepository->findOneBy(array('sponsorId' => $cookie)));
-                $godson->setInscription(new \DateTime());
-                $em->persist($godson);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
             }
 
-            $em->persist($user);
-            $em->flush();
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
 
-            return $this->redirectToRoute('fos_user_profile_edit', ['newRegister' => 'new']);
+            if (null !== $response = $event->getResponse()) {
+                return $response;
+            }
         }
 
-        return $this->render('FOSUserBundle:Registration:register.html.twig', array(
+        return $this->render('@User/Registration/register.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Get a user from the Security Token Storage.
-     *
      * @return mixed
-     *
-     * @throws \LogicException If SecurityBundle is not available
-     *
-     * @see TokenInterface::getUser()
      */
-    public function getUser()
+    private function getTargetUrlFromSession()
     {
-        return ($this->get('security.token_storage')->getToken() ? $this->get('security.token_storage')->getToken()->getUser() : null);
+        $key = sprintf('_security.%s.target_path', $this->get('security.token_storage')->getToken()->getProviderKey());
+
+        if ($this->get('session')->has($key)) {
+            return $this->get('session')->get($key);
+        }
+    }
+
+    /**
+     * Tell the user his account is now confirmed.
+     */
+    public function confirmedAction()
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        return $this->render('@User/Registration/confirmed.html.twig', array(
+            'user' => $user,
+            'targetUrl' => $this->getTargetUrlFromSession(),
+        ));
     }
 }

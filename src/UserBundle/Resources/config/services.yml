@@ -19,6 +19,16 @@ services:
             - { name: twig.extension }
 
     # Forms
+    user_bundle.forms.registration:
+        class: UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: user_bundle_registration }
+
+    user_bundle.forms.registration.step1:
+        class: UserBundle\Form\Registration\Step1Type
+        tags:
+            - { name: form.type, alias: user_bundle_registration_step1 }
+
     user_bundle.forms.profile:
         class: UserBundle\Form\ProfileType
         tags:

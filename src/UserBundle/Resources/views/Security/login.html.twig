@@ -55,10 +55,12 @@
 
             <a href="#"><small>Mot de passe oublié ?</small></a>
             <p class="text-muted text-center"><small>Pas de compte ? Inscrivez-vous !</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="{{ path('inspinia_register') }}">Inscription</a>
+            <a class="btn btn-sm btn-white btn-block" href="{{ path('fos_user_registration_register') }}">
+                Inscription
+            </a>
 
             <p class="m-t">
-                <small>Morphinof - Inspinia &copy; 2016</small>
+                <small>Morphinof - Inspinia &copy; {{ 'now' | date('Y') }}</small>
             </p>
         </div>
     </div>

@@ -46,7 +46,8 @@ sonata_media:
                 admin_list:   { width: 40, height: 40, quality: 80 }
                 small:        { width: 60, height: 60, quality: 80 }
                 medium:       { width: 80, height: 80, quality: 80 }
-                big:          { width: 500, height: 500, quality: 80 }
+                big:          { width: 100, height: 100, quality: 80 }
+                120x120:      { width: 120, height: 120, quality: 80 }
                 mstone:       { width: 500, height: 680, quality: 80 }
         logos:
             providers:
