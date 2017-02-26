@@ -60,7 +60,12 @@ twig:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
-    bundles: [ CoreBundle, InspiniaBundle, UserBundle, ResumeBundle ]
+    bundles:
+        - CoreBundle
+        - InspiniaBundle
+        - UserBundle
+        - ResumeBundle
+        - MorphinofPageBundle
     filters:
         cssrewrite: ~
 

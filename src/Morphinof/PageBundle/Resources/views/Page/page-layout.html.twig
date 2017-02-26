@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '@MorphinofPage/Page/base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -8,15 +8,6 @@
 
 {% block body %}
     {{ parent() }}
-
-    {% block header %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}
-
-    {% block footer %}
-    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}

@@ -5,7 +5,12 @@
     <title>{% block title %}Morphinof Page Bundle{% endblock %}</title>
     {% block stylesheets %}
         {% stylesheets
-            'bundles/tw'
+            '@MorphinofPageBundle/Resources/public/jquery-ui-1.12.1/jquery-ui.min.css'
+            '@MorphinofPageBundle/Resources/public/jquery-ui-1.12.1/jquery-ui.structure.min.css'
+            '@MorphinofPageBundle/Resources/public/jquery-ui-1.12.1/jquery-ui.theme.min.css'
+
+            '@MorphinofPageBundle/Resources/public/bootstrap-3.3.7/css/bootstrap.min.css'
+            '@MorphinofPageBundle/Resources/public/bootstrap-3.3.7/css/bootstrap-theme.css'
         %}
             <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -13,10 +18,17 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-    {% block body %}
-    {% endblock %}
+    {% block body %}{% endblock %}
 
     {% block javascripts %}
+        {% javascripts
+            '@MorphinofPageBundle/Resources/public/jquery-ui-1.12.1/external/jquery/jquery.js'
+            '@MorphinofPageBundle/Resources/public/jquery-ui-1.12.1/jquery-ui.min.js'
+
+            '@MorphinofPageBundle/Resources/public/bootstrap-3.3.7/js/bootstrap.min.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     {% endblock %}
 </body>
 </html>

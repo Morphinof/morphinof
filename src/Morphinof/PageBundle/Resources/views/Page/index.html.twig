@@ -1,20 +1,14 @@
 {% extends '@MorphinofPage/Page/page-layout.html.twig' %}
 
-{% block stylesheets %}
+{% block body %}
     {{ parent() }}
-{% endblock %}
 
-{% block title %}{{ parent() }}{% endblock %}
+    {% block header %}
+    {% endblock %}
 
-{% block header %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 
-{% block content %}
-{% endblock %}
-
-{% block footer %}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
+    {% block footer %}
+    {% endblock %}
 {% endblock %}
