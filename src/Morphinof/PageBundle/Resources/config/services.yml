@@ -1,0 +1,24 @@
+imports:
+    - { resource: form.yml }
+    - { resource: twig.yml }
+
+services:
+  mpf_page_bundle.services.page:
+    class: Morphinof\PageBundle\Services\PageService
+    arguments:
+        - "@doctrine.orm.entity_manager"
+
+  mpf_page_bundle.services.layout:
+    class: Morphinof\PageBundle\Services\LayoutService
+    arguments:
+        - "@doctrine.orm.entity_manager"
+
+  mpf_page_bundle.services.block:
+    class: Morphinof\PageBundle\Services\BlockService
+    arguments:
+        - "@doctrine.orm.entity_manager"
+
+  mpf_page_bundle.services.widget:
+    class: Morphinof\PageBundle\Services\WidgetService
+    arguments:
+        - "@doctrine.orm.entity_manager"

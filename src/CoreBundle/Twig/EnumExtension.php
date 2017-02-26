@@ -23,8 +23,8 @@ class EnumExtension extends \Twig_Extension
     {
         return array
         (
-            'enum_assoc_value' => new \Twig_Function_Method($this, 'assocValue'),
-            'enum_css_class' => new \Twig_Function_Method($this, 'cssClass'),
+            new \Twig_SimpleFunction('enum_assoc_value', array($this, 'assocValue')),
+            new \Twig_SimpleFunction('enum_css_class', array($this, 'cssClass')),
         );
     }
 
