@@ -10,16 +10,22 @@
                         Bonjour ! <br>
                         {% if user.profile.fullName is not null %}
                             Je suis {{ user.profile.fullName }}
-                            {% if user.profile.profession is not null %}
-                                {{ user.profile.fullName }}
-                            {% endif %}
+                            <p>
+                                <small>
+                                {% if user.profile.profession is not null %}
+                                    {{ user.profile.profession }}
+                                {% endif %}
+                                </small>
+                            </p>
                         {% else %}
                             <h2 class="t-a-c">
                                 <p>#Votre nom suivi de votre prénom#</p>
+                                {% if isAdmin %}
                                 <small class="">(remplissez ces données dans votre profil pour les afficher ici)</small>
                                 <a href="{{ path('admin_user_user_edit', { 'id': app.user.id }) }}" class="btn btn-default dim">
                                     <i class="fa fa-pencil"></i>
                                 </a>
+                                {% endif %}
                             </h2>
                         {% endif %}
                     </h1>

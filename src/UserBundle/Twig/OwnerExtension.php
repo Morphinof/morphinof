@@ -29,7 +29,7 @@ class OwnerExtension extends \Twig_Extension
     {
         return array
         (
-            'get_owner_of' => new \Twig_Function_Method($this, 'getOwnerOf'),
+            new \Twig_SimpleFunction('get_owner_of', array($this, 'getOwnerOf')),
         );
     }
 

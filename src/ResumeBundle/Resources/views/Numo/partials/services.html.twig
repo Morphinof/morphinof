@@ -11,20 +11,30 @@
                     </div>
                 </div>
                 <div class="row margin-bottom">
-                    {% for service in user.services %}
-                    <div class="col-sm-6 margin-bottom-xs">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <i class="fa fa-{{ service.glyph }} fa-4x"></i>
-                            </div>
-                            <div class="col-xs-10">
-                                <h3>{{ service.title }}</h3>
+                    {% if user.services | length > 0 %}
+                        {% for service in user.services %}
+                        <div class="col-sm-6 margin-bottom-xs">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <i class="fa fa-{{ service.glyph }} fa-4x"></i>
+                                </div>
+                                <div class="col-xs-10">
+                                    <h3>{{ service.title }}</h3>
 
-                                {{ service.resume | raw }}
+                                    {{ service.resume | raw }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <p>#Les services que vous proposez ici#</p>
+                        {% if isAdmin %}
+                        <small class="">(Composez votre portfolio dans votre partie administration pour afficher votre portfolio ici)</small>
+                        <a href="{{ path('admin_resume_portfolio_list', { 'id': app.user.id }) }}" class="btn btn-default dim">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>

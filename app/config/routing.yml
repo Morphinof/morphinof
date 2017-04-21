@@ -1,3 +1,7 @@
+morphinof_page:
+    resource: "@MorphinofPageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 blog:
     resource: "@BlogBundle/Controller/"
     type:     annotation

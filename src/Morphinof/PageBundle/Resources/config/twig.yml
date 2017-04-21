@@ -1,0 +1,28 @@
+services:
+  mpf_page_bundle.extensions.page:
+    class: Morphinof\PageBundle\Twig\PageExtension
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: twig.extension }
+
+  mpf_page_bundle.extensions.layout:
+    class: Morphinof\PageBundle\Twig\LayoutExtension
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: twig.extension }
+
+  mpf_page_bundle.extensions.block:
+    class: Morphinof\PageBundle\Twig\BlockExtension
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: twig.extension }
+
+  mpf_page_bundle.extensions.widget:
+    class: Morphinof\PageBundle\Twig\WidgetExtension
+    arguments:
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: twig.extension }
