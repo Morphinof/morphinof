@@ -34,8 +34,8 @@ class ResumeExtension extends \Twig_Extension
     {
         return array
         (
-            'get_project_portfolio' => new \Twig_Function_Method($this, 'getProjectPortfolio'),
-            'get_main_portfolio' => new \Twig_Function_Method($this, 'getMainPortfolio'),
+            new \Twig_SimpleFunction('get_project_portfolio', array($this, 'getProjectPortfolio')),
+            new \Twig_SimpleFunction('get_main_portfolio', array($this, 'getMainPortfolio')),
         );
     }
 

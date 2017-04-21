@@ -26,11 +26,15 @@
                 {% else %}
                     <h2 class="t-a-c">
                         <p class="white">#Un lien vers vos réseaux sociaux ici#</p>
+                        {% if isAdmin %}
                         <small class="">(renseignez vos réseaux sociaux dans votre profil pour les afficher ici)</small>
+                        {% endif %}
                     </h2>
+                    {% if isAdmin %}
                     <a href="{{ path('admin_user_user_edit', { 'id': app.user.id }) }}" class="btn btn-w-m btn-default">
                         Editer mes réseau sociaux
                     </a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

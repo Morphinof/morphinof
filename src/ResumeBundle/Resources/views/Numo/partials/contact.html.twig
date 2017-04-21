@@ -14,11 +14,24 @@
                 {% else %}
                     <h2 class="t-a-c">
                         <p>#Un lien vers votre e-mail de contact ici#</p>
-                        <small class="">(renseignez votre e-mail de contact dans votre profil pour l'afficher ici)</small>
+                        {% if isAdmin %}
+                        <small>(renseignez votre e-mail de contact dans votre profil pour l'afficher ici)</small>
+                        {% endif %}
                     </h2>
                 {% endif %}
             </div>
         </div>
+        {% if isAdmin %}
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p>
+                    <a href="{{ path('admin_user_user_edit', { 'id': app.user.id }) }}" class="btn btn-outline btn-default" style="background-color: #ffffff; color:#405a74;">
+                        Editer mon e-mail de contact
+                    </a>
+                </p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endif %}

@@ -16,6 +16,11 @@
 {% endblock %}
 
 {% block content %}
+    {% set isAdmin = false %}
+    {% if app.user is not null and app.user.hasRole('ROLE_SUPER_ADMIN') or (user is not null and app.user.id == user.id) %}
+        {% set isAdmin = true %}
+    {% endif %}
+
     {% include 'ResumeBundle:Numo/partials:nav-bar.html.twig' %}
 
     {% include 'ResumeBundle:Numo/partials:intro.html.twig' %}

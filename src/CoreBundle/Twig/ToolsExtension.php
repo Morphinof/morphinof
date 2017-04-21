@@ -38,8 +38,8 @@ class ToolsExtension extends \Twig_Extension
     {
         return array
         (
-            'is_instance_of' => new \Twig_Function_Method($this, 'isInstanceOf'),
-            'number_format' => new \Twig_Function_Method($this, 'numberFormat'),
+            new \Twig_SimpleFunction('is_instance_of', array($this, 'isInstanceOf')),
+            new \Twig_SimpleFunction('number_format', array($this, 'numberFormat')),
         );
     }
 

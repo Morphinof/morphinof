@@ -1,0 +1,20 @@
+services:
+  mpf_page_bundle.forms.page:
+    class: Morphinof\PageBundle\Form\PageType
+    tags:
+      - { name: form.type, alias: mpf_page_bundle_form_page }
+
+  mpf_page_bundle.forms.layout:
+    class: Morphinof\PageBundle\Form\LayoutType
+    tags:
+      - { name: form.type, alias: mpf_page_bundle_form_layout }
+
+  mpf_page_bundle.forms.block:
+    class: Morphinof\PageBundle\Form\BlockType
+    tags:
+      - { name: form.type, alias: mpf_page_bundle_form_block }
+
+  mpf_page_bundle.forms.widget:
+    class: Morphinof\PageBundle\Form\WidgetType
+    tags:
+      - { name: form.type, alias: mpf_page_bundle_form_widget }
